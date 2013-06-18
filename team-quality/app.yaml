@@ -9,8 +9,29 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
-- url: /public
-  static_dir: public
+# static html
+- url: /(.*\.html)
+  mime_type: text/html
+  static_files: public/\1
+  upload: public/(.*\.html)
+  expiration: "1h"
+
+# javascript
+- url: /(.*\.js)
+  mime_type: text/javascript
+  static_files: static/\1
+  upload: static/(.*\.js)
+
+# css
+- url: /(.*\.css)
+  mime_type: text/css
+  static_files: static/\1
+  upload: static/(.*\.css)
+
+# image files
+- url: /(.*\.(bmp|gif|ico|jpeg|jpg|png))
+  static_files: static/\1
+  upload: static/(.*\.(bmp|gif|ico|jpeg|jpg|png))
 
 - url: .*
   script: main.app
