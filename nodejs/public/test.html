@@ -4,14 +4,25 @@
   var socket = io.connect('http://192.168.74.151:3000');
   socket.on('news', function (data) {
     console.log(data);
-	$('#input').val(data.my);
+	$("#log").append('<br>' + data.my);
   });
 
   var sendmsg = function(data){
   	socket.emit('msg', {my: data});
+  	$("#log").append('<br>' + data);
+  	$("#input").val('');
   }
 </script>
 
-<span>hi</span>
-<input id="input"/>
-<input type="button" value="send message" onclick="sendmsg($('#input').val())">
+<span id="log">hi</span>
+<br/>
+<input id="input" autocomplete="off"/>
+<input type="submit" value="send message" onclick="sendmsg($('#input').val())">
+
+<script>
+$("#input").keyup(function(event){
+    if(event.keyCode == 13){
+        sendmsg($('#input').val());
+    }
+});
+</script>
