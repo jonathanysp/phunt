@@ -18,7 +18,7 @@ import webapp2
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello world!')
+        self.response.write(hello.html)
 
 class MobileHandler(webapp2.RequestHandler):
     def get(self):
