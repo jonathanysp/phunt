@@ -35,8 +35,16 @@ class Handler(webapp2.RequestHandler):
 
 class MainHandler(Handler):
     def get(self):
+<<<<<<< HEAD
         self.response.write('Hi guise! ^.^')
+=======
+        self.response.write(hello.html)
+
+class MobileHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.write('hello mobile')
+>>>>>>> 30b863001cee05539a850efc27d6da8fec0de7e4
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler), ('/m', MobileHandler)
 ], debug=True)
