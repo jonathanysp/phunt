@@ -1,0 +1,17 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/jquery.js"></script>
+<script>
+  var socket = io.connect('http://192.168.74.151:3000');
+  socket.on('news', function (data) {
+    console.log(data);
+	$('#input').val(data.my);
+  });
+
+  var sendmsg = function(data){
+  	socket.emit('msg', {my: data});
+  }
+</script>
+
+<span>hi</span>
+<input id="input"/>
+<input type="button" value="send message" onclick="sendmsg($('#input').val())">
