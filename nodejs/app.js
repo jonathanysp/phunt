@@ -30,6 +30,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.get('/pic', routes.camera);
 app.get('/users', user.list);
 
 //var server = http.createServer(app)
