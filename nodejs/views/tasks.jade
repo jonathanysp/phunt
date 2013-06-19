@@ -5,9 +5,8 @@ block content
 
 
 	- var tasks2 = ['one', 'two', 'three'];
-	- var gameid = '0';
-	- var userid = 'p1'
+
 	each task in tasks
 		span=task + " "
-		a(href="/uploads?taskid=" + tasks.indexOf(task) + "&userid=" + userid + "&gameid=" + gameid) FOUND IT! 
+		a(href="/upload?taskid=" + tasks.indexOf(task) + "&userid=" + userid + "&gameid=" + gameid) FOUND IT! 
 		br
