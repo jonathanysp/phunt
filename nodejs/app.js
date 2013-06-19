@@ -8,6 +8,7 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path')
+  , fs = require('fs')
   , game = require('./require/game.js');
 
 var app = express();
@@ -41,12 +42,44 @@ app.get('/game', function(req, res){
 	res.render('game', {g: game.getGame(0)})
 });
 app.get('/pic', routes.camera);
-app.get('/users', user.list);
+app.post('/login', function(req, res){
+	var gameid = req.body.gameid | '0';
+	var userid = req.body.userid;
+	var tasknum = req.body.tasknum;
+})
+app.post('/upload', function(req, res){
+	//res.send("uploaded");
+	console.log(req.body.gameid)
+	var gameid = req.body.gameid | '0';
+	var userid = req.body.userid;
+	var tasknum = req.body.tasknum;
+	var g = game.getGame(gameid);
+	fs.readFile(req.files.image.path, function(err, data){
+		if(err){
+			res.redirect('back');
+			return;
+		}
+		//check player id
+		//public/upload/gameid/userid/tasknum.jpg
+		var newPath = 'public/upload/new.jpg';
+		var link = '/upload/new.jpg';
+		fs.writeFile(newPath, data, function(err){
+			if(err){
+				res.redirect('back');
+				return;
+			}
+			res.redirect('back');
 
-//var server = http.createServer(app)
+			g.imageSubmit(gameid, userid, tasknum, newPath);
 
-//socket io server
-//var io = require('socket.io').listen(server);
+			io.sockets.in('0').emit('newImage', {
+				playerid: userid,
+				tasknum: tasknum,
+				image: link
+			})
+		})
+	})
+});
 
 var done = 0;
 
@@ -69,11 +102,6 @@ io.sockets.on('connection', function(socket){
 
 	socket.on('getInfo', function(data){
 		socket.emit('info', {g: game.getGame()});
-	})
-
-	socket.on('update', function(data){
-		console.log("update");
-		io.sockets.in('0').emit('miniProgress', {number: done++})
 	})
 
 	socket.on('msg', function(data){

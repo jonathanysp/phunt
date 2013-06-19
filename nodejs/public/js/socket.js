@@ -1,5 +1,5 @@
 //connect
-var socket = io.connect('http://192.168.74.151:3000');
+var socket = io.connect('http://192.168.74.79:3000');
 //var socket = io.connect('http://192.168.20.217:3000')
 //lets the server know which game notifications to send us
 //set userid to null for leaderboard
@@ -32,6 +32,9 @@ var addLeaderboardEvents = function(){
 	//format:
 	//playerid, tasknum, image
 	socket.on('newImage', function(data){
+
+		$('#img')[0].src = data.image;
+
 		console.log('New Image!')
 		console.log(data);
 		//update appropriate cell with image
