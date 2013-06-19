@@ -32,16 +32,21 @@ h1{
 .imgClass:active{
       background-position:  0px -104px;
 }
+*/
 
 table {
 	margin-left: auto;
 	margin-right: auto;
-	border: 1px solid black;
+	border: 2px solid black;
 }
 
 th {
-	border-bottom: 1px solid black;
+	font-size: 20px;
+	border: 2px solid black;
+}
+
+progress {
+	margin: 20px;
 }
 
 
-*/

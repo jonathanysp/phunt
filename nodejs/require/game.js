@@ -6,11 +6,13 @@ var socket;
 
 var game = {
 	gameid: 0,
-	tasks: ['one', 'two', 'three'],
+	tasks: ['one', 'two', 'three', 'four'],
 	players: ['p1', 'p2'],
 	images: {
-		'p1': ['http://placehold.it/200x150'],
-		'p2': [],
+		'p1': ['http://placehold.it/200x150', 'http://placehold.it/200x150',
+		'http://placehold.it/200x150', 'http://placehold.it/200x150'],
+		'p2': ['http://placehold.it/200x150', 'http://placehold.it/200x150',
+		'http://placehold.it/200x150', 'http://placehold.it/200x150'],
 	}
 }
 

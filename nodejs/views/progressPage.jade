@@ -3,18 +3,21 @@ extends layout
 block content
   table
     thead
-      - var players = ["Heidi", "Cara", "Jon", "Andre"]
       tr
-      th Questions
-      each player in players
+      th Tasks
+      each player in g.players
         th #{player}
     tbody
-      - var questions = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8"]
-      - var numOfPlayers = players.length;
-      each question in questions
+      each player in g.players
+        progress(max='100', value='50')
+      - var numOfPlayers = g.players.length;
+      - var counter = 0;
+      each task in g.tasks
         tr
-          td #{question}
-          - for(var i = 0; i < numOfPlayers; i++) {
-            td helllllllllooooooooooooooooo theeeerrrreee
-          - }
-      progress
+          td This is task #{task}
+          each player in g.players	
+            - var images = g.images[player];
+            - var pic = images[counter];
+            td
+              img(src=pic)
+        - counter++;
