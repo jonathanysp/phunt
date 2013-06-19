@@ -3,13 +3,18 @@ extends layout
 block content
 	h1 Scavenger Hunt
 
-	form(action = "/login", method = "post")
+	span=error
+
+	form#lForm(action = "/login", method = "post")
 		label What's your game ID?  
 		br
-		input(type="text", required, name = "gameid")
+		input(class="inp", type="text", required, name = "gameid")
 		br 
+		
+		br
 		label What's your name?  
 		br
-		input(type="text", required, name = "userid")
+		input(class = "inp", type="text", required, name = "userid")
 		br
-		input(type = "submit", value = "submit")
+		br
+		input(class = "butt", type = "submit", value = "submit")
