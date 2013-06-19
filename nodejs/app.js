@@ -14,6 +14,8 @@ var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
+game.setSocket(io);
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
@@ -49,6 +51,24 @@ app.get('/users', user.list);
 io.sockets.on('connection', function(socket){
 	//console.log("HIHIHIHI");
 	socket.broadcast.emit('news', {my: "joined"});
+
+	socket.on('register', function(data){
+		if(game.isGameId(data.gameid)){
+			if(data.userid != null){
+				console.log("New member registered on gameid: " + data.gameid);
+			} else {
+				console.log("New leaderboard joined");
+			}
+			socket.join(data.gameid);
+		} else {
+			socket.emit("error");
+		}
+	})
+
+	socket.on('getInfo', function(data){
+		socket.emit('info', {g: game.getGame()});
+	})
+
 	socket.on('msg', function(data){
 		console.log(data);
 		socket.broadcast.emit('news', data);
@@ -57,11 +77,6 @@ io.sockets.on('connection', function(socket){
 	socket.on('echo', function(data){
 		console.log(data);
 	})
-
-	//imgdataURL, gameid, userid
-	socket.on('picture', function(data){
-
-	});
 
 });
 
