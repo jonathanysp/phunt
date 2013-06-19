@@ -1,0 +1,20 @@
+<script src="/socket.io/socket.io.js"></script>
+<canvas id="canvas" width="500" height="500"></canvas>
+<script>
+	var canvas = document.getElementById('canvas');
+	var context = canvas.getContext('2d');
+
+	context.beginPath();
+	context.moveTo(100,150);
+	context.lineTo(450, 50);
+	context.lineWidth = 10;
+
+	context.strokeStyle = '#ff0000';
+	context.stroke();
+
+	var dataURL = canvas.toDataURL();
+	console.log(dataURL);
+
+  var socket = io.connect('http://192.168.74.151:3000');
+	socket.emit('echo', dataURL);
+</script>
