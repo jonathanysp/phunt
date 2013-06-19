@@ -46,9 +46,15 @@ app.get('/login', function(req, res){
 	res.render('login');
 })
 app.post('/login', function(req, res){
-	var gameid = req.body.gameid | '0';
+	var gameid = req.body.gameid;
 	var userid = req.body.userid;
-	res.send(gameid + " " + userid);
+
+	if(game.isGameId(gameid)){
+		var tasks = game.getTasks(gameid);
+		res.render('tasks', {tasks: tasks, gameid: gameid, userid: userid});
+	} else {
+		res.render('login', {error: "Incorrect gameid"});
+	}
 })
 app.post('/upload', function(req, res){
 	//res.send("uploaded");

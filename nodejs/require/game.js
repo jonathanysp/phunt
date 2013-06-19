@@ -67,3 +67,4 @@ exports.addPlayer = addPlayer;
 var getTasks = function(gameid){
 	return getGame(gameid).tasks;
 }
+exports.getTasks = getTasks;
