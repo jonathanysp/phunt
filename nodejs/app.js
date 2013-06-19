@@ -41,6 +41,9 @@ app.get('/progress', function(req, res){
 app.get('/game', function(req, res){
 	res.render('game', {g: game.getGame(0)})
 });
+app.post('/new', function(req, res){
+	res.send(req.body.task);
+})
 app.get('/pic', routes.camera);
 app.post('/login', function(req, res){
 	var gameid = req.body.gameid | '0';
