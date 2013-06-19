@@ -1,5 +1,5 @@
 //connect
-var socket = io.connect('http://10.1.1.77:3000');
+var socket = io.connect('http://192.168.74.151:3000');
 
 //lets the server know which game notifications to send us
 //set userid to null for leaderboard
@@ -37,7 +37,8 @@ var addLeaderboardEvents = function(){
 	//playerid, number of tasks
 	socket.on('miniProgress', function(data){
 		console.log("small progress update");
-		//update progress bar
+		console.log(data.number);
+		$("#s").text(data.number);
 	})
 
 	//format:

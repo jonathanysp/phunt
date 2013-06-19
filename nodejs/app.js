@@ -44,9 +44,11 @@ app.get('/users', user.list);
 //socket io server
 //var io = require('socket.io').listen(server);
 
+var done = 0;
+
 io.sockets.on('connection', function(socket){
 	//console.log("HIHIHIHI");
-	socket.broadcast.emit('news', {my: "joined"});
+	//socket.broadcast.emit('news', {my: "joined"});
 
 	socket.on('register', function(data){
 		if(game.isGameId(data.gameid)){
@@ -65,6 +67,11 @@ io.sockets.on('connection', function(socket){
 		socket.emit('info', {g: game.getGame()});
 	})
 
+	socket.on('update', function(data){
+		console.log("update");
+		io.sockets.in('0').emit('miniProgress', {number: done++})
+	})
+
 	socket.on('msg', function(data){
 		console.log(data);
 		socket.broadcast.emit('news', data);
@@ -73,6 +80,12 @@ io.sockets.on('connection', function(socket){
 	socket.on('echo', function(data){
 		console.log(data);
 	})
+
+	//debug responses
+	socket.on('debug', function(data){
+		console.log(data);
+		socket.broadcast.emit(data.msg, data);
+	});
 
 });
 
