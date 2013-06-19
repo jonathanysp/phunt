@@ -3,10 +3,12 @@ extends layout
 block content
 	h1 Scavenger Hunt
 
-
-	- var tasks2 = ['one', 'two', 'three'];
-
-	each task in tasks
-		span=task + " "
-		a(href="/upload?taskid=" + tasks.indexOf(task) + "&userid=" + userid + "&gameid=" + gameid) FOUND IT! 
+	- for(var i = 0; i < tasks.length; i++) {
+		- if(done[i] === undefined){
+			span=tasks[i] + " "
+		- } else {
+			span(style="text-decoration:line-through")=tasks[i] + " "
+		- }
+		a(href="/upload?taskid=" + i + "&userid=" + userid + "&gameid=" + gameid) FOUND IT! 
 		br
+	- }
