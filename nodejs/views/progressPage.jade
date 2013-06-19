@@ -1,5 +1,6 @@
 extends layout
-
+block head
+  script(src="/js/socket.js")
 block content
   table
     thead
@@ -8,16 +9,12 @@ block content
       each player in g.players
         th #{player}
     tbody
-      each player in g.players
-        progress(max='100', value='50')
       - var numOfPlayers = g.players.length;
       - var counter = 0;
       each task in g.tasks
         tr
           td This is task #{task}
-          each player in g.players	
-            - var images = g.images[player];
-            - var pic = images[counter];
-            td
-              img(src=pic)
-        - counter++;
+          each player in g.players
+            - var uniqueId = "" + task + "_" + player;	
+            td(id=uniqueId)
+              div(class="placeholder")

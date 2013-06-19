@@ -45,8 +45,11 @@ th {
 	border: 2px solid black;
 }
 
-progress {
-	margin: 20px;
+.placeholder {
+	width: 250px;
+	height: 250px;
+	margin: 10px;
+	padding: 5px;
 }
 
 
