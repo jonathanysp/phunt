@@ -56,6 +56,12 @@ app.post('/login', function(req, res){
 		res.render('login', {error: "Incorrect gameid"});
 	}
 })
+app.get('/upload', function(req, res){
+	var gameid = req.query.gameid;
+	var taskid = req.query.taskid;
+	
+	res.render('upload', {})
+})
 app.post('/upload', function(req, res){
 	//res.send("uploaded");
 	console.log(req.body.gameid)
