@@ -34,6 +34,8 @@ app.get('/', routes.index);
 app.get('/new', function(req, res){
 	res.render('game', {g: game.getGame(0)})
 });
+app.get('/pic', routes.camera);
+app.get('/users', user.list);
 
 //var server = http.createServer(app)
 
