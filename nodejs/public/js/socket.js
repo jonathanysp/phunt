@@ -1,10 +1,6 @@
 //connect
-<<<<<<< HEAD
 var socket = io.connect('http://192.168.74.151:3000');
-
-=======
-var socket = io.connect('http://192.168.20.217:3000')
->>>>>>> 0d1b35117796d910357505629f961fc09e3b003a
+//var socket = io.connect('http://192.168.20.217:3000')
 //lets the server know which game notifications to send us
 //set userid to null for leaderboard
 var register = function(gameid, userid){
@@ -15,15 +11,18 @@ var addMobileEvents = function(){
 	socket.on('progress', function(data){
 		console.log('Progress update!');
 		//send progress notification
+		console.log(data);
 	})
 }
 
 var addLeaderboardEvents = function(){
 	socket.on('progress', function(data){
 		console.log('Progress update!');
+		console.log(data);
 	})
 
 	socket.on('info', function(data){
+		console.log('info!')
 		console.log(data.g);
 		var span = document.createElement('span');
 		$(span).text(data.g.tasks);
@@ -31,13 +30,14 @@ var addLeaderboardEvents = function(){
 	})
 
 	//format:
-	//playerid, tasknumber, image
+	//playerid, tasknum, image
 	socket.on('newImage', function(data){
 		console.log('New Image!')
+		console.log(data);
 		//update appropriate cell with image
-		var location = "" + tasknumber + "_" + playerid;
+		var location = "" + data.tasknumber + "_" + data.playerid;
 		var placeholder = document.getElementById(location);
-		var image = document.createElement(img);
+		var image = document.createElement('img');
 		image.setAttribute(src, image);
 		//set dimensions?
 		placeholder.appendChild(image);
@@ -47,7 +47,7 @@ var addLeaderboardEvents = function(){
 	//playerid, number of tasks
 	socket.on('miniProgress', function(data){
 		console.log("small progress update");
-		console.log(data.number);
+		console.log(data);
 		//update progress bar
 	})
 
@@ -55,6 +55,7 @@ var addLeaderboardEvents = function(){
 	//player id
 	socket.on('newPlayer', function(data){
 		console.log("new player!");
+		console.log(data);
 		//add new empty column for new player
 	})
 }
