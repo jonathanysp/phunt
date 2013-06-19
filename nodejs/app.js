@@ -59,13 +59,13 @@ app.post('/login', function(req, res){
 app.get('/upload', function(req, res){
 	var gameid = req.query.gameid;
 	var taskid = req.query.taskid;
-	
-	res.render('upload', {})
+	var userid = req.query.userid;
+	res.render('upload', {gameid: gameid, taskid: taskid, userid:userid});
 })
 app.post('/upload', function(req, res){
 	//res.send("uploaded");
 	console.log(req.body.gameid)
-	var gameid = req.body.gameid | '0';
+	var gameid = req.body.gameid;
 	var userid = req.body.userid;
 	var tasknum = req.body.tasknum;
 	var g = game.getGame(gameid);
