@@ -43,6 +43,16 @@ app.get('/game', function(req, res){
 app.get('/pic', routes.camera);
 app.get('/users', user.list);
 
+app.get('/login', function(req, res){
+	res.render('login');
+})
+app.post('/login', function(req, res){
+	res.send("finished");
+})
+app.get('/tasks', function(req, res){
+	res.render('tasks');
+})
+
 //var server = http.createServer(app)
 
 //socket io server
