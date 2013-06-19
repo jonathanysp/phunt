@@ -86,7 +86,7 @@ app.post('/upload', function(req, res){
 			res.redirect('back');
 			g.imageSubmit(gameid, userid, tasknum, newPath);
 
-			io.sockets.in('0').emit('newImage', {
+			io.sockets.in(gameid).emit('newImage', {
 				playerid: userid,
 				tasknum: tasknum,
 				image: link
