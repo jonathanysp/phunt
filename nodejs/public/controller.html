@@ -1,0 +1,30 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/socket.js"></script>
+<script src="/js/jquery.js"></script>
+
+<h2>Debug Panel</h2>
+
+<input id="player" placeholder="player"/>
+<input id="progress" placeholder="progress"/>
+<input type="button" value="progress" onclick="socket.emit('debug', {msg: 'progress', player: $('#player').val(), progress: parseInt($('#progress').val())})"/>
+<br/>
+
+<input id="info" placeholder="game id"/>
+<input type="button" value="Get Info" onclick="socket.emit('debug', {msg: 'getInfo', gameid: $('#info').val()})"/>
+<br/>
+
+<input id="newplayer" placeholder="new player"/>
+<input type="button" value="New Player" onclick="socket.emit('debug', {msg: 'newPlayer', player: $('#newplayer').val()})"/>
+<br/>
+
+<input id="pid" placeholder="player id"/>
+<input id="tasknum" placeholder="task number"/>
+<input id="img" placeholder="image link"/>
+<input type="button" value="New Image" onclick="socket.emit('debug', {msg: 'newImage', playerid: $('#pid').val(), tasknumber: parseInt($('#tasknum').val()), image: $('#img').val()})"/>
+<br/>
+
+<input id="playerid" placeholder="player id"/>
+<input id="numTasks" placeholder="num tasks"/>
+<input type="button" value="Mini Progress" onclick="socket.emit('debug', {msg: 'miniProgress', playerid: $('#playerid').val(), numTasks: parseInt($('#numTasks').val())})"/>
+<br/>
+
