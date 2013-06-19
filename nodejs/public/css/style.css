@@ -14,3 +14,15 @@ h1{
 	  padding: 10px;
 
 }
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid black;
+}
+
+th {
+	border-bottom: 1px solid black;
+}
+
+
