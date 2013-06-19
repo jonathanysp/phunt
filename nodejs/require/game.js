@@ -43,3 +43,27 @@ var isGameId = function(gameid){
 	}
 }
 exports.isGameId = isGameId;
+
+var isPlayer = function(gameid, userid){
+	var g = getGame(gameid);
+	if(g.players.indexOf(userid) != -1){
+		return true;
+	} else {
+		return false;
+	}
+}
+exports.isPlayer = isPlayer;
+
+var addPlayer = function(gameid, userid){
+	var g = getGame(gameid);
+	g.players.push(userid);
+	g.images[userid] = [];
+	io.sockets.in(gameid).emit('newPlayer', {
+		userid: userid,
+	})
+}
+exports.addPlayer = addPlayer;
+
+var getTasks = function(gameid){
+	return getGame(gameid).tasks;
+}
