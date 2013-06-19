@@ -20,9 +20,6 @@ var addLeaderboardEvents = function(){
 
 	socket.on('info', function(data){
 		console.log(data.g);
-		var span = document.createElement('span');
-		$(span).text(data.g.tasks);
-		$("#div").append(span);
 	})
 
 	//format:
