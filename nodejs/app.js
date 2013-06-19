@@ -33,7 +33,11 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/new', function(req, res){
+//app.get('/progress', routes.progress);
+app.get('/progress', function(req, res){
+	res.render('progressPage', {g: game.getGame(0)})
+});
+app.get('/game', function(req, res){
 	res.render('game', {g: game.getGame(0)})
 });
 app.get('/pic', routes.camera);

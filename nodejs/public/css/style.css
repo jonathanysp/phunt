@@ -11,25 +11,40 @@ h1{
 	  font-size: 80px;
 	  font-variant: small-caps;
 	  letter-spacing: 1.8pt;
-	  padding: 10px;
+	  padding-top: 10px;
+}
+#bridge{
+    width: 260px;
+    height: 230px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
+    margin:20px;
+}
+#pics{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background: url("/images/back.jpg");
+
 }
 
-.imgClass { 
-    background-image: url("http://www.visitingdc.com/images/golden-gate-bridge-picture.jpg");
-	max-width:100%; 
-	max-height:100%;
-    background-repeat: no-repeat;
-    width: 200px;
-    height: 200px;
-    border: 0px;
-
-}
-/*
-.imgClass:hover{ 
-      background-position:  0px -52px;
+table {
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid black;
 }
 
-.imgClass:active{
-      background-position:  0px -104px;
+th {
+	font-size: 20px;
+	border: 2px solid black;
 }
-*/
+
+.placeholder {
+	width: 250px;
+	height: 250px;
+	margin: 10px;
+	padding: 5px;
+}
+
+
