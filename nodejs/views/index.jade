@@ -1,8 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  video#video(width="640", height="480")
-  button#snap Snap Photo
-  canvas#canvas(width="640", height="480")
+	h1 Scavenger Hunt
+
+	div#pics
+		img#bridge(src = "/images/hunts/GoldenGateBridge.jpg", onmouseover="this.src ='images/mOver/sf.jpg'", onmouseout="this.src='/images/hunts/GoldenGateBridge.jpg'");
+		img#bridge(src = "/images/hunts/disney.jpg", onmouseover="this.src ='images/mOver/dis.jpg'", onmouseout="this.src='/images/hunts/disney.jpg'");
+		img#bridge(src = "/images/hunts/google.jpg", onmouseover="this.src ='images/mOver/goog.jpg'", onmouseout="this.src='/images/hunts/google.jpg'");
+		img#bridge(src = "/images/hunts/zoo.jpg", onmouseover="this.src ='images/mOver/zooz.jpg'", onmouseout="this.src='/images/hunts/zoo.jpg'");
+		img#bridge(src = "/images/hunts/hood.jpg", onmouseover="this.src ='images/mOver/town.jpg'", onmouseout="this.src='/images/hunts/hood.jpg'");
+		img#bridge(src = "/images/hunts/create.jpg", onmouseover="this.src ='images/mOver/own.jpg'", onmouseout="this.src='/images/hunts/create.jpg'");
