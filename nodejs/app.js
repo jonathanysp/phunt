@@ -7,7 +7,8 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , game = require('./require/game.js');
 
 var app = express();
 var server = http.createServer(app);
@@ -31,6 +32,10 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/progress', routes.progress);
+app.get('/new', function(req, res){
+	res.render('game', {g: game.getGame(0)})
+});
+app.get('/pic', routes.camera);
 app.get('/users', user.list);
 
 //var server = http.createServer(app)
@@ -45,6 +50,16 @@ io.sockets.on('connection', function(socket){
 		console.log(data);
 		socket.broadcast.emit('news', data);
 	})
+	
+	socket.on('echo', function(data){
+		console.log(data);
+	})
+
+	//imgdataURL, gameid, userid
+	socket.on('picture', function(data){
+
+	});
+
 });
 
 //http server
