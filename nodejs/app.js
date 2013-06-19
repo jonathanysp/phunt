@@ -41,14 +41,14 @@ app.get('/progress', function(req, res){
 app.get('/game', function(req, res){
 	res.render('game', {g: game.getGame(0)})
 });
-app.post('/new', function(req, res){
-	res.send(req.body.task);
-})
 app.get('/pic', routes.camera);
+app.get('/login', function(req, res){
+	res.render('login');
+})
 app.post('/login', function(req, res){
 	var gameid = req.body.gameid | '0';
 	var userid = req.body.userid;
-	var tasknum = req.body.tasknum;
+	res.send(gameid + " " + userid);
 })
 app.post('/upload', function(req, res){
 	//res.send("uploaded");
