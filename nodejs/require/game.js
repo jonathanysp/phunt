@@ -4,6 +4,10 @@ var id = 0;
 
 var io;
 
+var tasktemplate = {
+	'sample': ['q1', 'q2', 'q3', 'q4'],
+}
+
 var game = {
 	gameid: 0,
 	tasks: ['one', 'two', 'three', 'four'],
@@ -12,7 +16,7 @@ var game = {
 		'p1': ['http://placehold.it/200x150', 'http://placehold.it/200x150',
 		'http://placehold.it/200x150', 'http://placehold.it/200x150'],
 		'p2': ['http://placehold.it/200x150', 'http://placehold.it/200x150',
-		'http://placehold.it/200x150', 'http://placehold.it/200x150'],
+		'http://placehold.it/200x150'],
 	}
 }
 
@@ -23,10 +27,10 @@ exports.setSocket = function(sockio){
 	io = sockio;
 }
 
-var imageSubmit = function(gameid, userid, task, filepath){
+var imageSubmit = function(gameid, userid, tasknum, filepath){
 	var g = getGame(gameid);
-	var tasknum = g.tasks.indexOf(task);
-	g.players[userid][tasknum] = filepath;
+	g.images[userid][parseInt(tasknum)] = filepath;
+	console.log(g.images[userid]);
 }
 exports.imageSubmit = imageSubmit;
 
@@ -68,3 +72,29 @@ var getTasks = function(gameid){
 	return getGame(gameid).tasks;
 }
 exports.getTasks = getTasks;
+
+var getDone = function(gameid, userid){
+	return getGame(gameid).images[userid];
+}
+exports.getDone = getDone;
+
+var doneLink = function(gameid, userid, taskid){
+	return getGame(gameid).images[userid][parseInt(taskid)];
+}
+exports.doneLink = doneLink;
+
+var createGame = function(templateid){
+	var gameid = generateID();
+	var tasks = tasktemplate.templateid;
+	var newGame = {
+	gameid: gameid,
+	tasks: tasks,
+	players: [],
+	images: {}
+	}
+	games.push(newGame);
+}
+
+var generateID = function(){
+	return Math.random().toString(36).substr(2,5);
+}

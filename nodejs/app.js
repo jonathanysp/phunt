@@ -51,23 +51,32 @@ app.post('/login', function(req, res){
 
 	if(game.isGameId(gameid)){
 		var tasks = game.getTasks(gameid);
-		res.render('tasks', {tasks: tasks, gameid: gameid, userid: userid});
+		//res.render('tasks', {tasks: tasks, gameid: gameid, userid: userid});
+		res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
 	} else {
 		res.render('login', {error: "Incorrect gameid"});
 	}
+})
+app.get('/tasks', function(req, res){
+	var gameid = req.query.gameid;
+	var userid = req.query.userid;
+	var tasks = game.getTasks(gameid);
+	var done = game.getDone(gameid, userid);
+	res.render('tasks', {tasks: tasks, gameid: gameid, userid: userid, done: done});
 })
 app.get('/upload', function(req, res){
 	var gameid = req.query.gameid;
 	var taskid = req.query.taskid;
 	var userid = req.query.userid;
-	res.render('upload', {gameid: gameid, taskid: taskid, userid:userid});
+	var link = game.doneLink(gameid, userid, taskid);
+	res.render('upload', {gameid: gameid, taskid: taskid, userid:userid, link: link});
 })
 app.post('/upload', function(req, res){
 	//res.send("uploaded");
 	console.log(req.body.gameid)
 	var gameid = req.body.gameid;
 	var userid = req.body.userid;
-	var tasknum = req.body.tasknum;
+	var tasknum = req.body.taskid;
 	var g = game.getGame(gameid);
 	fs.readFile(req.files.image.path, function(err, data){
 		if(err){
@@ -83,14 +92,14 @@ app.post('/upload', function(req, res){
 				res.redirect('back');
 				return;
 			}
-			res.redirect('back');
-			g.imageSubmit(gameid, userid, tasknum, newPath);
+			game.imageSubmit(gameid, userid, tasknum, link);
 
 			io.sockets.in(gameid).emit('newImage', {
 				playerid: userid,
 				tasknum: tasknum,
 				image: link
 			})
+			res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
 		})
 	})
 });
