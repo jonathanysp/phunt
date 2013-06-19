@@ -1,0 +1,7 @@
+extends layout
+
+block content
+	h1 Scavenger Hunt
+	form(enctype="multipart/form-data", method="POST", action="/upload")
+		input(id="image", name="image", type="file")
+		input(type="submit", value="submit")
