@@ -1,0 +1,13 @@
+extends layout
+
+block content
+	h1 Scavenger Hunt
+
+
+	- var tasks = ['one', 'two', 'three'];
+	- var gameid = '0';
+	- var userid = 'p1'
+	each task in tasks
+		span=task + " "
+		a(href="/upload?taskid=" + tasks.indexOf(task) + "&userid=" + userid + "&gameid=" + gameid) FOUND IT! 
+		br
