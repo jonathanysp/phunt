@@ -34,6 +34,9 @@ app.get('/', routes.index);
 app.get('/new', function(req, res){
 	res.render('game', {g: game.getGame(0)})
 });
+app.post('/new', function(req, res){
+	res.send(req.body.task);
+})
 app.get('/pic', routes.camera);
 app.get('/users', user.list);
 
