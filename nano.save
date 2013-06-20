@@ -1,0 +1,7 @@
+$("#p1").mouseover(function(){
+	show('top1');
+})
+
+$("#p1").mouseleave(function(){
+	hide('top1')
+})

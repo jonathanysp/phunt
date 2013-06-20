@@ -20,7 +20,10 @@
 <input id="pid" placeholder="player id"/>
 <input id="tasknum" placeholder="task number"/>
 <input id="img" placeholder="image link"/>
-<input type="button" value="New Image" onclick="socket.emit('debug', {msg: 'newImage', playerid: $('#pid').val(), tasknumber: parseInt($('#tasknum').val()), image: $('#img').val()})"/>
+<input id="lat" placeholder="lat"/>
+<input id="lon" placeholder="lon"/>
+<input id="s" placeholder="score"/>
+<input type="button" value="New Image" onclick="socket.emit('debug', {msg: 'newImage', playerid: $('#pid').val(), tasknumber: parseInt($('#tasknum').val()), image: $('#img').val(), lat: $('#lat').val(), lon: $('#lon').val(), score: $('#s').val()})"/>
 <br/>
 
 <input id="playerid" placeholder="player id"/>
@@ -28,3 +31,7 @@
 <input type="button" value="Mini Progress" onclick="socket.emit('debug', {msg: 'miniProgress', playerid: $('#playerid').val(), numTasks: parseInt($('#numTasks').val())})"/>
 <br/>
 
+<input id="p" placeholder="player id"/>
+<input id="score" placeholder="score"/>
+<input type="button" value="Finished" onclick="socket.emit('debug', {msg: 'finish', playerid: $('#playerid').val(), score: parseInt($('#score').val())})"/>
+<br/>

@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 
 var socket = io.connect('192.168.22.220:3000');
 
 
+=======
+//connect
+var socket = io.connect('192.168.74.105:3000');
+>>>>>>> 75bb78d16cf819e6dc1887d0007af751df2b76db
 //var socket = io.connect('http://192.168.20.217:3000')
 //lets the server know which game notifications to send us
 //set userid to null for leaderboard
@@ -32,21 +37,45 @@ var addLeaderboardEvents = function(){
 
 	socket.on('info', function(data){
 		console.log(data.g);
-		//setup current progress bars for the current players
+		//setup current progress bars for all current players
 		totalTasks = data.g.tasks.length;
 		var progressSection = document.getElementById("progressBars");
 		for(var i = 0; i < data.g.players.length; i++) {
-			/*
-			var player = data.g.players[i];
+			
+			//create container for each player's summary
+			var progressSummary = document.createElement("div");
+
+			//create player's name
+			progressSummary.setAttribute("class", "progressSummary");
+			var progressPlayer = document.createElement("span");
+			progressPlayer.innerHTML = data.g.players[i] + "'s Progress";
+
+			//a span with a progress bar with the current percentage (calculate with object with images uploaded)
 			var bar = document.createElement("progress");
-			var arrOfPics = data.g.images[player];
-			var percentage = (arrOfPics / totalTasks) * 100;
+			var arrOfPics = data.g.images[data.g.players[i]];
+			var percentage = (arrOfPics.length / totalTasks) * 100;
 			bar.setAttribute("value", percentage);
 			bar.setAttribute("max", 100);
 			var barId = player + "_bar";
 			bar.setAttribute("id", barId);
-			progressSection.appendChild(bar);
-			*/
+
+			//and a span with the percentage display
+			var percentageDisplay = document.createElement("span");
+			percentageDisplay.setAttribute("id", data.g.players[i] + "_progress_display");
+			percentageDisplay.innerHTML = percentage + "%";
+
+			//append to container with new lines where necessary
+			//append container to progressSection
+			
+			progressSummary.appendChild(progressPlayer);
+			var newLine = document.createElement("br");
+			progressSummary.appendChild(newLine);
+			progressSummary.appendChild(bar);
+			progressSummary.appendChild(percentageDisplay);
+			var newLine2 = document.createElement("br");
+			progressSummary.appendChild(newLine2);
+			progressSection.appendChild(progressSummary);
+			
 		}
 
 		//setup current table and populate recent table with data.g
@@ -183,6 +212,10 @@ var addLeaderboardEvents = function(){
 		  taskNumber++;
 		});
 
+	})
+
+	socket.on('finish', function(data){
+		console.log(data);
 	})
 }
 

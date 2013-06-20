@@ -116,6 +116,8 @@ app.post('/upload', function(req, res){
 	var gameid = req.body.gameid;
 	var userid = req.body.userid;
 	var tasknum = req.body.taskid;
+	var lat = req.body.lat;
+	var lon = req.body.lon;
 	var g = game.getGame(gameid);
 	fs.readFile(req.files.image.path, function(err, data){
 		if(err){
@@ -134,13 +136,16 @@ app.post('/upload', function(req, res){
 					res.redirect('back');
 					return;
 				}
-				game.imageSubmit(gameid, userid, tasknum, link);
+				var score = game.imageSubmit(gameid, userid, tasknum, link);
 
 				io.sockets.in(gameid).emit('newImage', {
 					playerid: userid,
 					tasknum: g.tasks[tasknum],
 					tasknumber: parseInt(tasknum),
-					image: link
+					image: link,
+					lat: lat,
+					lon: lon,
+					score: score
 				})
 				io.sockets.in(gameid).emit('miniProgress', {
 					playerid: userid,
