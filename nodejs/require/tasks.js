@@ -19,7 +19,7 @@ tasks.google = [
 	'Play in a ballpit'
 ]
 
-tasks.sf = [
+tasks["san francisco"] = [
 	"The Transamerica Pyramid",
 	"Cable Car",
 	"The Golden Gate Bridge",
