@@ -62,6 +62,7 @@ app.get('/help', function(req, res){
 
 app.get('/show', function(req, res){
 	var templateid = req.query.tid;
+	console.log(templateid);
 	var tasks = game.getTemplate(templateid);
 	res.render('show', {tid: templateid, tasks: tasks});
 })
