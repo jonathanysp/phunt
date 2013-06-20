@@ -1,5 +1,5 @@
 //connect
-var socket = io.connect('192.168.74.105:3000');
+var socket = io.connect('192.168.20.10:3000');
 //var socket = io.connect('http://192.168.20.217:3000')
 //lets the server know which game notifications to send us
 //set userid to null for leaderboard
@@ -117,11 +117,15 @@ var addLeaderboardEvents = function(){
 	socket.on('newImage', function(data){
 		console.log('New Image!');
 		console.log(data);
+
 		//update appropriate cell with image
 		var newTaskNum = data.tasknumber + 1;
 		var tdLocation = newTaskNum + "_" + data.playerid;
-		console.log("In newImage: " + tdLocation);
-		//var placeholder = document.getElementById(tdLocation);
+		var td = document.getElementById(tdLocation);
+		//if data.score == 2, fill in cell/highlight
+		if(data.score == "2") {
+			td.style.backgroundColor="#F4FA58";
+		}
 
 		//if there's an img already at tdLocation, replace its src
 		var placeholder = $("#"+tdLocation).children();
@@ -130,8 +134,17 @@ var addLeaderboardEvents = function(){
 			image.src = data.image;
 			image.setAttribute("class", "incomingPics");
 			$(image).hide().appendTo("#"+tdLocation).fadeIn("slow");
+			//create paragraph with lat/long information (give it an id)
+			var latLon = document.createElement("p");
+			var latLonId = "latLon_" + data.playerid;
+			latLon.setAttribute("id", latLonId);
+			latLon.innerHTML = "Latitude: " + data.lat + "	Lontitude: " + data.lon;
+			$("#"+tdLocation).append(latLon);
 		} else {
 			placeholder[0].src = data.image;
+			//update paragraph with lat/long information
+			var latLon = document.getElementById("latLon_" + data.playerid);
+			latLong.innerHTML = "Latitude: " + data.lat + "	Lontitude: " + data.lon;
 		}
 
 		
