@@ -2,13 +2,13 @@ extends layout
 
 block content
 	h1 Scavenger Hunt
-
-	- for(var i = 0; i < tasks.length; i++) {
-		- if(done[i] === undefined){
-			span=tasks[i] + " "
-		- } else {
-			span(style="text-decoration:line-through")=tasks[i] + " "
+	div#todo 
+		- for(var i = 0; i < tasks.length; i++) {
+			a(href="/upload?taskid=" + i + "&userid=" + userid + "&gameid=" + gameid) 
+				- if(done[i] === undefined){
+					span=tasks[i] + " "
+				- } else {
+					span(style="text-decoration:line-through")=tasks[i] + " "
+				- }
+			br
 		- }
-		a(href="/upload?taskid=" + i + "&userid=" + userid + "&gameid=" + gameid) FOUND IT! 
-		br
-	- }

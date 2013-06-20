@@ -3,9 +3,9 @@ extends layout
 block content
 	h1 Scavenger Hunt
 
-	span(style="color:red")=error
-	br
-	form(action = "/login", method = "post")
+	form#lForm(action = "/login", method = "post")
+		span(class = "err")=error
+		br
 		label What's your game ID?  
 		br
 		input(class="inp", type="text", required, name = "gameid")
