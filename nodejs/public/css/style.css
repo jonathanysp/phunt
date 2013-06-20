@@ -97,4 +97,11 @@ img {
   text-align: center;
   color: #393FEF !important;
 }
+hr {
+  display: block; 
+  height: 1px;
+  border-color: black; 
+  border-top: 1px solid black;
+  padding: 0; 
+}
 
