@@ -4,18 +4,21 @@
 	<title>Create your own adventure!</title>
 	<script src="/js/jquery.js"></script>
 	<script src="/js/angular.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
 	<h1>Create your own adventure!</h1>
-	<input id="input" placeholder="Propose a picture!"></input>
-	<button id="deleteall">Clear All</button>
-	<ul id="ul">
-		<li ng-repeat="item in items" ng-class="'done-'+item.done" ng-animate="'repeat'">
-			<button>
-	</ul>
-	<form id="hidden_form" method="POST" action="/new">
-		<input type="submit" value="Next">
-	</form>
+	<div id='andre'>
+		<input id="input" placeholder="Propose a picture!"></input>
+		<button id="deleteall">Clear All</button>
+		<ul id="ul">
+			<li ng-repeat="item in items" ng-class="'done-'+item.done" ng-animate="'repeat'">
+				<button>
+		</ul>
+		<form id="hidden_form" method="POST" action="/new">
+			<input type="submit" value="Next">
+		</form>
+	</div>
 	<script>
 		var counter = 0;
 		$('#input').keyup(function(event){
@@ -33,7 +36,7 @@
 						var newdiv = $(document.createElement('div'))
 							var newdel = $(document.createElement('button'))
 						newdel.attr('class', 'a'+counter)
-						newdel.text('Delete')
+						newdel.text('DELETE')
 						newdel.click(function(){
 							var classy = newdel.attr('class')
 							$('.'+classy).remove()
@@ -41,9 +44,11 @@
 						counter++
 						newdiv.append(typed)
 						newdiv.append(newdel)
+						newdiv.attr('class', 'user_typed')
 					newli.addClass('li')
 					newli.append(newdiv);
 					$("#ul").append(newli);
+					//$("#ul").append($(document.createElement('br')))
 					$('#input').val("")
 					}
 		    	}

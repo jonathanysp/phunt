@@ -50,3 +50,46 @@ th {
 #lForm{
   font-size: 30px;
 }
+
+
+
+
+.user_typed {
+	font-size: 20px;
+}
+
+ul {
+	list-style-type: none;
+}
+
+input {
+	background-color: rgb(230, 227, 177);
+}
+
+#input {
+	font-size: 20px;
+}
+
+button, input[type=submit] {
+	color: black;
+	background-color: rgb(192, 172, 95);
+	border-color: rgb(216, 205, 126);
+	-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+	cursor:pointer;
+}
+
+.delete {
+	font-size: 200px;
+}
+
+button:hover, input[type=submit]:hover {
+	background-color: rgb(216, 181, 128);
+}
+
+#andre {
+	text-align: center
+}
+
+.task {
+	display:none !important;
+}
