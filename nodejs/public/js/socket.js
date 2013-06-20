@@ -23,10 +23,18 @@ var addLeaderboardEvents = function(){
 
 	socket.on('info', function(data){
 		console.log(data.g);
+		//setup current progress bars for the current players
+		var totalTasks = data.g.tasks.length;
+		var progressSection = document.getElementById("progressBars");
+		for(var i = 0; i < data.g.players.length; i++) {
+			var player = data.g.players[i];
+			var bar = document.createElement("progress");
+			var arrOfPics = data.g.images[player];
+			bar.setAttribute("value", ___);
+			bar.setAttribute("max", __);
+		}
 
 		//setup current table and populate recent table with data.g
-		//for each player in data.g.players, create th for the player
-		
 		var headRow = document.getElementById("headingRow");
 		for(var i = 0; i < data.g.players.length; i++) {
 			var newCol = document.createElement("th");
@@ -46,9 +54,7 @@ var addLeaderboardEvents = function(){
 			});
 		}
 
-		//for each player in images, 
-		//loop through its array of images
-		//insert images uploaded to the correct task (fix index/id?)
+		//insert images uploaded by users so far
 		for(var player in data.g.images) {
 			var arrOfPics = data.g.images[player];
 			for(var i = 0; i < arrOfPics.length; i++) {
@@ -72,15 +78,12 @@ var addLeaderboardEvents = function(){
 		console.log('New Image!');
 		console.log(data);
 		//update appropriate cell with image
-		//depends on the number of the task the image is for.
-		//user must enter the number of the task
 		var tdLocation = data.tasknumber + "_" + data.playerid;
 		console.log("In newImage: " + tdLocation);
 		var placeholder = document.getElementById(tdLocation);
 		var image = document.createElement('img');
 		image.src = data.image;
 		image.setAttribute("class", "incomingPics");
-		//set dimensions
 		placeholder.appendChild(image);
 	})
 
