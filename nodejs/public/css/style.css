@@ -295,6 +295,10 @@ hr {
 }
 .help{
   font-weight: bold;
+<<<<<<< HEAD
+
+}
+=======
   font-size: 15px;
   max-width: 80%;
   padding-left: 80px;
@@ -307,3 +311,4 @@ hr {
 span.done{
   color: gray;
 }
+>>>>>>> f8a9bbb9e96dded25f43b2e900bd7d46db1cb0ad
