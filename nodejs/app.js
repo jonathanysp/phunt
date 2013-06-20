@@ -42,14 +42,14 @@ app.get('/progress', function(req, res){
 	if(gameid === undefined){
 		//gameid = 0;
 	}
-	res.render('progressPage', {g: game.getGame(gameid), gameid: gameid})
+	res.render('progressPage', {title: "Game: " + gameid, g: game.getGame(gameid), gameid: gameid})
 });
 app.get('/game', function(req, res){
 	res.render('game', {g: game.getGame(0)})
 });
 app.get('/pic', routes.camera);
-app.get('/login', function(req, res){
-	res.render('login');
+app.get('/m', function(req, res){
+	res.render('login', {title: "Phunt Login"});
 })
 
 app.get('/create', function(req, res){
