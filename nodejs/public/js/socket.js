@@ -1,5 +1,5 @@
 //connect
-var socket = io.connect('http://192.168.20.10:3000');
+var socket = io.connect('http://192.168.74.105:3000');
 //var socket = io.connect('http://192.168.20.217:3000')
 //lets the server know which game notifications to send us
 //set userid to null for leaderboard
@@ -16,6 +16,7 @@ var addMobileEvents = function(){
 		var span = document.createElement(span);
 		$(span).text(string);
 		$("#notif").append(span);
+		$("#notif").append(document.createElement('br'));
 	})
 }
 

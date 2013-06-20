@@ -7,20 +7,29 @@ body {
 a {
   color: #00B7FF;
 }
-h1.create{
+h1{
 	  text-align: center;
     font-weight: bolder;
 	  font-size: 100px;
 	  font-variant: small-caps;
     text-shadow: 2px 2px 2px #73718A;
 	  letter-spacing: 1.8pt;
+    margin-bottom:-15px;
+    margin-top: 4px;
 }
 h2{
 
     font-size: 28px;
     font-style: italic;
     font-variant: small-caps;
-
+    text-align: center;
+    margin-bottom: 50px;
+}
+#lForm{
+  padding-top: 40px;
+  font-size: 75px;
+  font-variant: small-caps;
+  text-align: center;
 
 }
 #bottom{
@@ -46,7 +55,7 @@ h2{
 #top1, #top2, #top3, #top4, #top5, #top6{
   position: relative;
   visibility: hidden; 
-  top: -234px;
+  top: -248px;
   width: 260px;
   height: 230px;
 
@@ -87,11 +96,6 @@ td {
 .headingCol {
 	width: 200px;
 }
-#lForm{
-  font-size: 75px;
-  font-variant: small-caps;
-  text-align: center;
-}
 
 .user_typed {
 	font-size: 20px;
@@ -102,7 +106,7 @@ div.user_typed {
 	text-align: right ;
 }
 
-.ul {
+ul {
 	list-style-type: none;
 }
 
@@ -138,16 +142,18 @@ button:hover, input[type=submit]:hover {
 	display:none !important;
 }
 .inp{
-  width: 350px;
-  font-size: 40px;
-  height: 90px;  
+
+  width: 550px;
+  font-size: 100px;
+  height: 160px;
 
 }
 .butt{
   width: 300px;
   height: 120px;
-  font-size: 20px;
-
+  font-size: 70px;
+  margin-top: 70px;
+  text-align: center;
 }
 .err{
   font-size: 50px;
@@ -156,7 +162,7 @@ button:hover, input[type=submit]:hover {
   color: red;
 }
 #todo, a{
-  font-size: 40px;
+  font-size: 80px;
   text-align: center;
   color: #393FEF !important;
 }
@@ -168,8 +174,12 @@ hr {
   padding: 0; 
 }
 
-.up{
-  font-size: 39px;
+#pix{
+  font-size: 40px;
+  font-variant: small-caps;
+  margin-left:auto;
+  margin-right: auto;
+  text-align: center
 }
 
 .share-button {
@@ -185,8 +195,6 @@ hr {
 }
 
 .share-button p {
-    margin: 0px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
     font-family: calibri;
     font-size: 26px;
     color: #fff;
@@ -200,18 +208,13 @@ hr {
 .photo-button {
     cursor: pointer;
     float: left;
-    margin: 0px 10px 0px 0px;
-    height: 30px;
-    width: 150px;
+    height: 150px;
+    width: 500px;
     border: none;
     border-radius: 4px 4px 4px 4px;
     background-color: #608AB0;
     background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
-}
-
-.photo-button p {
-    margin: 0px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
+    margin:70px 10px 0px 100px;
     font-size: 46px;
     color: #fff;
 }
@@ -233,10 +236,6 @@ hr {
   font-weight: bold;
   font-size: 20px;
   background-color: white;
-}
-
-input[type=submit] {
-	font-size: 20px;
 }
 
 #displaytitle {
