@@ -9,7 +9,9 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , fs = require('fs')
-  , game = require('./require/game.js');
+  , game = require('./require/game.js')
+  , mkdirp = require('mkdirp')
+  , getDirName = path.dirname;
 
 var app = express();
 var server = http.createServer(app);
@@ -54,6 +56,12 @@ app.get('/create', function(req, res){
 	res.render('input');
 })
 
+app.get('/show', function(req, res){
+	var templateid = req.query.tid;
+	var tasks = game.getTemplate(templateid);
+	res.render('show', {tid: templateid, tasks: tasks});
+})
+
 app.get('/new', function(req, res){
 	var templateid = req.query.tid;
 	var gameid = game.createGame(templateid);
@@ -61,6 +69,9 @@ app.get('/new', function(req, res){
 })
 app.post('/new', function(req, res){
 	var template = req.body.task;
+	if(!(template instanceof Array)){
+		template = [template];
+	}
 	var name = req.body.name;
 	game.addTemplate(template, name);
 	res.redirect('/new?tid=' + name);
@@ -104,28 +115,37 @@ app.post('/upload', function(req, res){
 	var g = game.getGame(gameid);
 	fs.readFile(req.files.image.path, function(err, data){
 		if(err){
+			console.log(err);
 			res.redirect('back');
 			return;
 		}
 		//check player id
 		//public/upload/gameid/userid/tasknum.jpg
-		var newPath = 'public/upload/new.jpg';
-		var link = '/upload/new.jpg';
-		fs.writeFile(newPath, data, function(err){
-			if(err){
-				res.redirect('back');
-				return;
-			}
-			game.imageSubmit(gameid, userid, tasknum, link);
+		var newPath = 'public/upload/' + gameid + '/' + userid + '/' + tasknum + '.jpg';
+		var link = '/upload/' + gameid + '/' + userid + '/' + tasknum + '.jpg';
+		mkdirp(getDirName(newPath), function(err){
+			fs.writeFile(newPath, data, function(err){
+				if(err){
+					console.log(err);
+					res.redirect('back');
+					return;
+				}
+				game.imageSubmit(gameid, userid, tasknum, link);
 
-			io.sockets.in(gameid).emit('newImage', {
-				playerid: userid,
-				tasknum: g.tasks[tasknum],
-				tasknumber: parseInt(tasknum),
-				image: link
+				io.sockets.in(gameid).emit('newImage', {
+					playerid: userid,
+					tasknum: g.tasks[tasknum],
+					tasknumber: parseInt(tasknum),
+					image: link
+				})
+				io.sockets.in(gameid).emit('miniProgress', {
+					playerid: userid,
+					numTasks: game.getNumDone(gameid, userid)
+				})
+				res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
 			})
-			res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
 		})
+
 	})
 });
 

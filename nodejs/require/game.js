@@ -1,4 +1,5 @@
 var tasks = require('./tasks.js').tasks;
+var words = require('./words.js').words;
 var games = {};
 
 var id = 0;
@@ -32,6 +33,28 @@ var imageSubmit = function(gameid, userid, tasknum, filepath){
 	var g = getGame(gameid);
 	g.images[userid][parseInt(tasknum)] = filepath;
 	console.log(g.images[userid]);
+
+	var numTasks = getTasks(gameid).length;
+	var numDone = getNumDone(gameid, userid);
+	console.log(numTasks + " " + numDone);
+
+	var q1 = Math.floor(numTasks*0.25);
+	var q2 = Math.floor(numTasks*0.5);
+	var q3 = Math.floor(numTasks*0.75);
+
+	switch(numDone){
+		case q1:
+			io.sockets.in(gameid).emit('progress', {player: userid, progress: 25});
+			break;
+		case q2:
+			io.sockets.in(gameid).emit('progress', {player: userid, progress: 50});
+			break;
+		case q3:
+			io.sockets.in(gameid).emit('progress', {player: userid, progress: 75});
+			break;
+		case numDone:
+			io.sockets.in(gameid).emit('progress', {player: userid, progress: 100});
+	}
 }
 exports.imageSubmit = imageSubmit;
 
@@ -99,10 +122,29 @@ var createGame = function(templateid){
 exports.createGame = createGame;
 
 var generateID = function(){
-	return Math.random().toString(36).substr(2,5);
+	//return Math.random().toString(36).substr(2,5);
+	var max = words.length;
+	return words[Math.floor(Math.random()*max)];
 }
 
 var addTemplate = function(template, name){
 	tasks[name] = template;
 }
 exports.addTemplate = addTemplate;
+
+var getTemplate = function(tid){
+	return tasks[tid];
+}
+exports.getTemplate = getTemplate;
+
+var getNumDone = function(gameid, userid){
+	var list = getDone(gameid, userid);
+	var counter = 0;
+	for(var i = 0 ; i < list.length; i++){
+		if(list[i] !== undefined){
+			counter++;
+		}
+	}
+	return counter;
+}
+exports.getNumDone = getNumDone;

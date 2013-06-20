@@ -4,7 +4,7 @@ block head
 	script(src="/socket.io/socket.io.js")
 	script(src="/js/socket.js")
 	script.
-		register(#{"'"+gameid+"'"}, null);
+		register(#{"'"+gameid+"'"}, #{"'"+userid+"'"});
 		addMobileEvents();
 
 block content
