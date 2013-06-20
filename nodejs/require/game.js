@@ -137,7 +137,6 @@ var createGame = function(templateid){
 	tasks: t,
 	players: [],
 	images: {},
-	scores: {}
 	scores: {},
 	coord: {},
 	}
