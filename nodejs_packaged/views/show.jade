@@ -1,0 +1,15 @@
+extends layout
+
+block content
+	h1 #{tid.charAt(0).toUpperCase() + tid.slice(1)}
+	div(class = "shows")
+		br 
+		br
+		ol(class = "lists")
+			each task in tasks
+				li=task
+		a(href="/new?tid=" + tid)
+			button(class="butt2") Start Game!
+
+		a.starting(href="/")
+			button(class="butt3") Go Back
