@@ -10,8 +10,26 @@ var register = function(gameid, userid){
 var addMobileEvents = function(){
 	socket.on('progress', function(data){
 		console.log('Progress update!');
-		//send progress notification
 		console.log(data);
+		var span1 = document.createElement('span');
+		$(span1).text(data.player);
+		console.log(span1);
+		$("#notif").append(span1);
+
+		var span2 = document.createElement('span');
+		$(span2).text(" has made it to ");
+		console.log(span2);
+		$("#notif").append(span2);
+
+		var span = document.createElement('span');
+		$(span).text(data.progress);
+		$("#notif").append(span);
+
+		var span3 = document.createElement('span');
+		$(span3).text("%. Hurry up!");
+		console.log(span3);
+		$("#notif").append(span3);
+		$("#notif").append(document.createElement("br"))
 	})
 }
 

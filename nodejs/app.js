@@ -50,6 +50,10 @@ app.get('/login', function(req, res){
 	res.render('login');
 })
 
+app.get('/create', function(req, res){
+	res.render('input');
+})
+
 app.get('/new', function(req, res){
 	var templateid = req.query.tid;
 	var gameid = game.createGame(templateid);

@@ -66,6 +66,11 @@ td {
 	height: auto;
 }
 
+#sub{
+  width: 400px;
+  height: auto;
+
+}
 .headingCol {
 	width: 200px;
 }
@@ -78,8 +83,10 @@ td {
 .user_typed {
 	font-size: 20px;
 	width: 250px;
-	margin-left: 175px;
-	text-align: right;
+}
+
+div.user_typed {
+	text-align: right ;
 }
 
 ul {
@@ -111,7 +118,7 @@ button:hover, input[type=submit]:hover {
 }
 
 #andre {
-	text-align: center
+	margin-left: 20px;
 }
 
 .task {
@@ -126,7 +133,7 @@ button:hover, input[type=submit]:hover {
 .butt{
   width: 300px;
   height: 120px;
-  font-size: 40px;
+  font-size: 20px;
 
 }
 .err{
@@ -148,6 +155,100 @@ hr {
   padding: 0; 
 }
 
+<<<<<<< HEAD
+.up{
+  font-size: 39px;
+}
+
+.share-button {
+    cursor: pointer;
+    float: left;
+    margin: 0px 0px 0px 10px;
+    height: 30px;
+    width: 80px;
+    border: none;
+    border-radius: 4px 4px 4px 4px;
+    background-color: #608AB0;
+    background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.share-button p {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    font-family: calibri;
+    font-size: 26px;
+    color: #fff;
+}
+
+#share-bottom {
+    height: 30px;
+    width: 580px;
+}
+
+.photo-button {
+    cursor: pointer;
+    float: left;
+    margin: 0px 10px 0px 0px;
+    height: 30px;
+    width: 150px;
+    border: none;
+    border-radius: 4px 4px 4px 4px;
+    background-color: #608AB0;
+    background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.photo-button p {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    font-size: 46px;
+    color: #fff;
+}
+
+#upload-wrap {
+    float: left;
+    height: 30px;
+    width: 200px;
+    display:none;
+}
+#thing{
+  margin-left: auto;
+  width: 700px ;
+  margin-right: auto;
+}
+#notif{
+  vertical-align: top;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: white;
+}
+
+
+
+
 input[type=submit] {
 	font-size: 20px;
+}
+
+#displaytitle {
+	font-size: 30px ;
+	text-align: left; 
+}
+
+#cyoatitle {
+	font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+	font-weight: bolder;
+	font-size: 55px;
+	font-variant: small-caps;
+	letter-spacing: 1.8pt;
+	padding-top: 10px;
+	padding-left: 15px;
+}
+
+.user_span {
+	padding-right: 30px;
+}
+
+.deletespan {
+	text-align: right
 }
