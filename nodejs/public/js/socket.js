@@ -1,5 +1,5 @@
 //connect
-var socket = io.connect('http://10.1.1.77:3000');
+var socket = io.connect('http://10.1.1.112:3000');
 //var socket = io.connect('http://192.168.20.217:3000')
 //lets the server know which game notifications to send us
 //set userid to null for leaderboard
@@ -30,8 +30,12 @@ var addLeaderboardEvents = function(){
 			var player = data.g.players[i];
 			var bar = document.createElement("progress");
 			var arrOfPics = data.g.images[player];
-			bar.setAttribute("value", ___);
-			bar.setAttribute("max", __);
+			var percentage = (arrOfPics / totalTasks) * 100;
+			bar.setAttribute("value", percentage);
+			bar.setAttribute("max", 100);
+			var barId = player + "_bar";
+			bar.setAttribute("id", barId);
+			progressSection.appendChild(bar);
 		}
 
 		//setup current table and populate recent table with data.g
@@ -78,7 +82,8 @@ var addLeaderboardEvents = function(){
 		console.log('New Image!');
 		console.log(data);
 		//update appropriate cell with image
-		var tdLocation = data.tasknumber + "_" + data.playerid;
+		var newTaskNum = data.tasknumber + 1;
+		var tdLocation = newTaskNum + "_" + data.playerid;
 		console.log("In newImage: " + tdLocation);
 		var placeholder = document.getElementById(tdLocation);
 		var image = document.createElement('img');
@@ -93,6 +98,7 @@ var addLeaderboardEvents = function(){
 		console.log("small progress update");
 		console.log(data);
 		//update progress bar
+
 	})
 
 	//format:
@@ -100,6 +106,14 @@ var addLeaderboardEvents = function(){
 	socket.on('newPlayer', function(data){
 		console.log("new player!");
 		console.log(data);
+
+		var progressSection = document.getElementById("progressBars");
+		var bar = document.createElement("progress");
+		bar.setAttribute("value", 0);
+		bar.setAttribute("max", 100);
+		var barId = data.player + "_bar";
+		bar.setAttribute("id", __);
+		progressSection.appendChild(bar);
 
 		var headRow = document.getElementById("headingRow");
 		var newCol = document.createElement("th");
