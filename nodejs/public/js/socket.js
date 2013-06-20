@@ -12,6 +12,10 @@ var addMobileEvents = function(){
 		console.log('Progress update!');
 		//send progress notification
 		console.log(data);
+		var string = data.player + " has completed " + data.progress + "%!";
+		var span = document.createElement(span);
+		$(span).text(string);
+		$("#notif").append(span);
 	})
 }
 

@@ -69,6 +69,9 @@ app.get('/new', function(req, res){
 })
 app.post('/new', function(req, res){
 	var template = req.body.task;
+	if(!(template instanceof Array)){
+		template = [template];
+	}
 	var name = req.body.name;
 	game.addTemplate(template, name);
 	res.redirect('/new?tid=' + name);
@@ -134,6 +137,10 @@ app.post('/upload', function(req, res){
 					tasknum: g.tasks[tasknum],
 					tasknumber: parseInt(tasknum),
 					image: link
+				})
+				io.sockets.in(gameid).emit('miniProgress', {
+					playerid: userid,
+					numTasks: game.getNumDone(gameid, userid)
 				})
 				res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
 			})
