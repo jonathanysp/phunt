@@ -174,12 +174,17 @@ hr {
   padding: 0; 
 }
 
+<<<<<<< HEAD
+.up{
+  font-size: 39px;
+=======
 #pix{
   font-size: 40px;
   font-variant: small-caps;
   margin-left:auto;
   margin-right: auto;
   text-align: center
+>>>>>>> a9b508fc8b30511a17357a4cfb3dc5be32ecce3c
 }
 
 .share-button {

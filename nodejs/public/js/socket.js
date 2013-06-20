@@ -1,5 +1,10 @@
 //connect
+<<<<<<< HEAD
+var socket = io.connect('192.168.52.244');
+
+=======
 var socket = io.connect('http://192.168.74.105:3000');
+>>>>>>> a9b508fc8b30511a17357a4cfb3dc5be32ecce3c
 //var socket = io.connect('http://192.168.20.217:3000')
 //lets the server know which game notifications to send us
 //set userid to null for leaderboard
