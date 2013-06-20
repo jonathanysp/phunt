@@ -11,26 +11,8 @@ var register = function(gameid, userid){
 var addMobileEvents = function(){
 	socket.on('progress', function(data){
 		console.log('Progress update!');
+		//send progress notification
 		console.log(data);
-		var span1 = document.createElement('span');
-		$(span1).text(data.player);
-		console.log(span1);
-		$("#notif").append(span1);
-
-		var span2 = document.createElement('span');
-		$(span2).text(" has made it to ");
-		console.log(span2);
-		$("#notif").append(span2);
-
-		var span = document.createElement('span');
-		$(span).text(data.progress);
-		$("#notif").append(span);
-
-		var span3 = document.createElement('span');
-		$(span3).text("%. Hurry up!");
-		console.log(span3);
-		$("#notif").append(span3);
-		$("#notif").append(document.createElement("br"))
 	})
 }
 
@@ -117,7 +99,9 @@ var addLeaderboardEvents = function(){
 		console.log("small progress update");
 		console.log(data);
 		//update progress bar
-
+		var barId = data.playerid + "_bar";
+		var bar = document.getElementById(barId);
+		//bar.setAttribute()
 	})
 
 	//format:
@@ -131,7 +115,7 @@ var addLeaderboardEvents = function(){
 		bar.setAttribute("value", 0);
 		bar.setAttribute("max", 100);
 		var barId = data.player + "_bar";
-		bar.setAttribute("id", __);
+		bar.setAttribute("id", barId);
 		progressSection.appendChild(bar);
 
 		var headRow = document.getElementById("headingRow");
