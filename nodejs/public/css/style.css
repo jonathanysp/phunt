@@ -99,12 +99,16 @@ td {
 	padding: 5px;
 }
 
+.spanForProgress {
+  margin: 10px;
+}
+
 .progressSummary {
-  display: inline;
+  text-align: center;
 }
 
 .incomingPics {
-	width: 100px;
+	width: 190px;
 	height: auto;
 }
 
@@ -318,10 +322,13 @@ hr {
 .help{
   font-weight: bold;
   font-size: 18px;
-  max-width: 80%;
-  padding-left: 80px;
+
 }
 
 .BIG {
   display:none;
+}
+
+span.done{
+  color: gray;
 }

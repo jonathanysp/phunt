@@ -23,6 +23,10 @@ var game = {
 	scores: {
 		'p1': [2,1,2],
 		'p2': [1,2,1]
+	},
+	coord: {
+		'p1': [{lat: 1, lon: 0}, {lat: 1, lon: 0}, {lat: 1, lon: 0}],
+		'p2': [{lat: 1, lon: 0}, {lat: 1, lon: 0}, {lat: 1, lon: 0}],
 	}
 }
 
@@ -33,7 +37,7 @@ exports.setSocket = function(sockio){
 	io = sockio;
 }
 
-var imageSubmit = function(gameid, userid, tasknum, filepath){
+var imageSubmit = function(gameid, userid, tasknum, filepath, lat, lon){
 	if(isFirst(gameid, userid, tasknum)){
 		var score = 2;
 	} else {
@@ -48,6 +52,8 @@ var imageSubmit = function(gameid, userid, tasknum, filepath){
 	var numDone = getNumDone(gameid, userid);
 
 	g.scores[userid][parseInt(tasknum)] = score;
+
+	g.coord[userid][parseInt(tasknum)] = {lat: lat, lon: lon};
 
 	var q1 = Math.floor(numTasks*0.25);
 	var q2 = Math.floor(numTasks*0.5);
@@ -100,6 +106,8 @@ var addPlayer = function(gameid, userid){
 	g.players.push(userid);
 	g.images[userid] = [];
 	g.scores[userid] = [];
+	console.log(g);
+	g.coord[userid] = [];
 	io.sockets.in(gameid).emit('newPlayer', {
 		player: userid,
 	})
@@ -129,7 +137,8 @@ var createGame = function(templateid){
 	tasks: t,
 	players: [],
 	images: {},
-	scores: {}
+	scores: {},
+	coord: {},
 	}
 	games[gameid] = newGame;
 	return gameid;
