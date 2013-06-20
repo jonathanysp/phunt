@@ -21,10 +21,12 @@ var addLeaderboardEvents = function(){
 		console.log(data);
 	})
 
+	var totalTasks;
+
 	socket.on('info', function(data){
 		console.log(data.g);
 		//setup current progress bars for the current players
-		var totalTasks = data.g.tasks.length;
+		totalTasks = data.g.tasks.length;
 		var progressSection = document.getElementById("progressBars");
 		for(var i = 0; i < data.g.players.length; i++) {
 			/*
@@ -112,12 +114,12 @@ var addLeaderboardEvents = function(){
 		console.log("small progress update");
 		console.log(data);
 		//update progress bar
-		//var newPercentage = () * 100;
-		/*
+		var newPercentage = (numTasks / totalTasks) * 100;
+		
 		var barId = data.playerid + "_bar";
 		var bar = document.getElementById(barId);
-		*/
-		//bar.setAttribute("value", newPercentage);
+		
+		bar.setAttribute("value", newPercentage);
 	})
 
 	//format:
@@ -126,7 +128,7 @@ var addLeaderboardEvents = function(){
 		console.log("new player!");
 		console.log(data);
 
-		/*
+		//PROGRESS BAR SECTION
 		var progressSection = document.getElementById("progressBars");
 		var bar = document.createElement("progress");
 		bar.setAttribute("value", 0);
@@ -134,7 +136,6 @@ var addLeaderboardEvents = function(){
 		var barId = data.player + "_bar";
 		bar.setAttribute("id", barId);
 		progressSection.appendChild(bar);
-		*/
 
 		var headRow = document.getElementById("headingRow");
 		var newCol = document.createElement("th");
