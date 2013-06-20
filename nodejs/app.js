@@ -51,6 +51,9 @@ app.get('/pic', routes.camera);
 app.get('/m', function(req, res){
 	res.render('login', {title: "PHunt Login"});
 })
+app.get('/login', function(req, res){
+	res.render('login', {title: "PHunt Login"});
+})
 
 app.get('/create', function(req, res){
 	res.render('input');
