@@ -1,3 +1,4 @@
+var tasks = require('./tasks.js').tasks;
 var games = {};
 
 var id = 0;
@@ -34,7 +35,7 @@ var imageSubmit = function(gameid, userid, tasknum, filepath){
 exports.imageSubmit = imageSubmit;
 
 var getGame = function(gameid){
-	return games[0];
+	return games[gameid];
 }
 exports.getGame = getGame;
 
@@ -62,7 +63,7 @@ var addPlayer = function(gameid, userid){
 	g.players.push(userid);
 	g.images[userid] = [];
 	io.sockets.in(gameid).emit('newPlayer', {
-		userid: userid,
+		player: userid,
 	})
 }
 exports.addPlayer = addPlayer;
@@ -84,16 +85,23 @@ exports.doneLink = doneLink;
 
 var createGame = function(templateid){
 	var gameid = generateID();
-	var tasks = tasktemplate.templateid;
+	var t = tasks[templateid];
 	var newGame = {
 	gameid: gameid,
-	tasks: tasks,
+	tasks: t,
 	players: [],
 	images: {}
 	}
-	games.push(newGame);
+	games[gameid] = newGame;
+	return gameid;
 }
+exports.createGame = createGame;
 
 var generateID = function(){
 	return Math.random().toString(36).substr(2,5);
 }
+
+var addTemplate = function(template, name){
+	tasks[name] = template;
+}
+exports.addTemplate = addTemplate;

@@ -37,7 +37,10 @@ app.get('/', routes.index);
 //app.get('/progress', routes.progress);
 app.get('/progress', function(req, res){
 	var gameid = req.query.gameid;
-	res.render('progressPage', {g: game.getGame(0)})
+	if(gameid === undefined){
+		//gameid = 0;
+	}
+	res.render('progressPage', {g: game.getGame(gameid), gameid: gameid})
 });
 app.get('/game', function(req, res){
 	res.render('game', {g: game.getGame(0)})
@@ -46,6 +49,19 @@ app.get('/pic', routes.camera);
 app.get('/login', function(req, res){
 	res.render('login');
 })
+
+app.get('/new', function(req, res){
+	var templateid = req.query.tid;
+	var gameid = game.createGame(templateid);
+	res.redirect('/progress?gameid=' + gameid);
+})
+app.post('/new', function(req, res){
+	var template = req.body.task;
+	var name = req.body.name;
+	game.addTemplate(template, name);
+	res.redirect('/new?tid=' + name);
+})
+
 app.post('/login', function(req, res){
 	var gameid = req.body.gameid;
 	var userid = req.body.userid;
@@ -100,7 +116,7 @@ app.post('/upload', function(req, res){
 
 			io.sockets.in(gameid).emit('newImage', {
 				playerid: userid,
-				tasknum: tasknum,
+				tasknum: g.tasks[tasknum],
 				image: link
 			})
 			res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
