@@ -1,4 +1,4 @@
-var words = {
+var words = [
 'spell', 'study', 'still', 'plant', 'along', 'often', 'until', 'carry', 'black', 'bring', 'drink', 'funny', 'seven', 
 'blast', 'blend', 'blimp', 'blink', 'bliss', 'block', 'blond', 'bluff', 'blunt', 'brand', 'brass', 'brunt', 'clamp', 
 'clasp', 'cliff', 'cling', 'clink', 'clump', 'clung', 'craft', 'cramp', 'crisp', 'crust', 'draft', 'drank', 'dress', 
@@ -13,4 +13,6 @@ var words = {
 'sandy', 'scrub', 'silly', 'slick', 'stung', 'sunny', 'truck', 'tummy', 'unzip', 'visit', 'wagon', 'bless', 'brisk', 
 'clack', 'clang', 'crick', 'crock', 'flick', 'flock', 'frizz', 'gloss', 'gruff', 'plums', 'scuff', 'skips', 'skull', 
 'smock', 'snuff', 'speck', 'swept', 'track', 'given', 'adult', 'angry', 'belly', 'empty', 'extra', 'hurry', 'nasty', 'sorry'
-}
+]
+
+exports.words = words;

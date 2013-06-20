@@ -1,4 +1,5 @@
 var tasks = require('./tasks.js').tasks;
+var words = require('./words.js').words;
 var games = {};
 
 var id = 0;
@@ -121,7 +122,9 @@ var createGame = function(templateid){
 exports.createGame = createGame;
 
 var generateID = function(){
-	return Math.random().toString(36).substr(2,5);
+	//return Math.random().toString(36).substr(2,5);
+	var max = words.length;
+	return words[Math.floor(Math.random()*max)];
 }
 
 var addTemplate = function(template, name){
