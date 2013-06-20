@@ -36,6 +36,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 //app.get('/progress', routes.progress);
 app.get('/progress', function(req, res){
+	var gameid = req.query.gameid;
 	res.render('progressPage', {g: game.getGame(0)})
 });
 app.get('/game', function(req, res){
@@ -50,11 +51,14 @@ app.post('/login', function(req, res){
 	var userid = req.body.userid;
 
 	if(game.isGameId(gameid)){
-		var tasks = game.getTasks(gameid);
-		//res.render('tasks', {tasks: tasks, gameid: gameid, userid: userid});
-		res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
+		if(game.isPlayer(gameid, userid)){
+			res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
+		} else {
+			game.addPlayer(gameid, userid);
+			res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
+		}
 	} else {
-		res.render('login', {error: "Incorrect gameid"});
+		res.render('login', {error: "Invalid game id"});
 	}
 })
 app.get('/tasks', function(req, res){
