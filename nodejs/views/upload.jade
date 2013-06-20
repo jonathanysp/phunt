@@ -2,12 +2,17 @@ extends layout
 
 block content
 	h1 Scavenger Hunt
-	- if(link !== undefined){
-		span(class = "up") Your submission:
-		br
-		img#sub(src=link)
-	- }
-	div#thing 
+	div#pix
+		- if(link !== undefined){
+			span(class = "up") Your submission:
+			br
+			img#sub(src=link)
+		- }
+	script.
+		$('#myfile').change(function(){
+		$('#path').val($(this).val());
+	
+	div(id ="thing") 
 		form(enctype="multipart/form-data", method="POST", action="/upload")
 			input(name="gameid", value=gameid, hidden)
 			input(name="userid", value=userid, hidden)
@@ -17,3 +22,5 @@ block content
 				div(id="upload-wrap")
 					input(type="file", id="upload-field", name="image")
 				input.butt(type="submit", value="submit", class = "photo-button")
+				input(type="file", id="myfile", name="myfile")
+
