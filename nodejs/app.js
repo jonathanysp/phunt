@@ -49,7 +49,7 @@ app.get('/game', function(req, res){
 });
 app.get('/pic', routes.camera);
 app.get('/m', function(req, res){
-	res.render('login', {title: "Phunt Login"});
+	res.render('login', {title: "PHunt Login"});
 })
 
 app.get('/create', function(req, res){
@@ -64,7 +64,7 @@ app.get('/show', function(req, res){
 	var templateid = req.query.tid;
 	console.log(templateid);
 	var tasks = game.getTemplate(templateid);
-	res.render('show', {tid: templateid, tasks: tasks});
+	res.render('show', {title: templateid, tid: templateid, tasks: tasks});
 })
 
 app.get('/new', function(req, res){
@@ -102,14 +102,14 @@ app.get('/tasks', function(req, res){
 	var userid = req.query.userid;
 	var tasks = game.getTasks(gameid);
 	var done = game.getDone(gameid, userid);
-	res.render('tasks', {tasks: tasks, gameid: gameid, userid: userid, done: done});
+	res.render('tasks', {title: userid, tasks: tasks, gameid: gameid, userid: userid, done: done});
 })
 app.get('/upload', function(req, res){
 	var gameid = req.query.gameid;
 	var taskid = req.query.taskid;
 	var userid = req.query.userid;
 	var link = game.doneLink(gameid, userid, taskid);
-	res.render('upload', {gameid: gameid, taskid: taskid, userid:userid, link: link});
+	res.render('upload', {title: "Task: "+taskid, gameid: gameid, taskid: taskid, userid:userid, link: link});
 })
 app.post('/upload', function(req, res){
 	//res.send("uploaded");
