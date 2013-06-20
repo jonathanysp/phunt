@@ -56,6 +56,10 @@ app.get('/create', function(req, res){
 	res.render('input');
 })
 
+app.get('/help', function(req, res){
+	res.render('help');
+})
+
 app.get('/show', function(req, res){
 	var templateid = req.query.tid;
 	var tasks = game.getTemplate(templateid);
