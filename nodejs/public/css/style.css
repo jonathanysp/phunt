@@ -83,8 +83,10 @@ td {
 .user_typed {
 	font-size: 20px;
 	width: 250px;
-	margin-left: 175px;
-	text-align: right;
+}
+
+div.user_typed {
+	text-align: right ;
 }
 
 ul {
@@ -116,7 +118,7 @@ button:hover, input[type=submit]:hover {
 }
 
 #andre {
-	text-align: center
+	margin-left: 20px;
 }
 
 .task {
@@ -226,4 +228,27 @@ hr {
 
 input[type=submit] {
 	font-size: 20px;
+}
+
+#displaytitle {
+	font-size: 30px ;
+	text-align: left; 
+}
+
+#cyoatitle {
+	font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+	font-weight: bolder;
+	font-size: 55px;
+	font-variant: small-caps;
+	letter-spacing: 1.8pt;
+	padding-top: 10px;
+	padding-left: 15px;
+}
+
+.user_span {
+	padding-right: 30px;
+}
+
+.deletespan {
+	text-align: right
 }
