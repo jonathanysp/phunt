@@ -1,5 +1,5 @@
 
-var socket = io.connect('192.168.52.244');
+var socket = io.connect('192.168.22.220:3000');
 
 
 //var socket = io.connect('http://192.168.20.217:3000')
