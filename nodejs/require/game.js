@@ -106,3 +106,8 @@ var addTemplate = function(template, name){
 	tasks[name] = template;
 }
 exports.addTemplate = addTemplate;
+
+var getTemplate = function(tid){
+	return tasks[tid];
+}
+exports.getTemplate = getTemplate;
