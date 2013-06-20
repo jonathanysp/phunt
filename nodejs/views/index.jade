@@ -1,8 +1,11 @@
 extends layout
 
 block content
-	h1 Scavenger Hunt
+	h1 Phunt
 	h2 Grab your phone and grab some friends and connect to our game to compete in a photo scavenger hunt! Start by selecting one of our premade hunts below, or create your own!  
+				br
+				a(href = "/help") Click here for User Guide & Instructions
+
 	script
 		function show(id) {
 			document.getElementById(id).style.visibility = "visible";
@@ -14,7 +17,7 @@ block content
 
 	div#pics
 		div#p1(onmouseover = "show('top1')", onmouseout = "hide('top1')")
-			a(href="/show?tid=sf")
+			a(href="/show?tid=san+francisco")
 				img#bottom(src = "/images/hunts/GoldenGateBridge.jpg")
 				img#top1(src="images/mOver/sf.jpg")		
 		div#p2(onmouseover = "show('top2')", onmouseout = "hide('top2')")

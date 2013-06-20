@@ -1,3 +1,4 @@
+
 //connect
 var socket = io.connect('192.168.20.10:3000');
 //var socket = io.connect('http://192.168.20.217:3000')
@@ -233,10 +234,21 @@ var addLeaderboardEvents = function(){
 	socket.on('finish', function(data){
 		console.log(data);
 	})
+
+	socket.on('disqualify', function(data){
+		console.log(data);
+	})
 }
 
 var getInfo = function(gameid){
 	socket.emit('getInfo', {gameid: gameid});
 }
 
-var updateImage = function(){}
+var disqualify = function(gameid, userid, taskid){
+	socket.emit('disqualify', {
+		gameid: gameid,
+		userid: userid,
+		taskid: taskid
+	});
+	//add css filter to image?!?!?
+}

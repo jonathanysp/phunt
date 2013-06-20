@@ -56,8 +56,13 @@ app.get('/create', function(req, res){
 	res.render('input');
 })
 
+app.get('/help', function(req, res){
+	res.render('help');
+})
+
 app.get('/show', function(req, res){
 	var templateid = req.query.tid;
+	console.log(templateid);
 	var tasks = game.getTemplate(templateid);
 	res.render('show', {tid: templateid, tasks: tasks});
 })
@@ -132,7 +137,7 @@ app.post('/upload', function(req, res){
 					res.redirect('back');
 					return;
 				}
-				var score = game.imageSubmit(gameid, userid, tasknum, link);
+				var score = game.imageSubmit(gameid, userid, tasknum, link, lat, lon);
 
 				io.sockets.in(gameid).emit('newImage', {
 					playerid: userid,
@@ -184,6 +189,10 @@ io.sockets.on('connection', function(socket){
 	
 	socket.on('echo', function(data){
 		console.log(data);
+	})
+
+	socket.on('disqualify', function(data){
+		game.disqualify(data.gameid, data.userid, data.taskid);
 	})
 
 	//debug responses
