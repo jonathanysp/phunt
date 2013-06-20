@@ -104,6 +104,7 @@ app.post('/upload', function(req, res){
 	var g = game.getGame(gameid);
 	fs.readFile(req.files.image.path, function(err, data){
 		if(err){
+			console.log(err);
 			res.redirect('back');
 			return;
 		}
@@ -113,6 +114,7 @@ app.post('/upload', function(req, res){
 		var link = '/upload/new.jpg';
 		fs.writeFile(newPath, data, function(err){
 			if(err){
+				console.log(err);
 				res.redirect('back');
 				return;
 			}
