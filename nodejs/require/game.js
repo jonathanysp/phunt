@@ -63,8 +63,9 @@ var imageSubmit = function(gameid, userid, tasknum, filepath){
 		case q3:
 			io.sockets.in(gameid).emit('progress', {player: userid, progress: 75});
 			break;
-		case numDone:
+		case numTasks:
 			io.sockets.in(gameid).emit('progress', {player: userid, progress: 100});
+			io.sockets.in(gameid).emit('finish', {player: userid, score: arraySum(g.scores[userid])});
 	}
 	return score;
 }
@@ -127,7 +128,8 @@ var createGame = function(templateid){
 	gameid: gameid,
 	tasks: t,
 	players: [],
-	images: {}
+	images: {},
+	scores: {}
 	}
 	games[gameid] = newGame;
 	return gameid;
