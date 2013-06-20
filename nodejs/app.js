@@ -8,6 +8,7 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path')
+  , fs = require('fs')
   , game = require('./require/game.js');
 
 var app = express();
@@ -35,31 +36,77 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 //app.get('/progress', routes.progress);
 app.get('/progress', function(req, res){
+	var gameid = req.query.gameid;
 	res.render('progressPage', {g: game.getGame(0)})
 });
 app.get('/game', function(req, res){
 	res.render('game', {g: game.getGame(0)})
 });
-app.post('/new', function(req, res){
-	res.send(req.body.task);
-})
 app.get('/pic', routes.camera);
-app.get('/users', user.list);
-
 app.get('/login', function(req, res){
 	res.render('login');
 })
 app.post('/login', function(req, res){
-	res.send("finished");
+	var gameid = req.body.gameid;
+	var userid = req.body.userid;
+
+	if(game.isGameId(gameid)){
+		if(game.isPlayer(gameid, userid)){
+			res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
+		} else {
+			game.addPlayer(gameid, userid);
+			res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
+		}
+	} else {
+		res.render('login', {error: "Invalid game id"});
+	}
 })
 app.get('/tasks', function(req, res){
-	res.render('tasks');
+	var gameid = req.query.gameid;
+	var userid = req.query.userid;
+	var tasks = game.getTasks(gameid);
+	var done = game.getDone(gameid, userid);
+	res.render('tasks', {tasks: tasks, gameid: gameid, userid: userid, done: done});
 })
+app.get('/upload', function(req, res){
+	var gameid = req.query.gameid;
+	var taskid = req.query.taskid;
+	var userid = req.query.userid;
+	var link = game.doneLink(gameid, userid, taskid);
+	res.render('upload', {gameid: gameid, taskid: taskid, userid:userid, link: link});
+})
+app.post('/upload', function(req, res){
+	//res.send("uploaded");
+	console.log(req.body.gameid)
+	var gameid = req.body.gameid;
+	var userid = req.body.userid;
+	var tasknum = req.body.taskid;
+	var g = game.getGame(gameid);
+	fs.readFile(req.files.image.path, function(err, data){
+		if(err){
+			res.redirect('back');
+			return;
+		}
+		//check player id
+		//public/upload/gameid/userid/tasknum.jpg
+		var newPath = 'public/upload/new.jpg';
+		var link = '/upload/new.jpg';
+		fs.writeFile(newPath, data, function(err){
+			if(err){
+				res.redirect('back');
+				return;
+			}
+			game.imageSubmit(gameid, userid, tasknum, link);
 
-//var server = http.createServer(app)
-
-//socket io server
-//var io = require('socket.io').listen(server);
+			io.sockets.in(gameid).emit('newImage', {
+				playerid: userid,
+				tasknum: tasknum,
+				image: link
+			})
+			res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
+		})
+	})
+});
 
 var done = 0;
 
@@ -82,11 +129,6 @@ io.sockets.on('connection', function(socket){
 
 	socket.on('getInfo', function(data){
 		socket.emit('info', {g: game.getGame()});
-	})
-
-	socket.on('update', function(data){
-		console.log("update");
-		io.sockets.in('0').emit('miniProgress', {number: done++})
 	})
 
 	socket.on('msg', function(data){

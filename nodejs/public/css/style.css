@@ -8,24 +8,38 @@ a {
 }
 h1{
 	  text-align: center;
-	  font-size: 80px;
+    font-weight: bolder;
+	  font-size: 100px;
 	  font-variant: small-caps;
 	  letter-spacing: 1.8pt;
 	  padding-top: 10px;
 }
-#bridge{
+#bottom{
     width: 260px;
     height: 230px;
-    border-style: solid;
-    border-width: 3px;
-    border-color: black;
-    margin:20px;
 }
 #pics{
   display: block;
   margin-left: auto;
   margin-right: auto;
-  background: url("/images/back.jpg");
+  padding:20px;
+}
+#p1, #p2, #p3, #p4, #p5, #p6{
+  float:left;
+  margin-left: 70px;
+  margin-bottom: 30px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: black;
+  width: 260px;
+  height: 230px;
+}
+#top1, #top2, #top3, #top4, #top5, #top6{
+  position: relative;
+  visibility: hidden; 
+  top: -234px;
+  width: 260px;
+  height: 230px;
 
 }
 
@@ -48,11 +62,10 @@ th {
 }
 
 #lForm{
-  font-size: 30px;
+  font-size: 75px;
+  font-variant: small-caps;
+  text-align: center;
 }
-
-
-
 
 .user_typed {
 	font-size: 20px;
@@ -93,3 +106,27 @@ button:hover, input[type=submit]:hover {
 .task {
 	display:none !important;
 }
+.inp{
+  width: 350px;
+  font-size: 40px;
+  height: 90px;  
+
+}
+.butt{
+  width: 300px;
+  height: 120px;
+  font-size: 40px;
+
+}
+.err{
+  font-size: 50px;
+  text-align: center;
+  font-style: italic;
+  color: red;
+}
+#todo, a{
+  font-size: 40px;
+  text-align: center;
+  color: #393FEF !important;
+}
+

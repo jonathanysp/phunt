@@ -3,11 +3,31 @@ extends layout
 block content
 	h1 Scavenger Hunt
 
+	script
+		function show(id) {
+			document.getElementById(id).style.visibility = "visible";
+		}
+		function hide(id) {
+			document.getElementById(id).style.visibility = "hidden";
+		}
+	script
+
 	div#pics
-		img#bridge(src = "/images/hunts/GoldenGateBridge.jpg", onmouseover="this.src ='images/mOver/sf.jpg'", onmouseout="this.src='/images/hunts/GoldenGateBridge.jpg'");
-		
-		img#bridge(src = "/images/hunts/disney.jpg", onmouseover="this.src ='images/mOver/dis.jpg'", onmouseout="this.src='/images/hunts/disney.jpg'");
-		img#bridge(src = "/images/hunts/google.jpg", onmouseover="this.src ='images/mOver/goog.jpg'", onmouseout="this.src='/images/hunts/google.jpg'");
-		img#bridge(src = "/images/hunts/zoo.jpg", onmouseover="this.src ='images/mOver/zooz.jpg'", onmouseout="this.src='/images/hunts/zoo.jpg'");
-		img#bridge(src = "/images/hunts/hood.jpg", onmouseover="this.src ='images/mOver/town.jpg'", onmouseout="this.src='/images/hunts/hood.jpg'");
-		img#bridge(src = "/images/hunts/create.jpg", onmouseover="this.src ='images/mOver/own.jpg'", onmouseout="this.src='/images/hunts/create.jpg'");
+		div#p1(onmouseover = "show('top1')", onmouseout = "hide('top1')")
+			img#bottom(src = "/images/hunts/GoldenGateBridge.jpg")
+			img#top1(src="images/mOver/sf.jpg")		
+		div#p2(onmouseover = "show('top2')", onmouseout = "hide('top2')")
+			img#bottom(src = "/images/hunts/disney.jpg")
+			img#top2(src="images/mOver/dis.jpg")		
+		div#p3(onmouseover = "show('top3')", onmouseout = "hide('top3')")
+			img#bottom(src = "/images/hunts/google.jpg")
+			img#top3(src="images/mOver/goog.jpg")	
+		div#p4(onmouseover = "show('top4')", onmouseout = "hide('top4')")
+			img#bottom(src = "/images/hunts/zoo.jpg")
+			img#top4(src="images/mOver/zooz.jpg")	
+		div#p5(onmouseover = "show('top5')", onmouseout = "hide('top5')")
+			img#bottom(src = "/images/hunts/hood.jpg")
+			img#top5(src="images/mOver/town.jpg")
+		div#p6(onmouseover = "show('top6')", onmouseout = "hide('top6')")
+			img#bottom(src = "/images/hunts/create.jpg")
+			img#top6(src="images/mOver/own.jpg")	
