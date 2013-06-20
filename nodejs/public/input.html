@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html ng-app>
 <head>
-	<title>Create your own adventure!</title>
+	<title>Create Your Adventure!</title>
 	<script src="/js/jquery.js"></script>
 	<script src="/js/angular.js"></script>
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-	<h1>Create your own adventure!</h1>
+	<h2 id='cyoatitle'>Create Your Adventure!</h2>
 	<div id='andre'>
 		<input id="input2" placeholder="Title"></input>
 		<button id="cleartitle">Clear Title</button>	
 		<input id="input" placeholder="Propose a picture!"></input>
 		<button id="deleteall">Clear Tasks</button>
-		<div id='divfortitle' class='user_typed'></div>
-		<ul id="ul">
-			<li ng-repeat="item in items" ng-class="'done-'+item.done" ng-animate="'repeat'">
-				<button>
-		</ul>
-		<form id="hidden_form" method="POST" action="/new">
-			<input type="submit" value="Next">
-		</form>
+		<br>
+		<br>
+			<div id='divfortitle' class='user_typed'></div>
+			<ul id="ul">
+				<li ng-repeat="item in items" ng-class="'done-'+item.done" ng-animate="'repeat'">
+					<button>
+			</ul>
+			<form id="hidden_form" method="POST" action="/new">
+				<input type="submit" value="Next">
+			</form>
 	</div>
 	<script>
 		var counter = 0;
@@ -63,14 +65,20 @@
 						var newdiv = $(document.createElement('div'))
 							var newdel = $(document.createElement('button'))
 						newdel.attr('class', 'a'+counter)
+						var deletespan = $(document.createElement('span'))
+						deletespan.attr('class', 'deletespan')
 						newdel.text('delete')
 						newdel.click(function(){
 							var classy = newdel.attr('class')
 							$('.'+classy).remove()
 						});
+						deletespan.append(newdel)
 						counter++
-						newdiv.append(typed)
-						newdiv.append(newdel)
+						var newspan = $(document.createElement('span'))
+						newspan.attr('class', 'user_span')
+						newspan.append(typed)
+						newdiv.append(newspan)
+						newdiv.append(deletespan)
 						newdiv.attr('class', 'user_typed')
 					newli.addClass('li')
 					newli.append(newdiv);
