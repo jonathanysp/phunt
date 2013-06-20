@@ -78,3 +78,15 @@ th {
   font-size: 40px;
 
 }
+.err{
+  font-size: 50px;
+  text-align: center;
+  font-style: italic;
+  color: red;
+}
+#todo, a{
+  font-size: 40px;
+  text-align: center;
+  color: #393FEF !important;
+}
+

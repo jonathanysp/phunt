@@ -15,8 +15,7 @@ var game = {
 	images: {
 		'p1': ['http://placehold.it/200x150', 'http://placehold.it/200x150',
 		'http://placehold.it/200x150', 'http://placehold.it/200x150'],
-		'p2': ['http://placehold.it/200x150', 'http://placehold.it/200x150',
-		'http://placehold.it/200x150'],
+		'p2': ['http://placehold.it/200x150', 'http://placehold.it/200x150'],
 	}
 }
 
