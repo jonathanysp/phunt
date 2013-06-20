@@ -4,6 +4,7 @@ block content
 	h1 Scavenger Hunt
 	div#todo 
 		- for(var i = 0; i < tasks.length; i++) {
+			hr
 			a(href="/upload?taskid=" + i + "&userid=" + userid + "&gameid=" + gameid) 
 				- if(done[i] === undefined){
 					span=tasks[i] + " "
@@ -11,4 +12,4 @@ block content
 					span(style="text-decoration:line-through")=tasks[i] + " "
 				- }
 			br
-		- }
+		-}

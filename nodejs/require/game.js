@@ -15,7 +15,8 @@ var game = {
 	images: {
 		'p1': ['http://placehold.it/200x150', 'http://placehold.it/200x150',
 		'http://placehold.it/200x150', 'http://placehold.it/200x150'],
-		'p2': ['http://placehold.it/200x150', 'http://placehold.it/200x150'],
+		'p2': ['http://placehold.it/200x150', 'http://placehold.it/200x150',
+		'http://placehold.it/200x150', 'http://placehold.it/200x150'],
 	}
 }
 
@@ -62,7 +63,7 @@ var addPlayer = function(gameid, userid){
 	g.players.push(userid);
 	g.images[userid] = [];
 	io.sockets.in(gameid).emit('newPlayer', {
-		userid: userid,
+		player: userid,
 	})
 }
 exports.addPlayer = addPlayer;

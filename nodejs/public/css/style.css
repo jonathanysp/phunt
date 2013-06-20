@@ -54,13 +54,21 @@ th {
 	border: 2px solid black;
 }
 
-.placeholder {
-	width: 250px;
-	height: 250px;
+td {
+	width: 200px;
+	height: 200px;
 	margin: 10px;
 	padding: 5px;
 }
 
+.incomingPics {
+	width: 100px;
+	height: auto;
+}
+
+.headingCol {
+	width: 200px;
+}
 #lForm{
   font-size: 75px;
   font-variant: small-caps;
@@ -131,6 +139,13 @@ button:hover, input[type=submit]:hover {
   font-size: 40px;
   text-align: center;
   color: #393FEF !important;
+}
+hr {
+  display: block; 
+  height: 1px;
+  border-color: black; 
+  border-top: 1px solid black;
+  padding: 0; 
 }
 
 input[type=submit] {

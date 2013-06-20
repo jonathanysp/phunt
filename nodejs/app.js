@@ -100,7 +100,7 @@ app.post('/upload', function(req, res){
 
 			io.sockets.in(gameid).emit('newImage', {
 				playerid: userid,
-				tasknum: tasknum,
+				tasknumber: parseInt(tasknum),
 				image: link
 			})
 			res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
