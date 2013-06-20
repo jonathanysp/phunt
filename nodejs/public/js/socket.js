@@ -210,10 +210,21 @@ var addLeaderboardEvents = function(){
 	socket.on('finish', function(data){
 		console.log(data);
 	})
+
+	socket.on('disqualify', function(data){
+		console.log(data);
+	})
 }
 
 var getInfo = function(gameid){
 	socket.emit('getInfo', {gameid: gameid});
 }
 
-var updateImage = function(){}
+var disqualify = function(gameid, userid, taskid){
+	socket.emit('disqualify', {
+		gameid: gameid,
+		userid: userid,
+		taskid: taskid
+	});
+	//add css filter to image?!?!?
+}

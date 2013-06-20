@@ -186,6 +186,10 @@ io.sockets.on('connection', function(socket){
 		console.log(data);
 	})
 
+	socket.on('disqualify', function(data){
+		game.disqualify(data.gameid, data.userid, data.taskid);
+	})
+
 	//debug responses
 	socket.on('debug', function(data){
 		console.log(data);
