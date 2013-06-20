@@ -19,6 +19,10 @@ var game = {
 		'http://placehold.it/200x150', 'http://placehold.it/200x150'],
 		'p2': ['http://placehold.it/200x150', 'http://placehold.it/200x150',
 		'http://placehold.it/200x150', 'http://placehold.it/200x150'],
+	},
+	scores: {
+		'p1': [2,1,2],
+		'p2': [1,2,1]
 	}
 }
 
@@ -30,13 +34,20 @@ exports.setSocket = function(sockio){
 }
 
 var imageSubmit = function(gameid, userid, tasknum, filepath){
+	if(isFirst(gameid, userid, tasknum)){
+		var score = 2;
+	} else {
+		var score = 1;
+	}
+
 	var g = getGame(gameid);
 	g.images[userid][parseInt(tasknum)] = filepath;
 	console.log(g.images[userid]);
 
 	var numTasks = getTasks(gameid).length;
 	var numDone = getNumDone(gameid, userid);
-	console.log(numTasks + " " + numDone);
+
+	g.scores[userid][parseInt(tasknum)] = score;
 
 	var q1 = Math.floor(numTasks*0.25);
 	var q2 = Math.floor(numTasks*0.5);
@@ -55,6 +66,7 @@ var imageSubmit = function(gameid, userid, tasknum, filepath){
 		case numDone:
 			io.sockets.in(gameid).emit('progress', {player: userid, progress: 100});
 	}
+	return score;
 }
 exports.imageSubmit = imageSubmit;
 
@@ -86,6 +98,7 @@ var addPlayer = function(gameid, userid){
 	var g = getGame(gameid);
 	g.players.push(userid);
 	g.images[userid] = [];
+	g.scores[userid] = [];
 	io.sockets.in(gameid).emit('newPlayer', {
 		player: userid,
 	})
@@ -148,3 +161,14 @@ var getNumDone = function(gameid, userid){
 	return counter;
 }
 exports.getNumDone = getNumDone;
+
+var isFirst = function(gameid, userid, taskid){
+	var g = getGame(gameid);
+	for(var i = 0; i < g.players.length; i++){
+		if(g.images[g.players[i]][taskid] !== undefined){
+			return false;
+		}
+	}
+	return true;
+}
+exports.isFirst = isFirst;
