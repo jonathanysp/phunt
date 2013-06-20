@@ -145,7 +145,7 @@ io.sockets.on('connection', function(socket){
 	})
 
 	socket.on('getInfo', function(data){
-		socket.emit('info', {g: game.getGame()});
+		socket.emit('info', {g: game.getGame(data.gameid)});
 	})
 
 	socket.on('msg', function(data){
