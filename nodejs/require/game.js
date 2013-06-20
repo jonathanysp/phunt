@@ -47,7 +47,7 @@ var imageSubmit = function(gameid, userid, tasknum, filepath){
 	var numTasks = getTasks(gameid).length;
 	var numDone = getNumDone(gameid, userid);
 
-	g.scores[userid].push(score);
+	g.scores[userid][parseInt(tasknum)] = score;
 
 	var q1 = Math.floor(numTasks*0.25);
 	var q2 = Math.floor(numTasks*0.5);
