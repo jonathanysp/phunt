@@ -1,7 +1,9 @@
 body {
   font-family: 'Average', serif;
-  font-weight: bold;
+  font-weight: bolder;
   background: url("green-dots.jpg");
+  display: -webkit-flex;
+  -webkit-flex-flow:column;
 
 }
 
@@ -25,6 +27,11 @@ h2{
     text-align: center;
     margin-bottom: 50px;
 }
+h3{
+    font-size: 29px;
+    font-variant: small-caps;
+    font-weight: bolder;
+}
 #lForm{
   padding-top: 40px;
   font-size: 75px;
@@ -36,11 +43,24 @@ h2{
     width: 260px;
     height: 230px;
 }
+
+#pics img {
+    border-radius: 7px;
+}
+
+#pics div {
+    border-radius: 10px;
+
+}
+
 #pics{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding:30px;
+  display: -webkit-flex;
+  padding-right:50px;
+  max-width: 1100px;
+  -webkit-flex-flow:row wrap;
+  padding-left: 70px;
+  -webkit-align-self:center;
+  -webkit-justify-content:center;
 }
 #p1, #p2, #p3, #p4, #p5, #p6{
   float:left;
@@ -98,16 +118,19 @@ td {
 }
 
 .user_typed {
-	font-size: 20px;
-	width: 250px;
+	font-size: 28px;
 }
 
 div.user_typed {
 	text-align: right ;
+  width: = 500px;
 }
 
-ul {
-	list-style-type: none;
+ol {
+  margin-top: 0px;
+  width: 500px;
+  -webkit-justify: left;
+  list-style-type: none;
 }
 
 input {
@@ -125,6 +148,7 @@ button, input[type=submit] {
 	-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
 	cursor:pointer;
   font-variant: small-caps;
+  font-size: 19px;
 }
 
 .delete {
@@ -137,6 +161,7 @@ button:hover, input[type=submit]:hover {
 
 #andre {
 	margin-left: 20px;
+  display: -webkit-flex;
 }
 
 .task {
@@ -247,6 +272,7 @@ hr {
   width: 700px ;
   margin-right: auto;
 }
+
 /*
 .shows{
   margin-left:auto;
@@ -291,7 +317,7 @@ hr {
 }
 .help{
   font-weight: bold;
-  font-size: 15px;
+  font-size: 18px;
   max-width: 80%;
   padding-left: 80px;
 }
