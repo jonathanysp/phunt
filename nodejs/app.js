@@ -42,14 +42,14 @@ app.get('/progress', function(req, res){
 	if(gameid === undefined){
 		//gameid = 0;
 	}
-	res.render('progressPage', {g: game.getGame(gameid), gameid: gameid})
+	res.render('progressPage', {title: "Game: " + gameid, g: game.getGame(gameid), gameid: gameid})
 });
 app.get('/game', function(req, res){
 	res.render('game', {g: game.getGame(0)})
 });
 app.get('/pic', routes.camera);
-app.get('/login', function(req, res){
-	res.render('login');
+app.get('/m', function(req, res){
+	res.render('login', {title: "Phunt Login"});
 })
 
 app.get('/create', function(req, res){
@@ -62,6 +62,7 @@ app.get('/help', function(req, res){
 
 app.get('/show', function(req, res){
 	var templateid = req.query.tid;
+	console.log(templateid);
 	var tasks = game.getTemplate(templateid);
 	res.render('show', {tid: templateid, tasks: tasks});
 })
@@ -136,7 +137,7 @@ app.post('/upload', function(req, res){
 					res.redirect('back');
 					return;
 				}
-				var score = game.imageSubmit(gameid, userid, tasknum, link);
+				var score = game.imageSubmit(gameid, userid, tasknum, link, lat, lon);
 
 				io.sockets.in(gameid).emit('newImage', {
 					playerid: userid,
@@ -188,6 +189,10 @@ io.sockets.on('connection', function(socket){
 	
 	socket.on('echo', function(data){
 		console.log(data);
+	})
+
+	socket.on('disqualify', function(data){
+		game.disqualify(data.gameid, data.userid, data.taskid);
 	})
 
 	//debug responses

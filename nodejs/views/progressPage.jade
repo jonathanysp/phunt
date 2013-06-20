@@ -7,6 +7,7 @@ block head
     register(#{"'" + gameid + "'"}, null);
     getInfo(#{"'" + gameid + "'"});
 block content
+  h2 Game id: #{gameid}
   div(id="progressBars")
   table(id="table")
     thead

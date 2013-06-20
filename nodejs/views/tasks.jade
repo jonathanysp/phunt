@@ -21,7 +21,7 @@ block content
 				- if(done[i] === undefined){
 					span=tasks[i] + " "
 				- } else {
-					span(style="text-decoration:line-through")=tasks[i] + " "
+					span.done(style="text-decoration:line-through")=tasks[i] + " "
 				- }
 			br
 		-}
