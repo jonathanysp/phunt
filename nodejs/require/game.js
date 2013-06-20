@@ -36,8 +36,23 @@ var imageSubmit = function(gameid, userid, tasknum, filepath){
 	var numTasks = getTasks(gameid).length;
 	var numDone = getNumDone(gameid, userid);
 	console.log(numTasks + " " + numDone);
-	if(numTasks === numDone){
-		io.sockets.in(gameid).emit('progress', {player: userid, progress: 100});
+
+	var q1 = Math.floor(numTasks*0.25);
+	var q2 = Math.floor(numTasks*0.5);
+	var q3 = Math.floor(numTasks*0.75);
+
+	switch(numDone){
+		case q1:
+			io.sockets.in(gameid).emit('progress', {player: userid, progress: 25});
+			break;
+		case q2:
+			io.sockets.in(gameid).emit('progress', {player: userid, progress: 50});
+			break;
+		case q3:
+			io.sockets.in(gameid).emit('progress', {player: userid, progress: 75});
+			break;
+		case numDone:
+			io.sockets.in(gameid).emit('progress', {player: userid, progress: 100});
 	}
 }
 exports.imageSubmit = imageSubmit;
