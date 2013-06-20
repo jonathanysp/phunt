@@ -79,6 +79,10 @@ td {
 	padding: 5px;
 }
 
+.progressSummary {
+  display: inline;
+}
+
 .incomingPics {
 	width: 100px;
 	height: auto;
@@ -180,7 +184,9 @@ hr {
   border-top: 1px solid black;
   padding: 0; 
 }
-.starting {
+
+.up{
+  font-size: 39px;
 }
 #pix{
   font-size: 40px;

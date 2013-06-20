@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	h2 Tasks:
+	each task in g.tasks
+		span=task
+		br
+	h2 Players:
+	each player in g.players
+		span=player
+		br
+		each img in g.images[player]
+			img(src=img)
+			br
