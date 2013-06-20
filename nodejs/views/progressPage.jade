@@ -3,7 +3,11 @@ block head
   script(src="/socket.io/socket.io.js")
   script(src="/js/socket.js")
   script(src="/js/leaderboard.js")
+  script.
+    register(#{"'" + gameid + "'"}, null);
+    getInfo(#{"'" + gameid + "'"});
 block content
+  div(id="progressBars")
   table(id="table")
     thead
       tr(id="headingRow")
