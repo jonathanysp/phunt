@@ -13,7 +13,7 @@ tasks.google = [
 	'Slide down building 2000',
 	'Get a haircut',
 	'Swim in the water treadmill', 
-	'Eat at an outdoor garden ',
+	'Climb the T-Rex',
 	'Try on 5 items of swag at the google store',
 	'Find Sergey and/or Larry', 
 	'Play in a ballpit'

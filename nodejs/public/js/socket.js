@@ -1,5 +1,5 @@
 //connect
-var socket = io.connect('http://10.1.1.55:3000');
+var socket = io.connect('http://192.168.22.220:3000');
 
 //var socket = io.connect('http://192.168.20.217:3000')
 //lets the server know which game notifications to send us
