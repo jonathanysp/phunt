@@ -136,7 +136,7 @@ app.post('/upload', function(req, res){
 					res.redirect('back');
 					return;
 				}
-				var score = game.imageSubmit(gameid, userid, tasknum, link);
+				var score = game.imageSubmit(gameid, userid, tasknum, link, lat, lon);
 
 				io.sockets.in(gameid).emit('newImage', {
 					playerid: userid,
