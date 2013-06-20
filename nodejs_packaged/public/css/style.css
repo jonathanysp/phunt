@@ -1,0 +1,253 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #99CC66;
+}
+
+a {
+  color: #00B7FF;
+}
+h1{
+	  text-align: center;
+    font-weight: bolder;
+	  font-size: 100px;
+	  font-variant: small-caps;
+	  letter-spacing: 1.8pt;
+	  padding-top: 10px;
+}
+#bottom{
+    width: 260px;
+    height: 230px;
+}
+#pics{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding:20px;
+}
+#p1, #p2, #p3, #p4, #p5, #p6{
+  float:left;
+  margin-left: 70px;
+  margin-bottom: 30px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: black;
+  width: 260px;
+  height: 230px;
+}
+#top1, #top2, #top3, #top4, #top5, #top6{
+  position: relative;
+  visibility: hidden; 
+  top: -234px;
+  width: 260px;
+  height: 230px;
+
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid black;
+}
+
+th {
+	font-size: 20px;
+	border: 2px solid black;
+}
+
+td {
+	width: 200px;
+	height: 200px;
+	margin: 10px;
+	padding: 5px;
+}
+
+.incomingPics {
+	width: 100px;
+	height: auto;
+}
+
+#sub{
+  width: 400px;
+  height: auto;
+
+}
+.headingCol {
+	width: 200px;
+}
+#lForm{
+  font-size: 75px;
+  font-variant: small-caps;
+  text-align: center;
+}
+
+.user_typed {
+	font-size: 20px;
+	width: 250px;
+}
+
+div.user_typed {
+	text-align: right ;
+}
+
+ul {
+	list-style-type: none;
+}
+
+input {
+	background-color: rgb(230, 227, 177);
+}
+
+#input, #input2 {
+	font-size: 20px;
+}
+
+button, input[type=submit] {
+	color: black;
+	background-color: rgb(192, 172, 95);
+	border-color: rgb(216, 205, 126);
+	-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+	cursor:pointer;
+}
+
+.delete {
+	font-size: 200px;
+}
+
+button:hover, input[type=submit]:hover {
+	background-color: rgb(216, 181, 128);
+}
+
+#andre {
+	margin-left: 20px;
+}
+
+.task {
+	display:none !important;
+}
+.inp{
+  width: 350px;
+  font-size: 40px;
+  height: 90px;  
+
+}
+.butt{
+  width: 300px;
+  height: 120px;
+  font-size: 20px;
+
+}
+.err{
+  font-size: 50px;
+  text-align: center;
+  font-style: italic;
+  color: red;
+}
+#todo, a{
+  font-size: 40px;
+  text-align: center;
+  color: #393FEF !important;
+}
+hr {
+  display: block; 
+  height: 1px;
+  border-color: black; 
+  border-top: 1px solid black;
+  padding: 0; 
+}
+
+.up{
+  font-size: 39px;
+}
+
+.share-button {
+    cursor: pointer;
+    float: left;
+    margin: 0px 0px 0px 10px;
+    height: 30px;
+    width: 80px;
+    border: none;
+    border-radius: 4px 4px 4px 4px;
+    background-color: #608AB0;
+    background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.share-button p {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    font-family: calibri;
+    font-size: 26px;
+    color: #fff;
+}
+
+#share-bottom {
+    height: 30px;
+    width: 580px;
+}
+
+.photo-button {
+    cursor: pointer;
+    float: left;
+    margin: 0px 10px 0px 0px;
+    height: 30px;
+    width: 150px;
+    border: none;
+    border-radius: 4px 4px 4px 4px;
+    background-color: #608AB0;
+    background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.photo-button p {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    font-size: 46px;
+    color: #fff;
+}
+
+#upload-wrap {
+    float: left;
+    height: 30px;
+    width: 200px;
+    display:none;
+}
+#thing{
+  margin-left: auto;
+  width: 700px ;
+  margin-right: auto;
+}
+#notif{
+  vertical-align: top;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: white;
+}
+
+
+
+
+input[type=submit] {
+	font-size: 20px;
+}
+
+#displaytitle {
+	font-size: 30px ;
+	text-align: left; 
+}
+
+#cyoatitle {
+	font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+	font-weight: bolder;
+	font-size: 55px;
+	font-variant: small-caps;
+	letter-spacing: 1.8pt;
+	padding-top: 10px;
+	padding-left: 15px;
+}
+
+.user_span {
+	padding-right: 30px;
+}
+
+.deletespan {
+	text-align: right
+}

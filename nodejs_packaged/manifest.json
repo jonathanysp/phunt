@@ -1,0 +1,11 @@
+{
+	"name": "Hello World!",
+	"description": "Photo scavenger hunt app.",
+	"version": "0.1",
+	"app": {
+		"background": {
+			"scripts": ["background.js"]
+		}
+	},
+	"icons": { "cat": "new.jpg", "cat2": "cat2.jpg" }
+}

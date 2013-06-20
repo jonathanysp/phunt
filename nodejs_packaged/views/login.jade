@@ -1,0 +1,18 @@
+extends layout
+
+block content
+	h1 Scavenger Hunt
+
+	form#lForm(action = "/login", method = "post")
+		span(class = "err")=error
+		br
+		label What's your game ID?  
+		br
+		input(class="inp", type="text", required, name = "gameid")
+		br
+		br
+		label What's your name?  
+		br
+		input(class = "inp", type="text", required, name = "userid") 
+		br
+		input(class = "butt", type = "submit", value = "submit")
