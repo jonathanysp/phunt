@@ -295,3 +295,7 @@ hr {
   max-width: 80%;
   padding-left: 80px;
 }
+
+.BIG {
+  display:none;
+}
