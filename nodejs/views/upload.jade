@@ -14,8 +14,15 @@ block content
 			input(name="userid", value=userid, hidden)
 			input(name="taskid", value=taskid, hidden)
 			div(id="share-bottom")
-				input.butt(type="button", class="photo-button", onclick="document.getElementById('upload-field').click();", value='upload photo')
+				input.butt(id="upload", type="button", class="photo-button", onclick="document.getElementById('upload-field').click();", value='upload photo')
 				
 				div(id="upload-wrap")
-					input(type="file", id="upload-field", name="image")
+					input(type="file", id="upload-field", name="image", hidden)
 				input.butt(type="submit", value="submit", class = "photo-button")
+
+	script.
+		$("#upload-field").change(function(){
+			console.log("change");
+			//change upload button
+			$("#upload").css('background-color', 'green');
+		})
