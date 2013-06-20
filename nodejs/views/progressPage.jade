@@ -4,19 +4,11 @@ block head
   script(src="/js/socket.js")
   script(src="/js/leaderboard.js")
 block content
-  table
+  table(id="table")
     thead
-      tr
-      th Tasks
-      each player in g.players
-        th #{player}
+      tr(id="headingRow")
+        th Tasks
     tbody
-      - var numOfPlayers = g.players.length;
-      - var counter = 0;
       each task in g.tasks
-        tr
-          td This is task #{task}
-          each player in g.players
-            - var uniqueId = "" + task + "_" + player;	
-            td(id=uniqueId)
-              div(class="placeholder")
+        tr(class="taskRow")
+          td #{task}

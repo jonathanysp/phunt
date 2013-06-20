@@ -40,11 +40,19 @@ th {
 	border: 2px solid black;
 }
 
-.placeholder {
-	width: 250px;
-	height: 250px;
+td {
+	width: 200px;
+	height: 200px;
 	margin: 10px;
 	padding: 5px;
 }
 
+img {
+	width: 100px;
+	height: auto;
+}
+
+.headingCol {
+	width: 200px;
+}
 
