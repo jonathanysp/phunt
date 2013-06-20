@@ -79,8 +79,12 @@ td {
 	padding: 5px;
 }
 
+.spanForProgress {
+  margin: 10px;
+}
+
 .progressSummary {
-  display: inline;
+  text-align: center;
 }
 
 .incomingPics {

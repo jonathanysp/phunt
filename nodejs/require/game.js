@@ -99,6 +99,7 @@ var addPlayer = function(gameid, userid){
 	g.players.push(userid);
 	g.images[userid] = [];
 	g.scores[userid] = [];
+	console.log(g);
 	io.sockets.in(gameid).emit('newPlayer', {
 		player: userid,
 	})
@@ -127,7 +128,8 @@ var createGame = function(templateid){
 	gameid: gameid,
 	tasks: t,
 	players: [],
-	images: {}
+	images: {},
+	scores: {}
 	}
 	games[gameid] = newGame;
 	return gameid;
