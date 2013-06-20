@@ -69,6 +69,9 @@ th {
 
 .user_typed {
 	font-size: 20px;
+	width: 250px;
+	margin-left: 175px;
+	text-align: right;
 }
 
 ul {
@@ -79,7 +82,7 @@ input {
 	background-color: rgb(230, 227, 177);
 }
 
-#input {
+#input, #input2 {
 	font-size: 20px;
 }
 
@@ -130,3 +133,6 @@ button:hover, input[type=submit]:hover {
   color: #393FEF !important;
 }
 
+input[type=submit] {
+	font-size: 20px;
+}

@@ -9,8 +9,11 @@
 <body>
 	<h1>Create your own adventure!</h1>
 	<div id='andre'>
+		<input id="input2" placeholder="Title"></input>
+		<button id="cleartitle">Clear Title</button>	
 		<input id="input" placeholder="Propose a picture!"></input>
-		<button id="deleteall">Clear All</button>
+		<button id="deleteall">Clear Tasks</button>
+		<div id='divfortitle' class='user_typed'></div>
 		<ul id="ul">
 			<li ng-repeat="item in items" ng-class="'done-'+item.done" ng-animate="'repeat'">
 				<button>
@@ -21,6 +24,29 @@
 	</div>
 	<script>
 		var counter = 0;
+		$('#input2').keyup(function(event){
+			if(event.keyCode == 13){
+				if($('#input2').val() != ""){
+					if($('#displaytitle').val() == null){
+						var typed = $('#input2').val()
+						var newdiv = $(document.createElement('div'))
+						newdiv.append(typed)
+						newdiv.attr('id','displaytitle')
+						var newtitle_hidden = $(document.createElement('input'))
+						newtitle_hidden.attr('value', typed)
+						newtitle_hidden.attr('id', 'title')
+						newtitle_hidden.attr('style', 'display:none;')
+						$('#hidden_form').append(newtitle_hidden)
+						$('#divfortitle').append(newdiv)
+						$('#input2').val("")
+					}
+					else {
+						$('#input2').val("")
+						alert('You may only have one title.')
+					}
+				}
+			}
+		})
 		$('#input').keyup(function(event){
 			if($('.li').length < 12){
 				if(event.keyCode == 13){
@@ -28,6 +54,7 @@
 					typed = $('#input').val()
 					var newli = $(document.createElement('li'));
 					var newinput = $(document.createElement('input'));
+						newinput.attr('style', "display:none;")
 						newinput.attr('name', 'task');
 						newinput.attr('value', typed)
 						newinput.attr('class', 'a'+counter+' deletethis')
@@ -36,7 +63,7 @@
 						var newdiv = $(document.createElement('div'))
 							var newdel = $(document.createElement('button'))
 						newdel.attr('class', 'a'+counter)
-						newdel.text('DELETE')
+						newdel.text('delete')
 						newdel.click(function(){
 							var classy = newdel.attr('class')
 							$('.'+classy).remove()
@@ -48,7 +75,6 @@
 					newli.addClass('li')
 					newli.append(newdiv);
 					$("#ul").append(newli);
-					//$("#ul").append($(document.createElement('br')))
 					$('#input').val("")
 					}
 		    	}
@@ -57,6 +83,11 @@
 		$('#deleteall').click(function(){
 			$('.li').remove()
 			$('.deletethis').remove()
+		})
+		$('#cleartitle').click(function(){
+
+			$('#title').remove()
+			$('#displaytitle').remove()
 		})
 	</script>
 </body>
