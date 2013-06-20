@@ -54,17 +54,68 @@ th {
 	border: 2px solid black;
 }
 
-.placeholder {
-	width: 250px;
-	height: 250px;
+td {
+	width: 200px;
+	height: 200px;
 	margin: 10px;
 	padding: 5px;
 }
 
+.incomingPics {
+	width: 100px;
+	height: auto;
+}
+
+.headingCol {
+	width: 200px;
+}
 #lForm{
   font-size: 75px;
   font-variant: small-caps;
   text-align: center;
+}
+
+.user_typed {
+	font-size: 20px;
+	width: 250px;
+	margin-left: 175px;
+	text-align: right;
+}
+
+ul {
+	list-style-type: none;
+}
+
+input {
+	background-color: rgb(230, 227, 177);
+}
+
+#input, #input2 {
+	font-size: 20px;
+}
+
+button, input[type=submit] {
+	color: black;
+	background-color: rgb(192, 172, 95);
+	border-color: rgb(216, 205, 126);
+	-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+	cursor:pointer;
+}
+
+.delete {
+	font-size: 200px;
+}
+
+button:hover, input[type=submit]:hover {
+	background-color: rgb(216, 181, 128);
+}
+
+#andre {
+	text-align: center
+}
+
+.task {
+	display:none !important;
 }
 .inp{
   width: 350px;
@@ -89,4 +140,14 @@ th {
   text-align: center;
   color: #393FEF !important;
 }
+hr {
+  display: block; 
+  height: 1px;
+  border-color: black; 
+  border-top: 1px solid black;
+  padding: 0; 
+}
 
+input[type=submit] {
+	font-size: 20px;
+}
