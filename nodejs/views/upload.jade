@@ -7,13 +7,13 @@ block content
 		br
 		img#sub(src=link)
 	- }
-
-	form(enctype="multipart/form-data", method="POST", action="/upload")
-		input(name="gameid", value=gameid, hidden)
-		input(name="userid", value=userid, hidden)
-		input(name="taskid", value=taskid, hidden)
-		div(id="share-bottom")
-			input.butt(type="button", class="photo-button", onclick="document.getElementById('upload-field').click();", value='upload photo')
-			div(id="upload-wrap")
-				input(type="file", id="upload-field", name="image")
-			input.butt(type="submit", value="submit", class = "photo-button")
+	div#thing 
+		form(enctype="multipart/form-data", method="POST", action="/upload")
+			input(name="gameid", value=gameid, hidden)
+			input(name="userid", value=userid, hidden)
+			input(name="taskid", value=taskid, hidden)
+			div(id="share-bottom")
+				input.butt(type="button", class="photo-button", onclick="document.getElementById('upload-field').click();", value='upload photo')
+				div(id="upload-wrap")
+					input(type="file", id="upload-field", name="image")
+				input.butt(type="submit", value="submit", class = "photo-button")
