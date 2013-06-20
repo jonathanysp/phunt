@@ -1,0 +1,9 @@
+extends layout
+
+block content
+	h2 #{tid.charAt(0).toUpperCase() + tid.slice(1)}
+	ul
+		each task in tasks
+			li=task
+	a(href="/new?tid=" + tid)
+		button Start Game!
