@@ -1,6 +1,6 @@
 
 //connect
-var socket = io.connect('10.1.1.112:3000');
+var socket = io.connect('10.1.1.77:3000');
 
 var gameid;
 //var socket = io.connect('http://192.168.20.217:3000')
