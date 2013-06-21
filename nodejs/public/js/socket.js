@@ -170,7 +170,7 @@ var addLeaderboardEvents = function(){
 			//$("#"+tdLocation).append(latLon);
 			$(latLon).hide().appendTo("#"+tdLocation).fadeIn("slow");
 
-			latLon.innerHTML = "Latitude: " + data.lat + "	Lontitude: " + data.lon;
+			latLon.innerHTML = "Latitude: " + data.lat + "	Longitude: " + data.lon;
 			var alink = document.createElement('a');
 			//alink.href = "https://maps.google.com/maps?q=" + data.lat + "," + data.lon;
 			alink.href = "";
@@ -190,6 +190,17 @@ var addLeaderboardEvents = function(){
 			latLong.innerHTML = "Latitude: " + parseInt(data.lat).toFixed(7) + "	Lontitude: " + parseInt(data.lon).toFixed(7);
 		}
 		
+		//at tdLocation, create a disqualify button/sign and call disqualify when pressed with
+		//gameid, userid, taskid
+		var disqualify = document.createElement(button);
+		/*
+		disqualify.innerHTML = "Disqualify";
+		$(disqualify).hide();
+		$(disqualify).hover(
+			$(disqualify).show();
+		);
+		$("#"+tdLocation).append(disqualify);
+		*/
 	})
 
 	//format:
@@ -220,7 +231,6 @@ var addLeaderboardEvents = function(){
 		var progressSection = document.getElementById("progressBars");
 		var progressSummary = document.createElement("p");
 
-		//IN CSS: inline these spans!!!!!!
 		progressSummary.setAttribute("class", "progressSummary");
 		var progressPlayer = document.createElement("span");
 		progressPlayer.innerHTML = data.player;;
@@ -250,6 +260,7 @@ var addLeaderboardEvents = function(){
 		var newCol = document.createElement("th");
 		newCol.innerHTML = data.player;
 		newCol.setAttribute("class", "headingCol");
+		newCol.setAttribute("id", "head_" + data.player);
 		headRow.appendChild(newCol);
 
 		var taskNumber = 1;
@@ -266,7 +277,8 @@ var addLeaderboardEvents = function(){
 
 	socket.on('finish', function(data){
 		console.log(data);
-
+		var header = document.getElementById("head_" + data.playerid);
+		header.innerHTML = "Score: " + data.score;
 	})
 
 	socket.on('disqualify', function(data){

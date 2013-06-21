@@ -33,5 +33,5 @@
 
 <input id="p" placeholder="player id"/>
 <input id="score" placeholder="score"/>
-<input type="button" value="Finished" onclick="socket.emit('debug', {msg: 'finish', playerid: $('#playerid').val(), score: parseInt($('#score').val())})"/>
+<input type="button" value="Finished" onclick="socket.emit('debug', {msg: 'finish', playerid: $('#p').val(), score: parseInt($('#score').val())})"/>
 <br/>
