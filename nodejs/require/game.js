@@ -6,10 +6,6 @@ var id = 0;
 
 var io;
 
-var tasktemplate = {
-	'sample': ['q1', 'q2', 'q3', 'q4'],
-}
-
 var game = {
 	gameid: 0,
 	tasks: ['one', 'two', 'three', 'four'],
