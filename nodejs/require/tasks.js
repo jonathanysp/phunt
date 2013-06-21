@@ -41,13 +41,9 @@ tasks.zoo = [
 ]
 
 tasks.town = [
-	"Alison", 
-	"Desiree",
-	"Janet",
-	"Peter", 
-	"Put 3 orange backpacks on",
+	"Our Team Coordinators", 
+	"Our Judges", 
 	"Find all of the people here wearing google shirts",
-	"Gather Chrome Academy Class of 2013",
 	"#teamQuality"
 ]
 tasks.disney = [
