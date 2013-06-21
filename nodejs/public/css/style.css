@@ -27,6 +27,11 @@ h2{
     text-align: center;
     margin-bottom: 50px;
 }
+.latlon{
+  font-size: 0px;
+  display: none;
+}
+
 h3{
     font-size: 29px;
     font-variant: small-caps;
@@ -56,9 +61,8 @@ h3{
 #pics{
   display: -webkit-flex;
   padding-right:50px;
-  max-width: 1100px;
+  max-width: 1300px;
   -webkit-flex-flow:row wrap;
-  padding-left: 70px;
   -webkit-align-self:center;
   -webkit-justify-content:center;
 }
@@ -84,12 +88,16 @@ h3{
 table {
 	margin-left: auto;
 	margin-right: auto;
-	border: 2px solid black;
+	border: 3px solid black;
+  border-spacing: 0;
+  background-color: rgba(0, 0, 0, 0.13);
 }
 
 th {
-	font-size: 20px;
+	font-size: 32px;
+  font-weight: bolder;
 	border: 2px solid black;
+  border-bottom: 4px solid black;
 }
 
 td {
@@ -97,6 +105,21 @@ td {
 	height: 200px;
 	margin: 10px;
 	padding: 5px;
+  font-size: 30px;
+  font-variant: small-caps;
+}
+
+#disqualifyButton{
+  color: black;
+  background-color: rgb(192, 172, 95);
+  border-color: rgb(216, 205, 126);
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 19px;
+  font-variant: small-caps;
+  float: right;
 }
 
 .spanForProgress {
@@ -108,7 +131,7 @@ td {
 }
 
 .incomingPics {
-	width: 190px;
+	width: 300px;
 	height: auto;
 }
 
@@ -129,8 +152,11 @@ div.user_typed {
 	text-align: right ;
   width: = 500px;
 }
-
-ol {
+.shows ol{
+  width: 800px;
+  list-style-type: none;
+}
+#andre ol {
   margin-top: 0px;
   width: 500px;
   -webkit-justify: left;
@@ -145,14 +171,14 @@ input {
 	font-size: 20px;
 }
 
-button, input[type=submit] {
+#andre button, #next {
 	color: black;
 	background-color: rgb(192, 172, 95);
 	border-color: rgb(216, 205, 126);
 	-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
 	cursor:pointer;
-  font-variant: small-caps;
   font-size: 19px;
+  font-variant: small-caps;
 }
 
 .delete {
@@ -184,11 +210,22 @@ button:hover, input[type=submit]:hover {
   font-size: 70px;
   margin-top: 70px;
   text-align: center;
+  color: black;
+  background-color: rgb(192, 172, 95);
+  border-color: rgb(216, 205, 126);
+  -moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+  cursor:pointer;
+  margin-left: 25px;
 }
 .butt2{
   height: 80px;
   font-size: 30px;
-  margin-left: 25px;
+  color: black;
+  background-color: rgb(192, 172, 95);
+  border-color: rgb(216, 205, 126);
+  -moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+  cursor:pointer;
+  margin-left: 75px;
 }
 
 .butt3{
@@ -196,6 +233,12 @@ button:hover, input[type=submit]:hover {
   height: 80px;
   font-size: 30px;
   margin-left: 50px;
+  color: black;
+  background-color: rgb(192, 172, 95);
+  border-color: rgb(216, 205, 126);
+  -moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+  cursor:pointer;
+
 }
 .err{
   font-size: 50px;
@@ -260,8 +303,29 @@ hr {
     background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
     margin:70px 10px 0px 100px;
     font-size: 46px;
-    color: #fff;
+    color: black;
+    border-color: rgb(216, 205, 126);
+    -moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+    cursor:pointer;
 }
+.submit-button {
+    cursor: pointer;
+    float: left;
+    height: 150px;
+    width: 500px;
+    border: none;
+    border-radius: 4px 4px 4px 4px;
+    background-color: #608AB0;
+    margin:70px 10px 0px 100px;
+    font-size: 46px;
+    color: #fff;
+    color: black;
+    background-color: rgb(192, 172, 95);
+    border-color: rgb(216, 205, 126);
+    -moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+    cursor:pointer;
+}
+
 .create{
   padding-bottom: 50px;
 }
@@ -277,13 +341,6 @@ hr {
   margin-right: auto;
 }
 
-/*
-.shows{
-  margin-left:auto;
-  margin-right: auto;
-  text-align: center
-}
-*/
 #notif{
   vertical-align: top;
   text-align: center;
@@ -322,7 +379,8 @@ hr {
 .help{
   font-weight: bold;
   font-size: 18px;
-
+  margin-left: 140px;
+  max-width: 80%;
 }
 
 .BIG {

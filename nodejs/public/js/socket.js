@@ -1,6 +1,8 @@
-
 //connect
-var socket = io.connect('192.168.74.105:3000');
+var socket = io.connect('10.1.1.55:3000');
+//var socket = io.connect('http://ec2-54-225-42-130.compute-1.amazonaws.com');
+
+var gameid;
 //var socket = io.connect('http://192.168.20.217:3000')
 //lets the server know which game notifications to send us
 //set userid to null for leaderboard
@@ -31,6 +33,7 @@ var addLeaderboardEvents = function(){
 
 	socket.on('info', function(data){
 		console.log(data.g);
+		gameid = data.g.gameid;
 		//setup current progress bars for all current players
 		totalTasks = data.g.tasks.length;
 		var progressSection = document.getElementById("progressBars");
@@ -94,7 +97,6 @@ var addLeaderboardEvents = function(){
 			});
 		}
 
-		var placeholder;
 		//insert images uploaded by users so far
 		for(var player in data.g.images) {
 			var arrOfPics = data.g.images[player];
@@ -103,7 +105,7 @@ var addLeaderboardEvents = function(){
 				var taskNum = i + 1;
 				var tdLocation = taskNum + "_" + player;
 				console.log("Inserting it into: " + tdLocation);
-				placeholder = document.getElementById(tdLocation);
+				var placeholder = document.getElementById(tdLocation);
 				var image = document.createElement("img");
 				image.src = arrOfPics[i];
 				image.setAttribute("class", "incomingPics");
@@ -114,10 +116,38 @@ var addLeaderboardEvents = function(){
 		for(var player in data.g.scores) {
 			var arrOfScores = data.g.scores[player];
 			for(var i = 0; i < arrOfScores.length; i++) {
+				console.log("arrOfScores[" + i + "]: " + arrOfScores[i]);
 				if(arrOfScores[i] == 2) {
+					var placeholder = document.getElementById((i + 1) + "_" + player);
 					placeholder.style.backgroundColor="#F3F781";
 				}
 			}
+		}
+
+		//insert lat and lon for imgaes so far
+		for(var player in data.g.coord) {
+			for(var i = 0; i < data.g.coord[player].length; i++) {
+				var latLonObject = data.g.coord[player][i]; 
+				var placeholder = document.getElementById((i + 1) + "_" + player);
+				var latLonInfo = document.createElement("p");
+				var latLonId = "latLon_" + player;
+				latLonInfo.setAttribute("id", latLonId);
+				latLonInfo.setAttribute("class", "latlon");
+				console.log(latLonObject);
+				latLonInfo.innerHTML = "Latitude: " + parseInt(latLonObject.lat).toFixed(7) + " 	Longitude: " + parseInt(latLonObject.lon).toFixed(7);
+				//placeholder.appendChild(latLonInfo);
+				var tdLocation = (i + 1) + "_" + player;
+				var alink = document.createElement('a');
+				alink.href = "#"
+				$(alink).text("Where was i?!");
+				$(alink).addClass("mapit");
+				$(alink).click(function(){
+					window.open("https://maps.google.com/maps?q=" + latLonObject.lat + "," + latLonObject.lon);
+				})
+				$("#"+tdLocation).append(alink);
+				$(latLonInfo).hide().appendTo("#"+tdLocation).fadeIn("slow");
+			}
+
 		}
 	})
 
@@ -140,6 +170,9 @@ var addLeaderboardEvents = function(){
 		var placeholder = $("#"+tdLocation).children();
 		if(placeholder.length == 0) {
 			var image = document.createElement('img');
+			var imageLocation = tdLocation + "_image";
+			image.setAttribute("id", imageLocation);
+			console.log("image id: " + imageLocation);
 			image.src = data.image;
 			image.setAttribute("class", "incomingPics");
 			$(image).hide().appendTo("#"+tdLocation).fadeIn("slow");
@@ -147,23 +180,44 @@ var addLeaderboardEvents = function(){
 			var latLon = document.createElement("p");
 			var latLonId = "latLon_" + data.playerid;
 			latLon.setAttribute("id", latLonId);
-			latLon.innerHTML = "Latitude: " + data.lat + "	Lontitude: " + data.lon;
+			$(latLon).addClass("latlon");
+			latLon.innerHTML = "Latitude: " + parseInt(data.lat).toFixed(7) + "	Longitude: " + parseInt(data.lon).toFixed(7);
+			//$("#"+tdLocation).append(latLon);
+			$(latLon).hide().appendTo("#"+tdLocation).fadeIn("slow");
+
+			latLon.innerHTML = "Latitude: " + data.lat + "	Longitude: " + data.lon;
 			var alink = document.createElement('a');
 			//alink.href = "https://maps.google.com/maps?q=" + data.lat + "," + data.lon;
-			alink.href = "";
-			$(alink).text("Map it!");
+			alink.href = "#";
+			$(alink).text("Where was i?!");
+			$(alink).addClass("mapit");
 			$(alink).click(function(){
 				window.open("https://maps.google.com/maps?q=" + data.lat + "," + data.lon);
 			})
 			$("#"+tdLocation).append(latLon);
 			$("#"+tdLocation).append(alink);
+
 		} else {
+			$(placeholder[0]).hide();
 			placeholder[0].src = data.image;
+			$(placeholder[0]).fadeIn("slow");
 			//update paragraph with lat/long information
 			var latLon = document.getElementById("latLon_" + data.playerid);
-			latLong.innerHTML = "Latitude: " + data.lat + "	Lontitude: " + data.lon;
+			latLong.innerHTML = "Latitude: " + parseInt(data.lat).toFixed(7) + "	Lontitude: " + parseInt(data.lon).toFixed(7);
 		}
-
+		
+		//at tdLocation, create a disqualify button/sign and call disqualify when pressed with
+		//gameid, userid, taskid
+		var disqualifyButton = document.createElement("button");
+		
+		disqualifyButton.innerHTML = "Disqualify";
+		disqualifyButton.setAttribute("id", "disqualifyButton");
+		disqualifyButton.setAttribute("class", data.playerid + "_disqualify_button");
+		disqualifyButton.onclick = function() {
+			disqualify(gameid, data.playerid, data.tasknumber);
+		};
+		$(disqualifyButton).hide();
+		$("#"+tdLocation).append(disqualifyButton);
 		
 	})
 
@@ -195,7 +249,6 @@ var addLeaderboardEvents = function(){
 		var progressSection = document.getElementById("progressBars");
 		var progressSummary = document.createElement("p");
 
-		//IN CSS: inline these spans!!!!!!
 		progressSummary.setAttribute("class", "progressSummary");
 		var progressPlayer = document.createElement("span");
 		progressPlayer.innerHTML = data.player;;
@@ -225,6 +278,7 @@ var addLeaderboardEvents = function(){
 		var newCol = document.createElement("th");
 		newCol.innerHTML = data.player;
 		newCol.setAttribute("class", "headingCol");
+		newCol.setAttribute("id", "head_" + data.player);
 		headRow.appendChild(newCol);
 
 		var taskNumber = 1;
@@ -241,10 +295,16 @@ var addLeaderboardEvents = function(){
 
 	socket.on('finish', function(data){
 		console.log(data);
+		var header = document.getElementById("head_" + data.player);
+		header.innerHTML = data.player + "'s Score: " + data.score;
+		$("." + data.player + "_disqualify_button").each(function() {
+			$(this).show();
+		});
 	})
 
 	socket.on('disqualify', function(data){
 		console.log(data);
+		document.getElementById("head_" + data.userid).innerHTML = data.userid + "'s Score: " + data.total;
 	})
 }
 
@@ -253,10 +313,19 @@ var getInfo = function(gameid){
 }
 
 var disqualify = function(gameid, userid, taskid){
+	console.log(gameid);
 	socket.emit('disqualify', {
 		gameid: gameid,
 		userid: userid,
 		taskid: taskid
 	});
 	//add css filter to image?!?!?
+	var imgLocation = (taskid + 1) + "_" + userid + "_image";
+	console.log("in disqualify, image id: " + imgLocation);
+	var img = document.getElementById(imgLocation);
+	console.log(img);
+	$(img).css("-webkit-filter", "grayscale(100%)");
+	$(img).css("-webkit-filter", "opacity(70%)");
+	var td = document.getElementById((taskid + 1) + "_" + userid);
+	td.style.backgroundColor = "#FE2E2E";
 }
