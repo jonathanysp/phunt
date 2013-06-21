@@ -4,7 +4,7 @@ block head
 	script(src="/socket.io/socket.io.js")
 	script(src="/js/socket.js")
 	script.
-		register(#{"'"+gameid+"'"}, null);
+		register(#{"'"+gameid+"'"}, #{"'"+userid+"'"});
 		addMobileEvents();
 
 block content
@@ -17,7 +17,7 @@ block content
 	div#todo 
 		- for(var i = 0; i < tasks.length; i++) {
 			hr
-			a(href="/upload?taskid=" + i + "&userid=" + userid + "&gameid=" + gameid) 
+			a.taskA(href="/upload?taskid=" + i + "&userid=" + userid + "&gameid=" + gameid) 
 				- if(done[i] === undefined){
 					span=tasks[i] + " "
 				- } else {
