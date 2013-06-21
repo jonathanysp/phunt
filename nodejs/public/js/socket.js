@@ -296,16 +296,15 @@ var addLeaderboardEvents = function(){
 	socket.on('finish', function(data){
 		console.log(data);
 		var header = document.getElementById("head_" + data.player);
-		header.innerHTML = "Score: " + data.score;
+		header.innerHTML = data.player + "'s Score: " + data.score;
 		$("." + data.player + "_disqualify_button").each(function() {
 			$(this).show();
 		});
-		header.innerHTML = data.player + " Score: " + data.score;
 	})
 
 	socket.on('disqualify', function(data){
 		console.log(data);
-		document.getElementById("head_" + data.userid).innerHTML = "Score: " + data.total;
+		document.getElementById("head_" + data.userid).innerHTML = data.userid + "'s Score: " + data.total;
 	})
 }
 
