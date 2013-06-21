@@ -1,6 +1,7 @@
 
 //connect
-var socket = io.connect('10.1.1.112:3000');
+var socket = io.connect('10.1.1.77:3000');
+>>>>>>> 7ad2d10629fee4eeee2ba4da2f17bbc20fcb61d7
 //var socket = io.connect('http://192.168.20.217:3000')
 //lets the server know which game notifications to send us
 //set userid to null for leaderboard
@@ -136,7 +137,7 @@ var addLeaderboardEvents = function(){
 				var tdLocation = (i + 1) + "_" + player;
 				var alink = document.createElement('a');
 				alink.href = "#"
-				$(alink).text("Map it!");
+				$(alink).text("Where was i?!");
 				$(alink).addClass("mapit");
 				$(alink).click(function(){
 					window.open("https://maps.google.com/maps?q=" + latLonObject.lat + "," + latLonObject.lon);
@@ -174,7 +175,7 @@ var addLeaderboardEvents = function(){
 			var latLon = document.createElement("p");
 			var latLonId = "latLon_" + data.playerid;
 			latLon.setAttribute("id", latLonId);
-
+			$(latLon).addClass("latlon");
 			latLon.innerHTML = "Latitude: " + parseInt(data.lat).toFixed(7) + "	Longitude: " + parseInt(data.lon).toFixed(7);
 			//$("#"+tdLocation).append(latLon);
 			$(latLon).hide().appendTo("#"+tdLocation).fadeIn("slow");
@@ -183,7 +184,7 @@ var addLeaderboardEvents = function(){
 			var alink = document.createElement('a');
 			//alink.href = "https://maps.google.com/maps?q=" + data.lat + "," + data.lon;
 			alink.href = "#";
-			$(alink).text("Map it!");
+			$(alink).text("Where was i?!");
 			$(alink).addClass("mapit");
 			$(alink).click(function(){
 				window.open("https://maps.google.com/maps?q=" + data.lat + "," + data.lon);
@@ -292,6 +293,7 @@ var addLeaderboardEvents = function(){
 		$("." + data.player + "_disqualify_button").each(function() {
 			$(this).show();
 		});
+		header.innerHTML = data.player + " Score: " + data.score;
 	})
 
 	socket.on('disqualify', function(data){
