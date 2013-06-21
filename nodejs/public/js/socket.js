@@ -1,6 +1,6 @@
 
 //connect
-var socket = io.connect('192.168.20.10:3000');
+var socket = io.connect('192.168.22.220:3000');
 //var socket = io.connect('http://192.168.20.217:3000')
 //lets the server know which game notifications to send us
 //set userid to null for leaderboard
@@ -164,9 +164,22 @@ var addLeaderboardEvents = function(){
 			var latLon = document.createElement("p");
 			var latLonId = "latLon_" + data.playerid;
 			latLon.setAttribute("id", latLonId);
+
 			latLon.innerHTML = "Latitude: " + parseInt(data.lat).toFixed(7) + "	Longitude: " + parseInt(data.lon).toFixed(7);
 			//$("#"+tdLocation).append(latLon);
 			$(latLon).hide().appendTo("#"+tdLocation).fadeIn("slow");
+
+			latLon.innerHTML = "Latitude: " + data.lat + "	Lontitude: " + data.lon;
+			var alink = document.createElement('a');
+			//alink.href = "https://maps.google.com/maps?q=" + data.lat + "," + data.lon;
+			alink.href = "";
+			$(alink).text("Map it!");
+			$(alink).click(function(){
+				window.open("https://maps.google.com/maps?q=" + data.lat + "," + data.lon);
+			})
+			$("#"+tdLocation).append(latLon);
+			$("#"+tdLocation).append(alink);
+
 		} else {
 			$(placeholder[0]).hide();
 			placeholder[0].src = data.image;
