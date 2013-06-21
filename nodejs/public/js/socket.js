@@ -1,6 +1,7 @@
-
 //connect
 var socket = io.connect('http://ec2-54-225-42-130.compute-1.amazonaws.com');
+
+var gameid;
 //var socket = io.connect('http://192.168.20.217:3000')
 //lets the server know which game notifications to send us
 //set userid to null for leaderboard
@@ -31,6 +32,7 @@ var addLeaderboardEvents = function(){
 
 	socket.on('info', function(data){
 		console.log(data.g);
+		gameid = data.g.gameid;
 		//setup current progress bars for all current players
 		totalTasks = data.g.tasks.length;
 		var progressSection = document.getElementById("progressBars");
@@ -167,6 +169,9 @@ var addLeaderboardEvents = function(){
 		var placeholder = $("#"+tdLocation).children();
 		if(placeholder.length == 0) {
 			var image = document.createElement('img');
+			var imageLocation = tdLocation + "_image";
+			image.setAttribute("id", imageLocation);
+			console.log("image id: " + imageLocation);
 			image.src = data.image;
 			image.setAttribute("class", "incomingPics");
 			$(image).hide().appendTo("#"+tdLocation).fadeIn("slow");
@@ -202,15 +207,17 @@ var addLeaderboardEvents = function(){
 		
 		//at tdLocation, create a disqualify button/sign and call disqualify when pressed with
 		//gameid, userid, taskid
-		var disqualify = document.createElement(button);
-		/*
-		disqualify.innerHTML = "Disqualify";
-		$(disqualify).hide();
-		$(disqualify).hover(
-			$(disqualify).show();
-		);
-		$("#"+tdLocation).append(disqualify);
-		*/
+		var disqualifyButton = document.createElement("button");
+		
+		disqualifyButton.innerHTML = "Disqualify";
+		disqualifyButton.setAttribute("class", "disqualifyButton");
+		disqualifyButton.setAttribute("class", data.playerid + "_disqualify_button");
+		disqualifyButton.onclick = function() {
+			disqualify(gameid, data.playerid, data.tasknumber);
+		};
+		$(disqualifyButton).hide();
+		$("#"+tdLocation).append(disqualifyButton);
+		
 	})
 
 	//format:
@@ -288,6 +295,10 @@ var addLeaderboardEvents = function(){
 	socket.on('finish', function(data){
 		console.log(data);
 		var header = document.getElementById("head_" + data.player);
+		header.innerHTML = "Score: " + data.score;
+		$("." + data.player + "_disqualify_button").each(function() {
+			$(this).show();
+		});
 		header.innerHTML = data.player + " Score: " + data.score;
 	})
 
@@ -302,10 +313,19 @@ var getInfo = function(gameid){
 }
 
 var disqualify = function(gameid, userid, taskid){
+	console.log(gameid);
 	socket.emit('disqualify', {
 		gameid: gameid,
 		userid: userid,
 		taskid: taskid
 	});
 	//add css filter to image?!?!?
+	var imgLocation = (taskid + 1) + "_" + userid + "_image";
+	console.log("in disqualify, image id: " + imgLocation);
+	var img = document.getElementById(imgLocation);
+	console.log(img);
+	$(img).css("-webkit-filter", "grayscale(100%)");
+	$(img).css("-webkit-filter", "opacity(70%)");
+	var td = document.getElementById((taskid + 1) + "_" + userid);
+	td.style.backgroundColor = "#FE2E2E";
 }
