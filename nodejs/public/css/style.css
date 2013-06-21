@@ -27,10 +27,11 @@ h2{
     text-align: center;
     margin-bottom: 50px;
 }
-#latLon{
-  font-size: 13px;
-
+.latlon{
+  font-size: 0px;
+  display: none;
 }
+
 h3{
     font-size: 29px;
     font-variant: small-caps;
