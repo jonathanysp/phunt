@@ -1,6 +1,7 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #99CC66;
+  background: url("green-dots.jpg");
+
 }
 
 a {
@@ -11,8 +12,25 @@ h1{
     font-weight: bolder;
 	  font-size: 100px;
 	  font-variant: small-caps;
+    text-shadow: 2px 2px 2px #73718A;
 	  letter-spacing: 1.8pt;
-	  padding-top: 10px;
+    margin-bottom:-15px;
+    margin-top: 4px;
+}
+h2{
+
+    font-size: 28px;
+    font-style: italic;
+    font-variant: small-caps;
+    text-align: center;
+    margin-bottom: 50px;
+}
+#lForm{
+  padding-top: 40px;
+  font-size: 75px;
+  font-variant: small-caps;
+  text-align: center;
+
 }
 #bottom{
     width: 260px;
@@ -22,7 +40,7 @@ h1{
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding:20px;
+  padding:30px;
 }
 #p1, #p2, #p3, #p4, #p5, #p6{
   float:left;
@@ -37,7 +55,7 @@ h1{
 #top1, #top2, #top3, #top4, #top5, #top6{
   position: relative;
   visibility: hidden; 
-  top: -234px;
+  top: -233px;
   width: 260px;
   height: 230px;
 
@@ -61,6 +79,10 @@ td {
 	padding: 5px;
 }
 
+.progressSummary {
+  display: inline;
+}
+
 .incomingPics {
 	width: 100px;
 	height: auto;
@@ -73,11 +95,6 @@ td {
 }
 .headingCol {
 	width: 200px;
-}
-#lForm{
-  font-size: 75px;
-  font-variant: small-caps;
-  text-align: center;
 }
 
 .user_typed {
@@ -125,16 +142,29 @@ button:hover, input[type=submit]:hover {
 	display:none !important;
 }
 .inp{
-  width: 350px;
-  font-size: 40px;
-  height: 90px;  
+
+  width: 550px;
+  font-size: 100px;
+  height: 160px;
 
 }
 .butt{
   width: 300px;
   height: 120px;
-  font-size: 20px;
+  font-size: 70px;
+  margin-top: 70px;
+  text-align: center;
+}
+.butt2{
+  height: 80px;
+  font-size: 30px;
+}
 
+.butt3{
+  width: 180px;
+  height: 80px;
+  font-size: 30px;
+  margin-left: 50px;
 }
 .err{
   font-size: 50px;
@@ -142,8 +172,8 @@ button:hover, input[type=submit]:hover {
   font-style: italic;
   color: red;
 }
-#todo, a{
-  font-size: 40px;
+#todo, .taskA{
+  font-size: 80px;
   text-align: center;
   color: #393FEF !important;
 }
@@ -157,6 +187,13 @@ hr {
 
 .up{
   font-size: 39px;
+}
+#pix{
+  font-size: 40px;
+  font-variant: small-caps;
+  margin-left:auto;
+  margin-right: auto;
+  text-align: center
 }
 
 .share-button {
@@ -172,8 +209,6 @@ hr {
 }
 
 .share-button p {
-    margin: 0px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
     font-family: calibri;
     font-size: 26px;
     color: #fff;
@@ -187,18 +222,13 @@ hr {
 .photo-button {
     cursor: pointer;
     float: left;
-    margin: 0px 10px 0px 0px;
-    height: 30px;
-    width: 150px;
+    height: 150px;
+    width: 500px;
     border: none;
     border-radius: 4px 4px 4px 4px;
     background-color: #608AB0;
     background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
-}
-
-.photo-button p {
-    margin: 0px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
+    margin:70px 10px 0px 100px;
     font-size: 46px;
     color: #fff;
 }
@@ -214,19 +244,19 @@ hr {
   width: 700px ;
   margin-right: auto;
 }
+/*
+.shows{
+  margin-left:auto;
+  margin-right: auto;
+  text-align: center
+}
+*/
 #notif{
   vertical-align: top;
   text-align: center;
   font-weight: bold;
   font-size: 20px;
   background-color: white;
-}
-
-
-
-
-input[type=submit] {
-	font-size: 20px;
 }
 
 #displaytitle {
@@ -243,11 +273,27 @@ input[type=submit] {
 	padding-top: 10px;
 	padding-left: 15px;
 }
-
+.lists{
+  font-size: 40px;
+  margin-left: 30px;
+  font-variant: small-caps;
+  font-weight: bold;
+}
 .user_span {
 	padding-right: 30px;
 }
 
 .deletespan {
 	text-align: right
+}
+.help{
+  font-weight: bold;
+}
+
+#p1 {
+  cursor: pointer;
+}
+
+#ol {
+  list-style-type: none;
 }
