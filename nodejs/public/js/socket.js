@@ -170,6 +170,9 @@ var addLeaderboardEvents = function(){
 		var placeholder = $("#"+tdLocation).children();
 		if(placeholder.length == 0) {
 			var image = document.createElement('img');
+			var imageLocation = tdLocation + "_image";
+			image.setAttribute("id", imageLocation);
+			console.log("image id: " + imageLocation);
 			image.src = data.image;
 			image.setAttribute("class", "incomingPics");
 			$(image).hide().appendTo("#"+tdLocation).fadeIn("slow");
@@ -318,7 +321,12 @@ var disqualify = function(gameid, userid, taskid){
 		taskid: taskid
 	});
 	//add css filter to image?!?!?
-	var tdLocation = taskid + "_" + userid;
-	var td = document.getElementById(tdLocation);
-	td.style.filter = "alpha(opacity=" + 100 + ")";
+	var imgLocation = (taskid + 1) + "_" + userid + "_image";
+	console.log("in disqualify, image id: " + imgLocation);
+	var img = document.getElementById(imgLocation);
+	console.log(img);
+	$(img).css("-webkit-filter", "grayscale(100%)");
+	$(img).css("-webkit-filter", "opacity(70%)");
+	var td = document.getElementById((taskid + 1) + "_" + userid);
+	td.style.backgroundColor = "#FE2E2E";
 }
