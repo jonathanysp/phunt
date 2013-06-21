@@ -7,13 +7,14 @@ block head
     register(#{"'" + gameid + "'"}, null);
     getInfo(#{"'" + gameid + "'"});
 block content
-  h2 Game id: #{gameid}
+  h2 Game ID: #{gameid}
   div(id="progressBars")
-  table(id="table")
+  table(id="table", border = "2")
     thead
       tr(id="headingRow")
-        th Tasks
+        th TASKS
     tbody
       each task in g.tasks
         tr(class="taskRow")
           td #{task}
+
