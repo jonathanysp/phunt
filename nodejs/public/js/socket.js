@@ -137,6 +137,7 @@ var addLeaderboardEvents = function(){
 				var alink = document.createElement('a');
 				alink.href = "#"
 				$(alink).text("Map it!");
+				$(alink).addClass("mapit");
 				$(alink).click(function(){
 					window.open("https://maps.google.com/maps?q=" + latLonObject.lat + "," + latLonObject.lon);
 				})
@@ -183,6 +184,7 @@ var addLeaderboardEvents = function(){
 			//alink.href = "https://maps.google.com/maps?q=" + data.lat + "," + data.lon;
 			alink.href = "#";
 			$(alink).text("Map it!");
+			$(alink).addClass("mapit");
 			$(alink).click(function(){
 				window.open("https://maps.google.com/maps?q=" + data.lat + "," + data.lon);
 			})
