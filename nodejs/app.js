@@ -140,17 +140,8 @@ app.post('/upload', function(req, res){
 					res.redirect('back');
 					return;
 				}
-				var score = game.imageSubmit(gameid, userid, tasknum, link, lat, lon);
+				var score = game.imageSubmit(gameid, userid, tasknum, link, lat, lon, link);
 
-				io.sockets.in(gameid).emit('newImage', {
-					playerid: userid,
-					tasknum: g.tasks[tasknum],
-					tasknumber: parseInt(tasknum),
-					image: link,
-					lat: lat,
-					lon: lon,
-					score: score
-				})
 				io.sockets.in(gameid).emit('miniProgress', {
 					playerid: userid,
 					numTasks: game.getNumDone(gameid, userid)
