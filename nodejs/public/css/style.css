@@ -109,8 +109,17 @@ td {
   font-variant: small-caps;
 }
 
-.disqualifyButton{
-  
+#disqualifyButton{
+  color: black;
+  background-color: rgb(192, 172, 95);
+  border-color: rgb(216, 205, 126);
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 19px;
+  font-variant: small-caps;
+  float: right;
 }
 
 .spanForProgress {

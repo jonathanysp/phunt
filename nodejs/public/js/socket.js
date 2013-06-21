@@ -1,5 +1,5 @@
 //connect
-var socket = io.connect('10.1.1.77:3000');
+var socket = io.connect('10.1.1.55:3000');
 //var socket = io.connect('http://ec2-54-225-42-130.compute-1.amazonaws.com');
 
 var gameid;
@@ -211,7 +211,7 @@ var addLeaderboardEvents = function(){
 		var disqualifyButton = document.createElement("button");
 		
 		disqualifyButton.innerHTML = "Disqualify";
-		disqualifyButton.setAttribute("class", "disqualifyButton");
+		disqualifyButton.setAttribute("id", "disqualifyButton");
 		disqualifyButton.setAttribute("class", data.playerid + "_disqualify_button");
 		disqualifyButton.onclick = function() {
 			disqualify(gameid, data.playerid, data.tasknumber);
