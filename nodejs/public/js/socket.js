@@ -305,7 +305,7 @@ var addLeaderboardEvents = function(){
 
 	socket.on('disqualify', function(data){
 		console.log(data);
-
+		document.getElementById("head_" + data.userid).innerHTML = "Score: " + data.total;
 	})
 }
 
