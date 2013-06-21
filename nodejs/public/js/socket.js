@@ -129,10 +129,18 @@ var addLeaderboardEvents = function(){
 				var latLonInfo = document.createElement("p");
 				var latLonId = "latLon_" + player;
 				latLonInfo.setAttribute("id", latLonId);
+				latLonInfo.setAttribute("class", "latlon");
 				console.log(latLonObject);
 				latLonInfo.innerHTML = "Latitude: " + parseInt(latLonObject.lat).toFixed(7) + " 	Longitude: " + parseInt(latLonObject.lon).toFixed(7);
 				//placeholder.appendChild(latLonInfo);
 				var tdLocation = (i + 1) + "_" + player;
+				var alink = document.createElement('a');
+				alink.href = "#"
+				$(alink).text("Map it!");
+				$(alink).click(function(){
+					window.open("https://maps.google.com/maps?q=" + latLonObject.lat + "," + latLonObject.lon);
+				})
+				$("#"+tdLocation).append(alink);
 				$(latLonInfo).hide().appendTo("#"+tdLocation).fadeIn("slow");
 			}
 
