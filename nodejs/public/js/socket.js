@@ -1,6 +1,6 @@
 
 //connect
-var socket = io.connect('192.168.22.220:3000');
+var socket = io.connect('10.1.1.112:3000');
 //var socket = io.connect('http://192.168.20.217:3000')
 //lets the server know which game notifications to send us
 //set userid to null for leaderboard
@@ -202,15 +202,15 @@ var addLeaderboardEvents = function(){
 		
 		//at tdLocation, create a disqualify button/sign and call disqualify when pressed with
 		//gameid, userid, taskid
-		var disqualify = document.createElement(button);
-		/*
+		var disqualify = document.createElement("button");
+		
 		disqualify.innerHTML = "Disqualify";
+		disqualify.setAttribute("class", "disqualifyButton");
+		disqualify.setAttribute("class", data.playerid + "_disqualify_button");
+		disqualify.onclick = disqualify(____, data.playerid, data.tasknumber);
 		$(disqualify).hide();
-		$(disqualify).hover(
-			$(disqualify).show();
-		);
 		$("#"+tdLocation).append(disqualify);
-		*/
+		
 	})
 
 	//format:
@@ -287,8 +287,11 @@ var addLeaderboardEvents = function(){
 
 	socket.on('finish', function(data){
 		console.log(data);
-		var header = document.getElementById("head_" + data.playerid);
+		var header = document.getElementById("head_" + data.player);
 		header.innerHTML = "Score: " + data.score;
+		$("." + data.player + "_disqualify_button").each(function() {
+			$(this).show();
+		});
 	})
 
 	socket.on('disqualify', function(data){
