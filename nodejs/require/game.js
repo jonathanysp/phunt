@@ -6,10 +6,6 @@ var id = 0;
 
 var io;
 
-var tasktemplate = {
-	'sample': ['q1', 'q2', 'q3', 'q4'],
-}
-
 var game = {
 	gameid: 0,
 	tasks: ['one', 'two', 'three', 'four'],
@@ -21,12 +17,12 @@ var game = {
 		'http://placehold.it/200x150', 'http://placehold.it/200x150'],
 	},
 	scores: {
-		'p1': [2,1,2],
-		'p2': [1,2,1]
+		'p1': [2,1,2,2],
+		'p2': [1,2,1,1]
 	},
 	coord: {
-		'p1': [{lat: 1, lon: 0}, {lat: 1, lon: 0}, {lat: 1, lon: 0}],
-		'p2': [{lat: 1, lon: 0}, {lat: 1, lon: 0}, {lat: 1, lon: 0}],
+		'p1': [{lat: 1, lon: 0}, {lat: 1, lon: 0}, {lat: 1, lon: 0}, {lat: 1, lon: 0}],
+		'p2': [{lat: 1, lon: 0}, {lat: 1, lon: 0}, {lat: 1, lon: 0}, {lat: 1, lon: 0}],
 	}
 }
 

@@ -60,7 +60,7 @@ app.get('/create', function(req, res){
 })
 
 app.get('/help', function(req, res){
-	res.render('help');
+	res.render('help', {title: "PHunt Help"});
 })
 
 app.get('/show', function(req, res){

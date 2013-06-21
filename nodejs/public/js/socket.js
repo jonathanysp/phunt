@@ -1,6 +1,6 @@
 
 //connect
-var socket = io.connect('192.168.20.10:3000');
+var socket = io.connect('192.168.22.220:3000');
 //var socket = io.connect('http://192.168.20.217:3000')
 //lets the server know which game notifications to send us
 //set userid to null for leaderboard
@@ -129,10 +129,19 @@ var addLeaderboardEvents = function(){
 				var latLonInfo = document.createElement("p");
 				var latLonId = "latLon_" + player;
 				latLonInfo.setAttribute("id", latLonId);
+				latLonInfo.setAttribute("class", "latlon");
 				console.log(latLonObject);
 				latLonInfo.innerHTML = "Latitude: " + parseInt(latLonObject.lat).toFixed(7) + " 	Longitude: " + parseInt(latLonObject.lon).toFixed(7);
 				//placeholder.appendChild(latLonInfo);
 				var tdLocation = (i + 1) + "_" + player;
+				var alink = document.createElement('a');
+				alink.href = "#"
+				$(alink).text("Map it!");
+				$(alink).addClass("mapit");
+				$(alink).click(function(){
+					window.open("https://maps.google.com/maps?q=" + latLonObject.lat + "," + latLonObject.lon);
+				})
+				$("#"+tdLocation).append(alink);
 				$(latLonInfo).hide().appendTo("#"+tdLocation).fadeIn("slow");
 			}
 
@@ -173,8 +182,9 @@ var addLeaderboardEvents = function(){
 			latLon.innerHTML = "Latitude: " + data.lat + "	Longitude: " + data.lon;
 			var alink = document.createElement('a');
 			//alink.href = "https://maps.google.com/maps?q=" + data.lat + "," + data.lon;
-			alink.href = "";
+			alink.href = "#";
 			$(alink).text("Map it!");
+			$(alink).addClass("mapit");
 			$(alink).click(function(){
 				window.open("https://maps.google.com/maps?q=" + data.lat + "," + data.lon);
 			})
