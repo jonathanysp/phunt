@@ -193,7 +193,7 @@ exports.isFirst = isFirst;
 var disqualify = function(gameid, userid, tasknum){
 	var g = getGame(gameid);
 	g.scores[userid][parseInt(tasknum)] = 0;
-	g.images[userid][parseInt(tasknum)] = "wwww.http://placehold.it/250x200";
+	g.images[userid][parseInt(tasknum)] = "http://placehold.it/250x200";
 
 	io.sockets.in(gameid).emit("disqualify", {
 		userid: userid,
