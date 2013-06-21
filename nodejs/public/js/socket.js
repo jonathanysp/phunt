@@ -1,6 +1,6 @@
 
 //connect
-var socket = io.connect('192.168.22.220:3000');
+var socket = io.connect('10.1.1.77:3000');
 //var socket = io.connect('http://192.168.20.217:3000')
 //lets the server know which game notifications to send us
 //set userid to null for leaderboard
@@ -287,8 +287,8 @@ var addLeaderboardEvents = function(){
 
 	socket.on('finish', function(data){
 		console.log(data);
-		var header = document.getElementById("head_" + data.playerid);
-		header.innerHTML = "Score: " + data.score;
+		var header = document.getElementById("head_" + data.player);
+		header.innerHTML = data.player + " Score: " + data.score;
 	})
 
 	socket.on('disqualify', function(data){
