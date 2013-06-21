@@ -94,7 +94,6 @@ var addLeaderboardEvents = function(){
 			});
 		}
 
-		var placeholder;
 		//insert images uploaded by users so far
 		for(var player in data.g.images) {
 			var arrOfPics = data.g.images[player];
@@ -103,7 +102,7 @@ var addLeaderboardEvents = function(){
 				var taskNum = i + 1;
 				var tdLocation = taskNum + "_" + player;
 				console.log("Inserting it into: " + tdLocation);
-				placeholder = document.getElementById(tdLocation);
+				var placeholder = document.getElementById(tdLocation);
 				var image = document.createElement("img");
 				image.src = arrOfPics[i];
 				image.setAttribute("class", "incomingPics");
@@ -114,10 +113,28 @@ var addLeaderboardEvents = function(){
 		for(var player in data.g.scores) {
 			var arrOfScores = data.g.scores[player];
 			for(var i = 0; i < arrOfScores.length; i++) {
+				console.log("arrOfScores[" + i + "]: " + arrOfScores[i]);
 				if(arrOfScores[i] == 2) {
+					var placeholder = document.getElementById((i + 1) + "_" + player);
 					placeholder.style.backgroundColor="#F3F781";
 				}
 			}
+		}
+
+		//insert lat and lon for imgaes so far
+		for(var player in data.g.coord) {
+			for(var i = 0; i < data.g.coord[player].length; i++) {
+				var latLonObject = data.g.coord[player][i]; 
+				var placeholder = document.getElementById((i + 1) + "_" + player);
+				var latLonInfo = document.createElement("p");
+				var latLonId = "latLon_" + player;
+				latLonInfo.setAttribute("id", latLonId);
+				console.log(latLonObject);
+				latLonInfo.innerHTML = "Latitude: " + parseInt(latLonObject.lat).toFixed(7) + " 	Longitude: " + parseInt(latLonObject.lon).toFixed(7);
+				//placeholder.appendChild(latLonInfo);
+				$(latLonInfo).hide().appendTo("#"+tdLocation).fadeIn("slow");
+			}
+
 		}
 	})
 
@@ -147,13 +164,16 @@ var addLeaderboardEvents = function(){
 			var latLon = document.createElement("p");
 			var latLonId = "latLon_" + data.playerid;
 			latLon.setAttribute("id", latLonId);
-			latLon.innerHTML = "Latitude: " + data.lat + "	Lontitude: " + data.lon;
-			$("#"+tdLocation).append(latLon);
+			latLon.innerHTML = "Latitude: " + parseInt(data.lat).toFixed(7) + "	Longitude: " + parseInt(data.lon).toFixed(7);
+			//$("#"+tdLocation).append(latLon);
+			$(latLon).hide().appendTo("#"+tdLocation).fadeIn("slow");
 		} else {
+			$(placeholder[0]).hide();
 			placeholder[0].src = data.image;
+			$(placeholder[0]).fadeIn("slow");
 			//update paragraph with lat/long information
 			var latLon = document.getElementById("latLon_" + data.playerid);
-			latLong.innerHTML = "Latitude: " + data.lat + "	Lontitude: " + data.lon;
+			latLong.innerHTML = "Latitude: " + parseInt(data.lat).toFixed(7) + "	Lontitude: " + parseInt(data.lon).toFixed(7);
 		}
 
 		
