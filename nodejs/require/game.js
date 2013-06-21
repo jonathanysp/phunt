@@ -33,7 +33,7 @@ exports.setSocket = function(sockio){
 	io = sockio;
 }
 
-var imageSubmit = function(gameid, userid, tasknum, filepath, lat, lon){
+var imageSubmit = function(gameid, userid, tasknum, filepath, lat, lon, link){
 	if(isFirst(gameid, userid, tasknum)){
 		var score = 2;
 	} else {
@@ -54,6 +54,16 @@ var imageSubmit = function(gameid, userid, tasknum, filepath, lat, lon){
 	var q1 = Math.floor(numTasks*0.25);
 	var q2 = Math.floor(numTasks*0.5);
 	var q3 = Math.floor(numTasks*0.75);
+
+	io.sockets.in(gameid).emit('newImage', {
+		playerid: userid,
+		tasknum: g.tasks[tasknum],
+		tasknumber: parseInt(tasknum),
+		image: link,
+		lat: lat,
+		lon: lon,
+		score: score
+	})
 
 	switch(numDone){
 		case q1:
