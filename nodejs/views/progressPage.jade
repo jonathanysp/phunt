@@ -3,9 +3,7 @@ block head
   script(src="/socket.io/socket.io.js")
   script(src="/js/socket.js")
   script(src="/js/leaderboard.js")
-  script.
-    register(#{"'" + gameid + "'"}, null);
-    getInfo(#{"'" + gameid + "'"});
+
 block content
   h2 Game ID: #{gameid}
   div(id="progressBars")
@@ -17,4 +15,7 @@ block content
       each task in g.tasks
         tr(class="taskRow")
           td #{task}
-
+  script.
+    console.log("hi");
+    register(#{"'" + gameid + "'"}, null);
+    getInfo(#{"'" + gameid + "'"});
