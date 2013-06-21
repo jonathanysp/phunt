@@ -1,7 +1,8 @@
 
 //connect
-var socket = io.connect('10.1.1.77:3000');
->>>>>>> 7ad2d10629fee4eeee2ba4da2f17bbc20fcb61d7
+var socket = io.connect('10.1.1.112:3000');
+
+var gameid;
 //var socket = io.connect('http://192.168.20.217:3000')
 //lets the server know which game notifications to send us
 //set userid to null for leaderboard
@@ -32,6 +33,7 @@ var addLeaderboardEvents = function(){
 
 	socket.on('info', function(data){
 		console.log(data.g);
+		gameid = data.g.gameid;
 		//setup current progress bars for all current players
 		totalTasks = data.g.tasks.length;
 		var progressSection = document.getElementById("progressBars");
@@ -203,14 +205,16 @@ var addLeaderboardEvents = function(){
 		
 		//at tdLocation, create a disqualify button/sign and call disqualify when pressed with
 		//gameid, userid, taskid
-		var disqualify = document.createElement("button");
+		var disqualifyButton = document.createElement("button");
 		
-		disqualify.innerHTML = "Disqualify";
-		disqualify.setAttribute("class", "disqualifyButton");
-		disqualify.setAttribute("class", data.playerid + "_disqualify_button");
-		disqualify.onclick = disqualify(____, data.playerid, data.tasknumber);
-		$(disqualify).hide();
-		$("#"+tdLocation).append(disqualify);
+		disqualifyButton.innerHTML = "Disqualify";
+		disqualifyButton.setAttribute("class", "disqualifyButton");
+		disqualifyButton.setAttribute("class", data.playerid + "_disqualify_button");
+		disqualifyButton.onclick = function() {
+			disqualify(gameid, data.playerid, data.tasknumber);
+		};
+		$(disqualifyButton).hide();
+		$("#"+tdLocation).append(disqualifyButton);
 		
 	})
 
@@ -307,10 +311,14 @@ var getInfo = function(gameid){
 }
 
 var disqualify = function(gameid, userid, taskid){
+	console.log(gameid);
 	socket.emit('disqualify', {
 		gameid: gameid,
 		userid: userid,
 		taskid: taskid
 	});
 	//add css filter to image?!?!?
+	var tdLocation = taskid + "_" + userid;
+	var td = document.getElementById(tdLocation);
+	td.style.filter = "alpha(opacity=" + 100 + ")";
 }
