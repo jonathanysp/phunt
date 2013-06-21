@@ -42,24 +42,32 @@ app.get('/progress', function(req, res){
 	if(gameid === undefined){
 		//gameid = 0;
 	}
-	res.render('progressPage', {g: game.getGame(gameid), gameid: gameid})
+	res.render('progressPage', {title: "Game: " + gameid, g: game.getGame(gameid), gameid: gameid})
 });
 app.get('/game', function(req, res){
 	res.render('game', {g: game.getGame(0)})
 });
 app.get('/pic', routes.camera);
+app.get('/m', function(req, res){
+	res.render('login', {title: "PHunt Login"});
+})
 app.get('/login', function(req, res){
-	res.render('login');
+	res.render('login', {title: "PHunt Login"});
 })
 
 app.get('/create', function(req, res){
 	res.render('input');
 })
 
+app.get('/help', function(req, res){
+	res.render('help', {title: "PHunt Help"});
+})
+
 app.get('/show', function(req, res){
 	var templateid = req.query.tid;
+	console.log(templateid);
 	var tasks = game.getTemplate(templateid);
-	res.render('show', {tid: templateid, tasks: tasks});
+	res.render('show', {title: templateid, tid: templateid, tasks: tasks});
 })
 
 app.get('/new', function(req, res){
@@ -97,14 +105,14 @@ app.get('/tasks', function(req, res){
 	var userid = req.query.userid;
 	var tasks = game.getTasks(gameid);
 	var done = game.getDone(gameid, userid);
-	res.render('tasks', {tasks: tasks, gameid: gameid, userid: userid, done: done});
+	res.render('tasks', {title: userid, tasks: tasks, gameid: gameid, userid: userid, done: done});
 })
 app.get('/upload', function(req, res){
 	var gameid = req.query.gameid;
 	var taskid = req.query.taskid;
 	var userid = req.query.userid;
 	var link = game.doneLink(gameid, userid, taskid);
-	res.render('upload', {gameid: gameid, taskid: taskid, userid:userid, link: link});
+	res.render('upload', {title: "Task: "+taskid, gameid: gameid, taskid: taskid, userid:userid, link: link});
 })
 app.post('/upload', function(req, res){
 	//res.send("uploaded");
@@ -112,6 +120,8 @@ app.post('/upload', function(req, res){
 	var gameid = req.body.gameid;
 	var userid = req.body.userid;
 	var tasknum = req.body.taskid;
+	var lat = req.body.lat;
+	var lon = req.body.lon;
 	var g = game.getGame(gameid);
 	fs.readFile(req.files.image.path, function(err, data){
 		if(err){
@@ -130,13 +140,16 @@ app.post('/upload', function(req, res){
 					res.redirect('back');
 					return;
 				}
-				game.imageSubmit(gameid, userid, tasknum, link);
+				var score = game.imageSubmit(gameid, userid, tasknum, link, lat, lon);
 
 				io.sockets.in(gameid).emit('newImage', {
 					playerid: userid,
 					tasknum: g.tasks[tasknum],
 					tasknumber: parseInt(tasknum),
-					image: link
+					image: link,
+					lat: lat,
+					lon: lon,
+					score: score
 				})
 				io.sockets.in(gameid).emit('miniProgress', {
 					playerid: userid,
@@ -179,6 +192,10 @@ io.sockets.on('connection', function(socket){
 	
 	socket.on('echo', function(data){
 		console.log(data);
+	})
+
+	socket.on('disqualify', function(data){
+		game.disqualify(data.gameid, data.userid, data.taskid);
 	})
 
 	//debug responses

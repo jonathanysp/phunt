@@ -6,10 +6,6 @@ var id = 0;
 
 var io;
 
-var tasktemplate = {
-	'sample': ['q1', 'q2', 'q3', 'q4'],
-}
-
 var game = {
 	gameid: 0,
 	tasks: ['one', 'two', 'three', 'four'],
@@ -19,6 +15,14 @@ var game = {
 		'http://placehold.it/200x150', 'http://placehold.it/200x150'],
 		'p2': ['http://placehold.it/200x150', 'http://placehold.it/200x150',
 		'http://placehold.it/200x150', 'http://placehold.it/200x150'],
+	},
+	scores: {
+		'p1': [2,1,2,2],
+		'p2': [1,2,1,1]
+	},
+	coord: {
+		'p1': [{lat: 1, lon: 0}, {lat: 1, lon: 0}, {lat: 1, lon: 0}, {lat: 1, lon: 0}],
+		'p2': [{lat: 1, lon: 0}, {lat: 1, lon: 0}, {lat: 1, lon: 0}, {lat: 1, lon: 0}],
 	}
 }
 
@@ -29,14 +33,23 @@ exports.setSocket = function(sockio){
 	io = sockio;
 }
 
-var imageSubmit = function(gameid, userid, tasknum, filepath){
+var imageSubmit = function(gameid, userid, tasknum, filepath, lat, lon){
+	if(isFirst(gameid, userid, tasknum)){
+		var score = 2;
+	} else {
+		var score = 1;
+	}
+
 	var g = getGame(gameid);
 	g.images[userid][parseInt(tasknum)] = filepath;
 	console.log(g.images[userid]);
 
 	var numTasks = getTasks(gameid).length;
 	var numDone = getNumDone(gameid, userid);
-	console.log(numTasks + " " + numDone);
+
+	g.scores[userid][parseInt(tasknum)] = score;
+
+	g.coord[userid][parseInt(tasknum)] = {lat: lat, lon: lon};
 
 	var q1 = Math.floor(numTasks*0.25);
 	var q2 = Math.floor(numTasks*0.5);
@@ -52,9 +65,11 @@ var imageSubmit = function(gameid, userid, tasknum, filepath){
 		case q3:
 			io.sockets.in(gameid).emit('progress', {player: userid, progress: 75});
 			break;
-		case numDone:
+		case numTasks:
 			io.sockets.in(gameid).emit('progress', {player: userid, progress: 100});
+			io.sockets.in(gameid).emit('finish', {player: userid, score: arraySum(g.scores[userid])});
 	}
+	return score;
 }
 exports.imageSubmit = imageSubmit;
 
@@ -86,6 +101,9 @@ var addPlayer = function(gameid, userid){
 	var g = getGame(gameid);
 	g.players.push(userid);
 	g.images[userid] = [];
+	g.scores[userid] = [];
+	console.log(g);
+	g.coord[userid] = [];
 	io.sockets.in(gameid).emit('newPlayer', {
 		player: userid,
 	})
@@ -114,7 +132,9 @@ var createGame = function(templateid){
 	gameid: gameid,
 	tasks: t,
 	players: [],
-	images: {}
+	images: {},
+	scores: {},
+	coord: {},
 	}
 	games[gameid] = newGame;
 	return gameid;
@@ -148,3 +168,34 @@ var getNumDone = function(gameid, userid){
 	return counter;
 }
 exports.getNumDone = getNumDone;
+
+var isFirst = function(gameid, userid, taskid){
+	var g = getGame(gameid);
+	for(var i = 0; i < g.players.length; i++){
+		if(g.images[g.players[i]][taskid] !== undefined){
+			return false;
+		}
+	}
+	return true;
+}
+exports.isFirst = isFirst;
+
+var disqualify = function(gameid, userid, tasknum){
+	var g = getGame(gameid);
+	g.scores[userid][parseInt(tasknum)] = 0;
+	g.images[userid][parseInt(tasknum)] = "wwww.http://placehold.it/250x200";
+
+	io.sockets.in(gameid).emit("disqualify", {
+		userid: userid,
+		total: arraySum(g.scores[userid]),
+	})
+}
+exports.disqualify = disqualify;
+
+var arraySum = function(array){
+	var total = 0;
+	for(var i = 0 ; i < array.length; i++){
+		total = total + array[i];
+	}
+	return total;
+}

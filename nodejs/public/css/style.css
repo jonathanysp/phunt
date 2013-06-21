@@ -1,11 +1,14 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Average', serif;
+  font-weight: bolder;
   background: url("green-dots.jpg");
+  display: -webkit-flex;
+  -webkit-flex-flow:column;
 
 }
 
 a {
-  color: #00B7FF;
+  color: #0037ff;
 }
 h1{
 	  text-align: center;
@@ -21,9 +24,18 @@ h2{
 
     font-size: 28px;
     font-style: italic;
-    font-variant: small-caps;
     text-align: center;
     margin-bottom: 50px;
+}
+.latlon{
+  font-size: 0px;
+  display: none;
+}
+
+h3{
+    font-size: 29px;
+    font-variant: small-caps;
+    font-weight: bolder;
 }
 #lForm{
   padding-top: 40px;
@@ -36,11 +48,23 @@ h2{
     width: 260px;
     height: 230px;
 }
+
+#pics img {
+    border-radius: 7px;
+}
+
+#pics div {
+    border-radius: 10px;
+
+}
+
 #pics{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding:30px;
+  display: -webkit-flex;
+  padding-right:50px;
+  max-width: 1300px;
+  -webkit-flex-flow:row wrap;
+  -webkit-align-self:center;
+  -webkit-justify-content:center;
 }
 #p1, #p2, #p3, #p4, #p5, #p6{
   float:left;
@@ -55,7 +79,7 @@ h2{
 #top1, #top2, #top3, #top4, #top5, #top6{
   position: relative;
   visibility: hidden; 
-  top: -248px;
+  top: -233px;
   width: 260px;
   height: 230px;
 
@@ -64,12 +88,16 @@ h2{
 table {
 	margin-left: auto;
 	margin-right: auto;
-	border: 2px solid black;
+	border: 3px solid black;
+  border-spacing: 0;
+  background-color: rgba(0, 0, 0, 0.13);
 }
 
 th {
-	font-size: 20px;
+	font-size: 32px;
+  font-weight: bolder;
 	border: 2px solid black;
+  border-bottom: 4px solid black;
 }
 
 td {
@@ -77,14 +105,20 @@ td {
 	height: 200px;
 	margin: 10px;
 	padding: 5px;
+  font-size: 30px;
+  font-variant: small-caps;
+}
+
+.spanForProgress {
+  margin: 10px;
 }
 
 .progressSummary {
-  display: inline;
+  text-align: center;
 }
 
 .incomingPics {
-	width: 100px;
+	width: 300px;
 	height: auto;
 }
 
@@ -98,16 +132,22 @@ td {
 }
 
 .user_typed {
-	font-size: 20px;
-	width: 250px;
+	font-size: 28px;
 }
 
 div.user_typed {
 	text-align: right ;
+  width: = 500px;
 }
-
-ul {
-	list-style-type: none;
+.shows ol{
+  width: 800px;
+  list-style-type: none;
+}
+#andre ol {
+  margin-top: 0px;
+  width: 500px;
+  -webkit-justify: left;
+  list-style-type: none;
 }
 
 input {
@@ -118,12 +158,14 @@ input {
 	font-size: 20px;
 }
 
-button, input[type=submit] {
+#andre button, #next {
 	color: black;
 	background-color: rgb(192, 172, 95);
 	border-color: rgb(216, 205, 126);
 	-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
 	cursor:pointer;
+  font-size: 19px;
+  font-variant: small-caps;
 }
 
 .delete {
@@ -136,6 +178,7 @@ button:hover, input[type=submit]:hover {
 
 #andre {
 	margin-left: 20px;
+  display: -webkit-flex;
 }
 
 .task {
@@ -154,10 +197,22 @@ button:hover, input[type=submit]:hover {
   font-size: 70px;
   margin-top: 70px;
   text-align: center;
+  color: black;
+  background-color: rgb(192, 172, 95);
+  border-color: rgb(216, 205, 126);
+  -moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+  cursor:pointer;
+  margin-left: 25px;
 }
 .butt2{
   height: 80px;
   font-size: 30px;
+  color: black;
+  background-color: rgb(192, 172, 95);
+  border-color: rgb(216, 205, 126);
+  -moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+  cursor:pointer;
+  margin-left: 75px;
 }
 
 .butt3{
@@ -165,6 +220,12 @@ button:hover, input[type=submit]:hover {
   height: 80px;
   font-size: 30px;
   margin-left: 50px;
+  color: black;
+  background-color: rgb(192, 172, 95);
+  border-color: rgb(216, 205, 126);
+  -moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+  cursor:pointer;
+
 }
 .err{
   font-size: 50px;
@@ -190,7 +251,6 @@ hr {
 }
 #pix{
   font-size: 40px;
-  font-variant: small-caps;
   margin-left:auto;
   margin-right: auto;
   text-align: center
@@ -230,9 +290,32 @@ hr {
     background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
     margin:70px 10px 0px 100px;
     font-size: 46px;
+    color: black;
+    border-color: rgb(216, 205, 126);
+    -moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+    cursor:pointer;
+}
+.submit-button {
+    cursor: pointer;
+    float: left;
+    height: 150px;
+    width: 500px;
+    border: none;
+    border-radius: 4px 4px 4px 4px;
+    background-color: #608AB0;
+    margin:70px 10px 0px 100px;
+    font-size: 46px;
     color: #fff;
+    color: black;
+    background-color: rgb(192, 172, 95);
+    border-color: rgb(216, 205, 126);
+    -moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+    cursor:pointer;
 }
 
+.create{
+  padding-bottom: 50px;
+}
 #upload-wrap {
     float: left;
     height: 30px;
@@ -244,13 +327,7 @@ hr {
   width: 700px ;
   margin-right: auto;
 }
-/*
-.shows{
-  margin-left:auto;
-  margin-right: auto;
-  text-align: center
-}
-*/
+
 #notif{
   vertical-align: top;
   text-align: center;
@@ -275,9 +352,9 @@ hr {
 }
 .lists{
   font-size: 40px;
-  margin-left: 30px;
-  font-variant: small-caps;
+  margin-left: 50px;
   font-weight: bold;
+  margin-top: -15px;
 }
 .user_span {
 	padding-right: 30px;
@@ -285,4 +362,18 @@ hr {
 
 .deletespan {
 	text-align: right
+}
+.help{
+  font-weight: bold;
+  font-size: 18px;
+  margin-left: 140px;
+  max-width: 80%;
+}
+
+.BIG {
+  display:none;
+}
+
+span.done{
+  color: gray;
 }

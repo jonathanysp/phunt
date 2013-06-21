@@ -9,18 +9,25 @@
 <body>
 	<h1 class="create">Create your own adventure!</h1>
 	<div id='andre'>
-		<input id="input2" placeholder="Title"></input>
-		<button id="cleartitle">Clear Title</button>	
-		<input id="input" placeholder="Propose a picture!"></input>
-		<button id="deleteall">Clear Tasks</button>
-		<div id='divfortitle' class='user_typed'></div>
-		<ul id="ul">
+		<div id = "createinput">
+			<input id="input2" placeholder="Give your hunt a title!"></input>
+			<button id="cleartitle">Clear Title</button>	
+			
+			<br>
+			<br>
+			
+			<input id="input" placeholder="Add a task!"></input>
+			<button id="deleteall">Clear Tasks</button>
+			<div id='divfortitle' class='user_typed'></div>
+			<br>
+			<form id="hidden_form" method="POST" action="/new">
+				<input id = "next" type="submit" value="Next">
+			</form>
+		</div>
+		<ol id="ol">
 			<li ng-repeat="item in items" ng-class="'done-'+item.done" ng-animate="'repeat'">
-				<button>
-		</ul>
-		<form id="hidden_form" method="POST" action="/new">
-			<input type="submit" value="Next">
-		</form>
+		</ol>
+		
 	</div>
 	<script>
 		var counter = 0;
@@ -63,18 +70,19 @@
 						var newdiv = $(document.createElement('div'))
 							var newdel = $(document.createElement('button'))
 						newdel.attr('class', 'a'+counter)
-						newdel.text('delete')
+						newdel.text('x')
 						newdel.click(function(){
 							var classy = newdel.attr('class')
 							$('.'+classy).remove()
 						});
 						counter++
 						newdiv.append(typed)
+						newdiv.append("       ")
 						newdiv.append(newdel)
 						newdiv.attr('class', 'user_typed')
 					newli.addClass('li')
 					newli.append(newdiv);
-					$("#ul").append(newli);
+					$("#ol").append(newli);
 					$('#input').val("")
 					}
 		    	}

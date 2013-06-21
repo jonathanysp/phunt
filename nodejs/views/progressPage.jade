@@ -3,16 +3,19 @@ block head
   script(src="/socket.io/socket.io.js")
   script(src="/js/socket.js")
   script(src="/js/leaderboard.js")
-  script.
-    register(#{"'" + gameid + "'"}, null);
-    getInfo(#{"'" + gameid + "'"});
+
 block content
+  h2 Game ID: #{gameid}
   div(id="progressBars")
-  table(id="table")
+  table(id="table", border = "2")
     thead
       tr(id="headingRow")
-        th Tasks
+        th TASKS
     tbody
       each task in g.tasks
         tr(class="taskRow")
           td #{task}
+  script.
+    console.log("hi");
+    register(#{"'" + gameid + "'"}, null);
+    getInfo(#{"'" + gameid + "'"});

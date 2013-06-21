@@ -13,12 +13,14 @@ block content
 			input(name="gameid", value=gameid, hidden)
 			input(name="userid", value=userid, hidden)
 			input(name="taskid", value=taskid, hidden)
+			input(id="lat", name="lat", hidden);
+			input(id="lon", name="lon", hidden);
 			div(id="share-bottom")
 				input.butt(id="upload", type="button", class="photo-button", onclick="document.getElementById('upload-field').click();", value='upload photo')
 				
 				div(id="upload-wrap")
 					input(type="file", id="upload-field", name="image", hidden)
-				input.butt(type="submit", value="submit", class = "photo-button")
+				input.butt(type="submit", value="submit", class = "submit-button")
 
 	script.
 		$("#upload-field").change(function(){
@@ -26,3 +28,11 @@ block content
 			//change upload button
 			$("#upload").css('background-color', 'green');
 		})
+		var showPosition = function(position){
+			console.log(position);
+			$("#lat").val(position.coords.latitude);
+			$("#lon").val(position.coords.longitude);
+		}
+		if(navigator.geolocation){
+			navigator.geolocation.getCurrentPosition(showPosition);
+		}

@@ -4,7 +4,7 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'team quality' });
+  res.render('index', { title: 'Phunt!' });
 };
 
 exports.progress = function(req, res){
