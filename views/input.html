@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+	<title>Create your own adventure!</title>
+	<script src="/js/jquery.js"></script>
+	<script src="/js/angular.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+<body>
+	<h1 class="create">Create your own adventure!</h1>
+	<div id='andre'>
+		<div id = "createinput">
+			<input id="input2" placeholder="Give your hunt a title!"></input>
+			<button id="cleartitle">Clear Title</button>	
+			
+			<br>
+			<br>
+			
+			<input id="input" placeholder="Add a task!"></input>
+			<button id="deleteall">Clear Tasks</button>
+			<div id='divfortitle' class='user_typed'></div>
+			<br>
+			<form id="hidden_form" method="POST" action="/new">
+				<input id = "next" type="submit" value="Next">
+			</form>
+		</div>
+		<ol id="ol">
+			<li ng-repeat="item in items" ng-class="'done-'+item.done" ng-animate="'repeat'">
+		</ol>
+		
+	</div>
+	<script>
+		var counter = 0;
+		$('#input2').keyup(function(event){
+			if(event.keyCode == 13){
+				if($('#input2').val() != ""){
+					if($('#displaytitle').val() == null){
+						var typed = $('#input2').val()
+						var newdiv = $(document.createElement('div'))
+						newdiv.append(typed)
+						newdiv.attr('id','displaytitle')
+						var newtitle_hidden = $(document.createElement('input'))
+						newtitle_hidden.attr('value', typed)
+						newtitle_hidden.attr('id', 'title')
+						newtitle_hidden.attr('style', 'display:none;')
+						$('#hidden_form').append(newtitle_hidden)
+						$('#divfortitle').append(newdiv)
+						$('#input2').val("")
+					}
+					else {
+						$('#input2').val("")
+						alert('You may only have one title.')
+					}
+				}
+			}
+		})
+		$('#input').keyup(function(event){
+			if($('.li').length < 12){
+				if(event.keyCode == 13){
+					if($('#input').val() != ""){
+					typed = $('#input').val()
+					var newli = $(document.createElement('li'));
+					var newinput = $(document.createElement('input'));
+						newinput.attr('style', "display:none;")
+						newinput.attr('name', 'task');
+						newinput.attr('value', typed)
+						newinput.attr('class', 'a'+counter+' deletethis')
+						$('#hidden_form').append(newinput)
+						newli.attr('class', 'a'+counter);
+						var newdiv = $(document.createElement('div'))
+							var newdel = $(document.createElement('button'))
+						newdel.attr('class', 'a'+counter)
+						newdel.text('x')
+						newdel.click(function(){
+							var classy = newdel.attr('class')
+							$('.'+classy).remove()
+						});
+						counter++
+						newdiv.append(typed)
+						newdiv.append("       ")
+						newdiv.append(newdel)
+						newdiv.attr('class', 'user_typed')
+					newli.addClass('li')
+					newli.append(newdiv);
+					$("#ol").append(newli);
+					$('#input').val("")
+					}
+		    	}
+			}
+		})
+		$('#deleteall').click(function(){
+			$('.li').remove()
+			$('.deletethis').remove()
+		})
+		$('#cleartitle').click(function(){
+
+			$('#title').remove()
+			$('#displaytitle').remove()
+		})
+	</script>
+</body>
+</html>

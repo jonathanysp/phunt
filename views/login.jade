@@ -1,0 +1,17 @@
+extends layout
+
+block content
+	h1 Phunt
+
+	form#lForm(action = "/login", method = "post")
+		label What's your game ID?  
+		br
+		input(class="inp", type="text", required, name = "gameid")
+		br
+		span(class = "err")=error
+		br
+		label What's your name?  
+		br
+		input(class = "inp", type="text", required, name = "userid") 
+		br
+		input(class = "butt", type = "submit", value = "submit")

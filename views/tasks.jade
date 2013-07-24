@@ -1,0 +1,27 @@
+extends layout
+
+block head
+	script(src="/socket.io/socket.io.js")
+	script(src="/js/socket.js")
+	script.
+		register(#{"'"+gameid+"'"}, #{"'"+userid+"'"});
+		addMobileEvents();
+
+block content
+	div#notif(onclick="$('#notif').children().remove()") 
+	
+
+
+	h1 Scavenger Hunt
+
+	div#todo 
+		- for(var i = 0; i < tasks.length; i++) {
+			hr
+			a.taskA(href="/upload?taskid=" + i + "&userid=" + userid + "&gameid=" + gameid) 
+				- if(done[i] === undefined){
+					span=tasks[i] + " "
+				- } else {
+					span.done(style="text-decoration:line-through")=tasks[i] + " "
+				- }
+			br
+		-}
