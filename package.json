@@ -10,7 +10,8 @@
     "jade": "*",
     "mkdirp": "*",
     "socket.io": "*",
-    "qrcode": "*"
+    "qrcode": "*",
+    "canvas": "*"
   },
   "description": "Phunt by TeamQuality, The Realtime Photohunt!",
   "main": "app.js",
