@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "phunt",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,6 +7,28 @@
   },
   "dependencies": {
     "express": "3.2.6",
-    "jade": "*"
+    "jade": "*",
+    "mkdirp": "*",
+    "socket.io": "*",
+    "qrcode": "*"
+  },
+  "description": "Phunt by TeamQuality, The Realtime Photohunt!",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jonathanysp/phunt.git"
+  },
+  "keywords": [
+    "phunt",
+    "photography",
+    "scavenger",
+    "hunt",
+    "websockets"
+  ],
+  "author": "Jonathan Poon",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/jonathanysp/phunt/issues"
   }
 }

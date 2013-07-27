@@ -11,6 +11,7 @@ var express = require('express')
   , fs = require('fs')
   , game = require('./require/game.js')
   , mkdirp = require('mkdirp')
+  , qrcode = require('qrcode')
   , getDirName = path.dirname;
 
 var app = express();
@@ -47,10 +48,10 @@ app.get('/progress', function(req, res){
 	if(gameid === undefined){
 		//gameid = 0;
 	}
-	res.render('progressPage', {title: "Game: " + gameid, g: game.getGame(gameid), gameid: gameid})
+	res.render('progressPage', {title: "Game: " + gameid, g: game.getGame(gameid), gameid: gameid});
 });
 app.get('/game', function(req, res){
-	res.render('game', {g: game.getGame(0)})
+	res.render('game', {g: game.getGame(0)});
 });
 app.get('/pic', routes.camera);
 app.get('/m', function(req, res){
@@ -79,7 +80,7 @@ app.get('/new', function(req, res){
 	var templateid = req.query.tid;
 	var gameid = game.createGame(templateid);
 	res.redirect('/progress?gameid=' + gameid);
-})
+});
 app.post('/new', function(req, res){
 	var template = req.body.task;
 	if(!(template instanceof Array)){
@@ -88,7 +89,7 @@ app.post('/new', function(req, res){
 	var name = req.body.name;
 	game.addTemplate(template, name);
 	res.redirect('/new?tid=' + name);
-})
+});
 
 app.post('/login', function(req, res){
 	var gameid = req.body.gameid;
@@ -104,24 +105,24 @@ app.post('/login', function(req, res){
 	} else {
 		res.render('login', {error: "Invalid game id"});
 	}
-})
+});
 app.get('/tasks', function(req, res){
 	var gameid = req.query.gameid;
 	var userid = req.query.userid;
 	var tasks = game.getTasks(gameid);
 	var done = game.getDone(gameid, userid);
 	res.render('tasks', {title: userid, tasks: tasks, gameid: gameid, userid: userid, done: done});
-})
+});
 app.get('/upload', function(req, res){
 	var gameid = req.query.gameid;
 	var taskid = req.query.taskid;
 	var userid = req.query.userid;
 	var link = game.doneLink(gameid, userid, taskid);
 	res.render('upload', {title: "Task: "+taskid, gameid: gameid, taskid: taskid, userid:userid, link: link});
-})
+});
 app.post('/upload', function(req, res){
 	//res.send("uploaded");
-	console.log(req.body.gameid)
+	console.log(req.body.gameid);
 	var gameid = req.body.gameid;
 	var userid = req.body.userid;
 	var tasknum = req.body.taskid;
@@ -150,12 +151,18 @@ app.post('/upload', function(req, res){
 				io.sockets.in(gameid).emit('miniProgress', {
 					playerid: userid,
 					numTasks: game.getNumDone(gameid, userid)
-				})
+				});
 				res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
-			})
-		})
+			});
+		});
 
-	})
+	});
+});
+
+app.get("/qr", function(req, res){
+	qrcode.toDataURL("text", function(err, dataurl){
+		res.render("qr", {data: dataurl});
+	});
 });
 
 var done = 0;
@@ -166,7 +173,7 @@ io.sockets.on('connection', function(socket){
 
 	socket.on('register', function(data){
 		if(game.isGameId(data.gameid)){
-			if(data.userid != null){
+			if(data.userid !== null){
 				console.log("New member registered on gameid: " + data.gameid);
 			} else {
 				console.log("New leaderboard joined");
@@ -175,24 +182,24 @@ io.sockets.on('connection', function(socket){
 		} else {
 			socket.emit("error");
 		}
-	})
+	});
 
 	socket.on('getInfo', function(data){
 		socket.emit('info', {g: game.getGame(data.gameid)});
-	})
+	});
 
 	socket.on('msg', function(data){
 		console.log(data);
 		socket.broadcast.emit('news', data);
-	})
-	
+	});
+
 	socket.on('echo', function(data){
 		console.log(data);
-	})
+	});
 
 	socket.on('disqualify', function(data){
 		game.disqualify(data.gameid, data.userid, data.taskid);
-	})
+	});
 
 	//debug responses
 	socket.on('debug', function(data){
