@@ -32,4 +32,8 @@
   "bugs": {
     "url": "https://github.com/jonathanysp/phunt/issues"
   }
+  "engines": {
+    "node": "*",
+    "npm": "*"
+  }
 }
