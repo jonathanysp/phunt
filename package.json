@@ -11,7 +11,8 @@
     "mkdirp": "*",
     "socket.io": "*",
     "qrcode": "*",
-    "canvas": "*"
+    "canvas": "*",
+    "papercut": "*"
   },
   "description": "Phunt by TeamQuality, The Realtime Photohunt!",
   "main": "app.js",

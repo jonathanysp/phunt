@@ -68,7 +68,7 @@ app.get('/progress', function(req, res){
 		res.send(404);
 		return;
 	}
-	qrcode.toDataURL(gameid, function(err, dataurl){
+	qrcode.toDataURL("http://phunt.jonathanysp.com/m", function(err, dataurl){
 		res.render("progressPage", {title: "Game: " + gameid, g: game.getGame(gameid), gameid: gameid, dataurl: dataurl});
 	});
 });
@@ -114,7 +114,7 @@ app.post('/new', function(req, res){
 });
 
 app.post('/login', function(req, res){
-	var gameid = req.body.gameid;
+	var gameid = req.body.gameid.toLowerCase();
 	var userid = req.body.userid;
 
 	if(game.isGameId(gameid)){
@@ -152,7 +152,7 @@ app.post('/upload', function(req, res){
 	var lon = req.body.lon;
 	var g = game.getGame(gameid);
 
-	uploader.process('image1', req.files.image.path, function(err, images){
+	uploader.process(gameid+'-'+userid+'-'+tasknum, req.files.image.path, function(err, images){
 		console.log(err);
 		console.log(images);
 		//res.send(images);
