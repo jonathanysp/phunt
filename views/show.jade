@@ -1,16 +1,12 @@
 extends layout
 
 block content
-	h1 #{tid.charAt(0).toUpperCase() + tid.slice(1)}
-	div(class = "shows")
-		br 
-		br
-		br
-		ol(class = "lists")
-			each task in tasks
-				li=task
-		a(href="/new?tid=" + tid)
-			button(class="butt2") Start Game!
-
-		a.starting(href="/")
-			button(class="butt3") Go Back
+	div.page-header
+		h1 #{tid.charAt(0).toUpperCase() + tid.slice(1)}
+	h3 Tasks in this Phunt:
+	ol
+		each task in tasks
+			li=task
+	div.btn-toolbar
+		a.btn.btn-primary(href="/new?tid=" + tid) Start Game!
+		a.btn.btn-primary(href="/") Go Back

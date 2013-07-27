@@ -17,6 +17,11 @@ var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
+io.configure(function () {
+	io.set("transports", ["xhr-polling"]);
+	io.set("polling duration", 10);
+});
+
 game.setSocket(io);
 
 // all environments
@@ -50,25 +55,25 @@ app.get('/game', function(req, res){
 app.get('/pic', routes.camera);
 app.get('/m', function(req, res){
 	res.render('login', {title: "PHunt Login"});
-})
+});
 app.get('/login', function(req, res){
 	res.render('login', {title: "PHunt Login"});
-})
+});
 
 app.get('/create', function(req, res){
-	res.render('input');
-})
+	res.render('create');
+});
 
 app.get('/help', function(req, res){
 	res.render('help', {title: "PHunt Help"});
-})
+});
 
 app.get('/show', function(req, res){
 	var templateid = req.query.tid;
 	console.log(templateid);
 	var tasks = game.getTemplate(templateid);
 	res.render('show', {title: templateid, tid: templateid, tasks: tasks});
-})
+});
 
 app.get('/new', function(req, res){
 	var templateid = req.query.tid;

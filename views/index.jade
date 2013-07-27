@@ -1,42 +1,24 @@
 extends layout
 
+block head
+	link(rel='stylesheet', href='/css/index.css')
+
 block content
-	h1 Phunt
-	h2 Grab your phone and grab some friends and connect to our game to compete in a photo scavenger hunt! Start by selecting one of our premade hunts below, or create your own!  
-				br
-				a(href = "/help") Click here for User Guide & Instructions
+	div.hero-unit
+		h1 PHUNT!
+		p Grab your phone and grab some friends and connect to our game to compete in a photo scavenger hunt! Start by selecting one of our premade hunts below, or create your own!  
+		div.btn-toolbar
+			a.btn.btn-large(href = "/help") Instructions
+			a.btn.btn-primary.btn-large(href='/create') Create your own Phunt!
 
-	script
-		function show(id) {
-			document.getElementById(id).style.visibility = "visible";
-		}
-		function hide(id) {
-			document.getElementById(id).style.visibility = "hidden";
-		}
-	script
-
-	div#pics
-		div#p1(onmouseover = "show('top1')", onmouseout = "hide('top1')")
-			a(href="/show?tid=san+francisco")
-				img#bottom(src = "/images/hunts/GoldenGateBridge.jpg")
-				img#top1(src="images/mOver/sf.jpg")		
-		div#p2(onmouseover = "show('top2')", onmouseout = "hide('top2')")
-			a(href="/show?tid=disney")
-				img#bottom(src = "/images/hunts/disney.jpg")
-				img#top2(src="images/mOver/dis.jpg")		
-		div#p3(onmouseover = "show('top3')", onmouseout = "hide('top3')")
-			a(href="/show?tid=google")
-				img#bottom(src = "/images/hunts/google.jpg")
-				img#top3(src="images/mOver/goog.jpg")	
-		div#p4(onmouseover = "show('top4')", onmouseout = "hide('top4')")
-			a(href="/show?tid=zoo")
-				img#bottom(src = "/images/hunts/zoo.jpg")
-				img#top4(src="images/mOver/zooz.jpg")	
-		div#p5(onmouseover = "show('top5')", onmouseout = "hide('top5')")
-			a(href="/show?tid=town")
-				img#bottom(src = "/images/hunts/hood.jpg")
-				img#top5(src="images/mOver/town.jpg")
-		div#p6(onmouseover = "show('top6')", onmouseout = "hide('top6')")
-			a(href="/create")
-				img#bottom(src = "/images/hunts/create.jpg")
-				img#top6(src="images/mOver/own.jpg")	
+	ul.thumbnails
+		for hunt in hunts
+			li.span4
+				div.thumbnail
+					a.thumbnail(href="javascript:void(0)")
+						img.taskthumb(src=hunt.thumbnail)
+					div.caption
+						h3= hunt.name
+						a.btn.btn-primary(href=hunt.link) Play this hunt!
+		li.span4
+			div.thumbnail

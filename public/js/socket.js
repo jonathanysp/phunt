@@ -1,5 +1,5 @@
 //connect
-var socket = io.connect('10.1.1.55:3000');
+var socket = io.connect('192.168.1.110:3000');
 //var socket = io.connect('http://ec2-54-225-42-130.compute-1.amazonaws.com');
 
 var gameid;
