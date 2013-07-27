@@ -3,16 +3,17 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
-  , http = require('http')
-  , path = require('path')
-  , fs = require('fs')
-  , game = require('./require/game.js')
-  , mkdirp = require('mkdirp')
-  , qrcode = require('qrcode')
-  , getDirName = path.dirname;
+var express = require('express'),
+	routes = require('./routes'),
+	user = require('./routes/user'),
+	http = require('http'),
+	path = require('path'),
+	fs = require('fs'),
+	game = require('./require/game.js'),
+	mkdirp = require('mkdirp'),
+	qrcode = require('qrcode'),
+	papercut = require('papercut'),
+	getDirName = path.dirname;
 
 var app = express();
 var server = http.createServer(app);
@@ -21,9 +22,26 @@ var io = require('socket.io').listen(server);
 io.configure(function () {
 	io.set("transports", ["xhr-polling"]);
 	io.set("polling duration", 10);
+	io.set('log level', 1);
 });
 
 game.setSocket(io);
+
+papercut.configure(function(){
+	papercut.set('storage', 'file');
+	papercut.set('directory', './public/uploads');
+	papercut.set('url', '/uploads');
+});
+
+photoUploader = papercut.Schema(function(schema){
+	schema.version({
+		name: 'display',
+		size: '400x400',
+		process: 'resize'
+	});
+});
+
+uploader = new photoUploader();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -47,8 +65,12 @@ app.get('/progress', function(req, res){
 	var gameid = req.query.gameid;
 	if(gameid === undefined){
 		//gameid = 0;
+		res.send(404);
+		return;
 	}
-	res.render('progressPage', {title: "Game: " + gameid, g: game.getGame(gameid), gameid: gameid});
+	qrcode.toDataURL(gameid, function(err, dataurl){
+		res.render("progressPage", {title: "Game: " + gameid, g: game.getGame(gameid), gameid: gameid, dataurl: dataurl});
+	});
 });
 app.get('/game', function(req, res){
 	res.render('game', {g: game.getGame(0)});
@@ -129,6 +151,20 @@ app.post('/upload', function(req, res){
 	var lat = req.body.lat;
 	var lon = req.body.lon;
 	var g = game.getGame(gameid);
+
+	uploader.process('image1', req.files.image.path, function(err, images){
+		console.log(err);
+		console.log(images);
+		//res.send(images);
+		var score = game.imageSubmit(gameid, userid, tasknum, images.display, lat, lon, images.display);
+		io.sockets.in(gameid).emit('miniProgress', {
+			playerid: userid,
+			numTasks: game.getNumDone(gameid, userid)
+		});
+		res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
+	});
+
+	/*
 	fs.readFile(req.files.image.path, function(err, data){
 		if(err){
 			console.log(err);
@@ -155,8 +191,7 @@ app.post('/upload', function(req, res){
 				res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
 			});
 		});
-
-	});
+	});*/
 });
 
 app.get("/qr", function(req, res){

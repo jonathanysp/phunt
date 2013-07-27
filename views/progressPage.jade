@@ -5,7 +5,12 @@ block head
   script(src="/js/leaderboard.js")
 
 block content
-  h2 Game ID: #{gameid}
+  div.row
+    div.span6
+      h3 Game ID: #{gameid}
+      p.lead Go to phunt.jonathanysp.com/login to join!
+    div.span6.pull-right
+      img.pull-right(src=dataurl)
   div(id="progressBars")
   table.table(id="table", border = "2")
     thead
@@ -16,7 +21,6 @@ block content
         tr(class="taskRow")
           td #{task}
   script.
-    console.log("hi");
     addLeaderboardEvents();
     register(#{"'" + gameid + "'"}, null);
     getInfo(#{"'" + gameid + "'"});
