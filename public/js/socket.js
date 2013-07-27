@@ -1,6 +1,6 @@
 //connect
-var socket = io.connect('192.168.1.110:3000');
-//var socket = io.connect('http://ec2-54-225-42-130.compute-1.amazonaws.com');
+//var socket = io.connect('192.168.1.110:3000');
+var socket = io.connect('https://phunt.herokuapp.com');
 
 var gameid;
 //var socket = io.connect('http://192.168.20.217:3000')
