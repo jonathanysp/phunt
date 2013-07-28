@@ -36,14 +36,9 @@ exports.index = function(req, res){
 			thumbnail: "/images/hunts/create.jpg"
 		}
 	];
-	res.render('index', { hunts: hunts });
+	res.render('index', { hunts: hunts , data: process.env});
 };
 
 exports.progress = function(req, res){
 	res.render('progressPage');
-};
-
-exports.camera = function(req, res){
-	console.log('hi');
-	res.render('camera');
 };

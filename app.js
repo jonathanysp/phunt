@@ -5,7 +5,6 @@
 
 var express = require('express'),
 	routes = require('./routes'),
-	user = require('./routes/user'),
 	http = require('http'),
 	path = require('path'),
 	fs = require('fs'),
@@ -27,21 +26,37 @@ io.configure(function () {
 
 game.setSocket(io);
 
+/*
 papercut.configure(function(){
 	papercut.set('storage', 'file');
 	papercut.set('directory', './public/uploads');
 	papercut.set('url', '/uploads');
 });
+*/
+
+papercut.configure(function(){
+	papercut.set('storage', 's3');
+	papercut.set('S3_KEY', process.env.S3_KEY);
+	papercut.set('S3_SECRET', process.env.S3_SECRET);
+	papercut.set('bucket', 'phunt');
+});
 
 photoUploader = papercut.Schema(function(schema){
-	schema.version({
+	this.version({
 		name: 'display',
-		size: '400x400',
+		size: '300x00',
 		process: 'resize'
 	});
 });
 
-uploader = new photoUploader();
+AvatarUploader = papercut.Schema(function(schema) {
+	this.version({
+		name: 'display',
+		size: '300x300'
+	});
+});
+
+uploader = new AvatarUploader();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -60,7 +75,6 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-//app.get('/progress', routes.progress);
 app.get('/progress', function(req, res){
 	var gameid = req.query.gameid;
 	if(gameid === undefined){
@@ -72,10 +86,11 @@ app.get('/progress', function(req, res){
 		res.render("progressPage", {title: "Game: " + gameid, g: game.getGame(gameid), gameid: gameid, dataurl: dataurl});
 	});
 });
+
 app.get('/game', function(req, res){
 	res.render('game', {g: game.getGame(0)});
 });
-app.get('/pic', routes.camera);
+
 app.get('/m', function(req, res){
 	res.render('login', {title: "PHunt Login"});
 });
@@ -128,6 +143,7 @@ app.post('/login', function(req, res){
 		res.render('login', {error: "Invalid game id"});
 	}
 });
+
 app.get('/tasks', function(req, res){
 	var gameid = req.query.gameid;
 	var userid = req.query.userid;
@@ -135,6 +151,7 @@ app.get('/tasks', function(req, res){
 	var done = game.getDone(gameid, userid);
 	res.render('tasks', {title: userid, tasks: tasks, gameid: gameid, userid: userid, done: done});
 });
+
 app.get('/upload', function(req, res){
 	var gameid = req.query.gameid;
 	var taskid = req.query.taskid;
@@ -142,6 +159,7 @@ app.get('/upload', function(req, res){
 	var link = game.doneLink(gameid, userid, taskid);
 	res.render('upload', {title: "Task: "+taskid, gameid: gameid, taskid: taskid, userid:userid, link: link});
 });
+
 app.post('/upload', function(req, res){
 	//res.send("uploaded");
 	console.log(req.body.gameid);
@@ -152,10 +170,8 @@ app.post('/upload', function(req, res){
 	var lon = req.body.lon;
 	var g = game.getGame(gameid);
 
+	uploader = new AvatarUploader();
 	uploader.process(gameid+'-'+userid+'-'+tasknum, req.files.image.path, function(err, images){
-		console.log(err);
-		console.log(images);
-		//res.send(images);
 		var score = game.imageSubmit(gameid, userid, tasknum, images.display, lat, lon, images.display);
 		io.sockets.in(gameid).emit('miniProgress', {
 			playerid: userid,
@@ -163,35 +179,6 @@ app.post('/upload', function(req, res){
 		});
 		res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
 	});
-
-	/*
-	fs.readFile(req.files.image.path, function(err, data){
-		if(err){
-			console.log(err);
-			res.redirect('back');
-			return;
-		}
-		//check player id
-		//public/upload/gameid/userid/tasknum.jpg
-		var newPath = 'public/upload/' + gameid + '/' + userid + '/' + tasknum + '.jpg';
-		var link = '/upload/' + gameid + '/' + userid + '/' + tasknum + '.jpg';
-		mkdirp(getDirName(newPath), function(err){
-			fs.writeFile(newPath, data, function(err){
-				if(err){
-					console.log(err);
-					res.redirect('back');
-					return;
-				}
-				var score = game.imageSubmit(gameid, userid, tasknum, link, lat, lon, link);
-
-				io.sockets.in(gameid).emit('miniProgress', {
-					playerid: userid,
-					numTasks: game.getNumDone(gameid, userid)
-				});
-				res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
-			});
-		});
-	});*/
 });
 
 app.get("/qr", function(req, res){

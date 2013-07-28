@@ -4,6 +4,8 @@ block head
 	link(rel='stylesheet', href='/css/index.css')
 
 block content
+	div
+		pre= JSON.stringify(data, null, 4)
 	div.hero-unit
 		h1 PHUNT!
 		p Grab your phone and grab some friends and connect to our game to compete in a photo scavenger hunt! Start by selecting one of our premade hunts below, or create your own!  

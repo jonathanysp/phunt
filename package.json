@@ -12,7 +12,8 @@
     "socket.io": "*",
     "qrcode": "*",
     "canvas": "*",
-    "papercut": "*"
+    "papercut": "*",
+    "nedb": "~0.8.4"
   },
   "description": "Phunt by TeamQuality, The Realtime Photohunt!",
   "main": "app.js",

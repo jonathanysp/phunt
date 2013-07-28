@@ -1,14 +1,14 @@
 //connect
-//var socket = io.connect('192.168.1.110:3000');
-var socket = io.connect('https://phunt.herokuapp.com');
+var socket = io.connect('192.168.1.110:3000');
+//var socket = io.connect('https://phunt.herokuapp.com');
 
 var gameid;
 //var socket = io.connect('http://192.168.20.217:3000')
 //lets the server know which game notifications to send us
 //set userid to null for leaderboard
 var register = function(gameid, userid){
-	socket.emit("register", {gameid: gameid, userid: userid})
-}
+	socket.emit("register", {gameid: gameid, userid: userid});
+};
 
 var addMobileEvents = function(){
 	socket.on('progress', function(data){
@@ -20,14 +20,14 @@ var addMobileEvents = function(){
 		$(span).text(string);
 		$("#notif").append(span);
 		$("#notif").append(document.createElement('br'));
-	})
-}
+	});
+};
 
 var addLeaderboardEvents = function(){
 	socket.on('progress', function(data){
 		console.log('Progress update!');
 		console.log(data);
-	})
+	});
 
 	var totalTasks;
 
@@ -38,7 +38,7 @@ var addLeaderboardEvents = function(){
 		totalTasks = data.g.tasks.length;
 		var progressSection = document.getElementById("progressBars");
 		for(var i = 0; i < data.g.players.length; i++) {
-			
+
 			//create container for each player's summary
 			var progressSummary = document.createElement("p");
 
@@ -66,15 +66,15 @@ var addLeaderboardEvents = function(){
 
 			//append to container with new lines where necessary
 			//append container to progressSection
-			
+
 			progressSummary.appendChild(progressPlayer);
 			progressSummary.appendChild(spanForBar);
 			progressSummary.appendChild(percentageDisplay);
-			
+
 			progressSection.appendChild(progressSummary);
 			var newLine = document.createElement("br");
 			progressSection.appendChild(newLine);
-			
+
 		}
 
 		//setup current table and populate recent table with data.g
@@ -84,8 +84,8 @@ var addLeaderboardEvents = function(){
 			newCol.innerHTML = data.g.players[i];
 			newCol.setAttribute("class", "headingCol");
 			headRow.appendChild(newCol);	
-		}
-		
+		};
+
 		for(var i = 0; i < data.g.players.length; i++) {
 			var taskNumber = 1;
 			$(".taskRow").each(function() {
@@ -95,7 +95,7 @@ var addLeaderboardEvents = function(){
 				$(this).append(td);
 				taskNumber++;
 			});
-		}
+		};
 
 		//insert images uploaded by users so far
 		for(var player in data.g.images) {
@@ -134,22 +134,21 @@ var addLeaderboardEvents = function(){
 				latLonInfo.setAttribute("id", latLonId);
 				latLonInfo.setAttribute("class", "latlon");
 				console.log(latLonObject);
-				latLonInfo.innerHTML = "Latitude: " + parseInt(latLonObject.lat).toFixed(7) + " 	Longitude: " + parseInt(latLonObject.lon).toFixed(7);
+				//latLonInfo.innerHTML = "Latitude: " + parseInt(latLonObject.lat).toFixed(7) + "Longitude: " + parseInt(latLonObject.lon).toFixed(7);
 				//placeholder.appendChild(latLonInfo);
 				var tdLocation = (i + 1) + "_" + player;
 				var alink = document.createElement('a');
-				alink.href = "#"
-				$(alink).text("Where was i?!");
+				alink.href = "#";
+				$(alink).text("Picture Location");
 				$(alink).addClass("mapit");
 				$(alink).click(function(){
 					window.open("https://maps.google.com/maps?q=" + latLonObject.lat + "," + latLonObject.lon);
-				})
+				});
 				$("#"+tdLocation).append(alink);
 				$(latLonInfo).hide().appendTo("#"+tdLocation).fadeIn("slow");
 			}
-
 		}
-	})
+	});
 
 	//format:
 	//playerid, tasknum, image
@@ -168,7 +167,7 @@ var addLeaderboardEvents = function(){
 
 		//if there's an img already at tdLocation, replace its src
 		var placeholder = $("#"+tdLocation).children();
-		if(placeholder.length == 0) {
+		if(placeholder.length === 0) {
 			var image = document.createElement('img');
 			var imageLocation = tdLocation + "_image";
 			image.setAttribute("id", imageLocation);
@@ -205,11 +204,11 @@ var addLeaderboardEvents = function(){
 			var latLon = document.getElementById("latLon_" + data.playerid);
 			latLong.innerHTML = "Latitude: " + parseInt(data.lat).toFixed(7) + "	Lontitude: " + parseInt(data.lon).toFixed(7);
 		}
-		
+
 		//at tdLocation, create a disqualify button/sign and call disqualify when pressed with
 		//gameid, userid, taskid
 		var disqualifyButton = document.createElement("button");
-		
+
 		disqualifyButton.innerHTML = "Disqualify";
 		disqualifyButton.setAttribute("id", "disqualifyButton");
 		disqualifyButton.setAttribute("class", data.playerid + "_disqualify_button");
@@ -218,8 +217,8 @@ var addLeaderboardEvents = function(){
 		};
 		$(disqualifyButton).hide();
 		$("#"+tdLocation).append(disqualifyButton);
-		
-	})
+
+	});
 
 	//format:
 	//playerid, number of tasks
@@ -232,12 +231,12 @@ var addLeaderboardEvents = function(){
 		var bar = document.getElementById(barId);
 		bar.setAttribute("value", newPercentage);
 		//update progress display
-		
+
 		var progressDisplayId = data.playerid + "_progress_display";
 		var percentageDisplay = document.getElementById(progressDisplayId);
 		percentageDisplay.innerHTML = newPercentage.toFixed(2) + "%";
-		
-	})
+
+	});
 
 	//format:
 	//player id
@@ -265,11 +264,11 @@ var addLeaderboardEvents = function(){
 		var percentageDisplay = document.createElement("span");
 		percentageDisplay.setAttribute("id", data.player + "_progress_display");
 		percentageDisplay.innerHTML = "0%";
-		
+
 		progressSummary.appendChild(progressPlayer);
 		progressSummary.appendChild(spanForBar);
 		progressSummary.appendChild(percentageDisplay);
-		
+
 		progressSection.appendChild(progressSummary);
 		var newLine = document.createElement("br");
 		progressSection.appendChild(newLine);
@@ -283,15 +282,14 @@ var addLeaderboardEvents = function(){
 
 		var taskNumber = 1;
 		$(".taskRow").each(function() {
-		  var td = document.createElement("td");
-		  var tdId = taskNumber + "_" + data.player;
-		  console.log("Assigning in newPlayer: " + tdId);
-		  td.setAttribute("id", tdId);
-		  $(this).append(td);
-		  taskNumber++;
+			var td = document.createElement("td");
+			var tdId = taskNumber + "_" + data.player;
+			console.log("Assigning in newPlayer: " + tdId);
+			td.setAttribute("id", tdId);
+			$(this).append(td);
+			taskNumber++;
 		});
-
-	})
+	});
 
 	socket.on('finish', function(data){
 		console.log(data);
@@ -300,17 +298,17 @@ var addLeaderboardEvents = function(){
 		$("." + data.player + "_disqualify_button").each(function() {
 			$(this).show();
 		});
-	})
+	});
 
 	socket.on('disqualify', function(data){
 		console.log(data);
 		document.getElementById("head_" + data.userid).innerHTML = data.userid + "'s Score: " + data.total;
-	})
-}
+	});
+};
 
 var getInfo = function(gameid){
 	socket.emit('getInfo', {gameid: gameid});
-}
+};
 
 var disqualify = function(gameid, userid, taskid){
 	console.log(gameid);
@@ -328,4 +326,4 @@ var disqualify = function(gameid, userid, taskid){
 	$(img).css("-webkit-filter", "opacity(70%)");
 	var td = document.getElementById((taskid + 1) + "_" + userid);
 	td.style.backgroundColor = "#FE2E2E";
-}
+};
