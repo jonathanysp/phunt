@@ -82,7 +82,7 @@ app.get('/progress', function(req, res){
 		res.send(404);
 		return;
 	}
-	qrcode.toDataURL("http://phunt.jonathanysp.com/m", function(err, dataurl){
+	qrcode.toDataURL("http://phunt.jonathanysp.com/m?gameid=" + gameid, function(err, dataurl){
 		res.render("progressPage", {title: "Game: " + gameid, g: game.getGame(gameid), gameid: gameid, dataurl: dataurl});
 	});
 });
@@ -92,10 +92,10 @@ app.get('/game', function(req, res){
 });
 
 app.get('/m', function(req, res){
-	res.render('login', {title: "PHunt Login"});
+	res.render('login', {title: "PHunt Login", gameid: req.query.gameid});
 });
 app.get('/login', function(req, res){
-	res.render('login', {title: "PHunt Login"});
+	res.render('login', {title: "PHunt Login", gameid: req.query.gameid});
 });
 
 app.get('/create', function(req, res){
@@ -170,6 +170,8 @@ app.post('/upload', function(req, res){
 	var lon = req.body.lon;
 	var g = game.getGame(gameid);
 
+	res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
+
 	uploader = new AvatarUploader();
 	uploader.process(gameid+'-'+userid+'-'+tasknum, req.files.image.path, function(err, images){
 		var score = game.imageSubmit(gameid, userid, tasknum, images.display, lat, lon, images.display);
@@ -177,7 +179,7 @@ app.post('/upload', function(req, res){
 			playerid: userid,
 			numTasks: game.getNumDone(gameid, userid)
 		});
-		res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
+		//res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
 	});
 });
 

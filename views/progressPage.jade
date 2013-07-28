@@ -3,13 +3,14 @@ block head
   script(src="/socket.io/socket.io.js")
   script(src="/js/socket.js")
   script(src="/js/leaderboard.js")
+  link(rel='stylesheet', href='/css/progress.css')
 
 block content
   div.row
-    div.span6
+    div.col-6
       h3 Game ID: #{gameid}
       p.lead Go to phunt.jonathanysp.com/login to join!
-    div.span6.pull-right
+    div.col-6
       img.pull-right(src=dataurl)
   div(id="progressBars")
   table.table(id="table", border = "2")

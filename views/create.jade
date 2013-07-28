@@ -7,11 +7,12 @@ block content
 	div.page-header
 		h1 Create Your Own Hunt
 
-	input.title(type='text', placeholder='Hunt Name')
+	input.title.form-control(type='text', placeholder='Hunt Name')
 	h2.title
 		span.title
 	hr
-	input.task(type='text', placeholder='Enter task')
+	p
+		input.task.form-control(type='text', placeholder='Enter task')
 	p.help Type the task and press enter
 	form(method="post", action="/new")
 		ol.list

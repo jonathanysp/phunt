@@ -47,6 +47,7 @@ var addLeaderboardEvents = function(){
 			var progressPlayer = document.createElement("span");
 			progressPlayer.innerHTML = data.g.players[i];
 
+			/*
 			//a span with a progress bar with the current percentage (calculate with object with images uploaded)
 			var bar = document.createElement("progress");
 			var arrOfPics = data.g.images[data.g.players[i]];
@@ -74,6 +75,7 @@ var addLeaderboardEvents = function(){
 			progressSection.appendChild(progressSummary);
 			var newLine = document.createElement("br");
 			progressSection.appendChild(newLine);
+			*/
 
 		}
 
@@ -81,7 +83,33 @@ var addLeaderboardEvents = function(){
 		var headRow = document.getElementById("headingRow");
 		for(var i = 0; i < data.g.players.length; i++) {
 			var newCol = document.createElement("th");
-			newCol.innerHTML = data.g.players[i];
+			//
+			var row = document.createElement("div");
+			var name = document.createElement("div");
+			var progressWrap = document.createElement("div");
+			var progress = document.createElement("div");
+			var progressBar = document.createElement("div");
+			$(row).addClass("row");
+			$(name).addClass("col-6");
+			$(name).text(data.g.players[i]);
+			$(progressWrap).addClass("col-6");
+			$(progress).addClass("progress");
+			$(progressBar).addClass("progress-bar ");
+			$(progressBar).attr("id", "progress_"+data.g.players[i]);
+			$(name).attr("id", "header_"+data.g.players[i]);
+
+			var arrOfPics = data.g.images[data.g.players[i]];
+			var percentage = (arrOfPics.length / totalTasks) * 100;
+			$(progressBar).css('width', percentage + "%");
+
+			progress.appendChild(progressBar);
+			progressWrap.appendChild(progress);
+			row.appendChild(name);
+			row.appendChild(progressWrap);
+
+			newCol.appendChild(row);
+
+			//newCol.innerHTML = data.g.players[i];
 			newCol.setAttribute("class", "headingCol");
 			headRow.appendChild(newCol);	
 		};
@@ -140,7 +168,7 @@ var addLeaderboardEvents = function(){
 				var alink = document.createElement('a');
 				alink.href = "#";
 				$(alink).text("Picture Location");
-				$(alink).addClass("mapit");
+				$(alink).addClass("mapit btn btn-primary");
 				$(alink).click(function(){
 					window.open("https://maps.google.com/maps?q=" + latLonObject.lat + "," + latLonObject.lon);
 				});
@@ -178,18 +206,18 @@ var addLeaderboardEvents = function(){
 			//create paragraph with lat/long information (give it an id)
 			var latLon = document.createElement("p");
 			var latLonId = "latLon_" + data.playerid;
-			latLon.setAttribute("id", latLonId);
-			$(latLon).addClass("latlon");
-			latLon.innerHTML = "Latitude: " + parseInt(data.lat).toFixed(7) + "	Longitude: " + parseInt(data.lon).toFixed(7);
-			//$("#"+tdLocation).append(latLon);
-			$(latLon).hide().appendTo("#"+tdLocation).fadeIn("slow");
+			//latLon.setAttribute("id", latLonId);
+			//$(latLon).addClass("latlon");
+			//latLon.innerHTML = "Latitude: " + parseInt(data.lat).toFixed(7) + "	Longitude: " + parseInt(data.lon).toFixed(7);
+			$("#"+tdLocation).append(latLon);
+			//$(latLon).hide().appendTo("#"+tdLocation).fadeIn("slow");
 
 			latLon.innerHTML = "Latitude: " + data.lat + "	Longitude: " + data.lon;
 			var alink = document.createElement('a');
 			//alink.href = "https://maps.google.com/maps?q=" + data.lat + "," + data.lon;
 			alink.href = "#";
-			$(alink).text("Where was i?!");
-			$(alink).addClass("mapit");
+			$(alink).text("Pciture Location");
+			$(alink).addClass("btn btn-primary");
 			$(alink).click(function(){
 				window.open("https://maps.google.com/maps?q=" + data.lat + "," + data.lon);
 			})
@@ -202,7 +230,7 @@ var addLeaderboardEvents = function(){
 			$(placeholder[0]).fadeIn("slow");
 			//update paragraph with lat/long information
 			var latLon = document.getElementById("latLon_" + data.playerid);
-			latLong.innerHTML = "Latitude: " + parseInt(data.lat).toFixed(7) + "	Lontitude: " + parseInt(data.lon).toFixed(7);
+			//latLong.innerHTML = "Latitude: " + parseInt(data.lat).toFixed(7) + "	Lontitude: " + parseInt(data.lon).toFixed(7);
 		}
 
 		//at tdLocation, create a disqualify button/sign and call disqualify when pressed with
@@ -212,6 +240,7 @@ var addLeaderboardEvents = function(){
 		disqualifyButton.innerHTML = "Disqualify";
 		disqualifyButton.setAttribute("id", "disqualifyButton");
 		disqualifyButton.setAttribute("class", data.playerid + "_disqualify_button");
+		$(disqualifyButton).addClass("btn btn-warning")
 		disqualifyButton.onclick = function() {
 			disqualify(gameid, data.playerid, data.tasknumber);
 		};
@@ -227,6 +256,9 @@ var addLeaderboardEvents = function(){
 		console.log(data);
 		//update progress bar
 		var newPercentage = (data.numTasks / totalTasks) * 100;
+		$("#progress_"+data.playerid).css("width", newPercentage + "%");
+
+		/*
 		var barId = data.playerid + "_bar";
 		var bar = document.getElementById(barId);
 		bar.setAttribute("value", newPercentage);
@@ -235,7 +267,7 @@ var addLeaderboardEvents = function(){
 		var progressDisplayId = data.playerid + "_progress_display";
 		var percentageDisplay = document.getElementById(progressDisplayId);
 		percentageDisplay.innerHTML = newPercentage.toFixed(2) + "%";
-
+	*/
 	});
 
 	//format:
@@ -275,7 +307,7 @@ var addLeaderboardEvents = function(){
 
 		var headRow = document.getElementById("headingRow");
 		var newCol = document.createElement("th");
-		newCol.innerHTML = data.player;
+		newCol.innerHTML = data.player + "<div class='progress'><div class='progress-bar' style='width:50%'/></div>";
 		newCol.setAttribute("class", "headingCol");
 		newCol.setAttribute("id", "head_" + data.player);
 		headRow.appendChild(newCol);
@@ -293,7 +325,7 @@ var addLeaderboardEvents = function(){
 
 	socket.on('finish', function(data){
 		console.log(data);
-		var header = document.getElementById("head_" + data.player);
+		var header = document.getElementById("header_" + data.player);
 		header.innerHTML = data.player + "'s Score: " + data.score;
 		$("." + data.player + "_disqualify_button").each(function() {
 			$(this).show();
@@ -302,7 +334,7 @@ var addLeaderboardEvents = function(){
 
 	socket.on('disqualify', function(data){
 		console.log(data);
-		document.getElementById("head_" + data.userid).innerHTML = data.userid + "'s Score: " + data.total;
+		document.getElementById("header_" + data.userid).innerHTML = data.userid + "'s Score: " + data.total;
 	});
 };
 

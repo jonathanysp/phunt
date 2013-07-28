@@ -1,3 +1,7 @@
 img.taskthumb {
 	max-height: 200px;
 }
+
+a.thumbnail {
+	text-align: center;
+}

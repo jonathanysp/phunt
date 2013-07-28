@@ -1,27 +1,27 @@
-extends layout
+extends layout-m
 
 block head
 	script(src="/socket.io/socket.io.js")
 	script(src="/js/socket.js")
+	link(rel='stylesheet', href='/css/tasks.css')
 	script.
 		register(#{"'"+gameid+"'"}, #{"'"+userid+"'"});
 		addMobileEvents();
 
 block content
-	div#notif(onclick="$('#notif').children().remove()") 
-	
+	//div#notif(onclick="$('#notif').children().remove()") 
 
-
-	h1 Scavenger Hunt
-
-	div#todo 
-		- for(var i = 0; i < tasks.length; i++) {
-			hr
-			a.taskA(href="/upload?taskid=" + i + "&userid=" + userid + "&gameid=" + gameid) 
-				- if(done[i] === undefined){
-					span=tasks[i] + " "
-				- } else {
-					span.done(style="text-decoration:line-through")=tasks[i] + " "
-				- }
-			br
-		-}
+	div.row
+		div.col-lg-12
+			h2 Your Phunt Tasks
+	- for(var i = 0; i < tasks.length; i++) {
+		div.row
+			div.col-lg-12
+				a.taskA(href="/upload?taskid=" + i + "&userid=" + userid + "&gameid=" + gameid) 
+					- if(done[i] === undefined){
+						h3=tasks[i] + " "
+					- } else {
+						h3.done(style="text-decoration:line-through; color:gray")=tasks[i] + " "
+					- }
+				br
+			-}

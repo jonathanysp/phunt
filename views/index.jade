@@ -4,21 +4,20 @@ block head
 	link(rel='stylesheet', href='/css/index.css')
 
 block content
-	div.hero-unit
+	div.jumbotron
 		h1 PHUNT!
 		p Grab your phone and grab some friends and connect to our game to compete in a photo scavenger hunt! Start by selecting one of our premade hunts below, or create your own!  
 		div.btn-toolbar
-			a.btn.btn-large(href = "/help") Instructions
+			a.btn.btn-default.btn-large(href = "/help") Instructions
 			a.btn.btn-primary.btn-large(href='/create') Create your own Phunt!
 
-	ul.thumbnails
+	div.row
 		for hunt in hunts
-			li.span4
+			div.col-lg-4
 				div.thumbnail
-					a.thumbnail(href="javascript:void(0)")
+					a.thumbnail
 						img.taskthumb(src=hunt.thumbnail)
 					div.caption
 						h3= hunt.name
-						a.btn.btn-primary(href=hunt.link) Play this hunt!
-		li.span4
-			div.thumbnail
+						p
+							a.btn.btn-primary(href=hunt.link) Play this hunt!
