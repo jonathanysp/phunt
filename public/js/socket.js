@@ -277,39 +277,31 @@ var addLeaderboardEvents = function(){
 		console.log(data);
 
 		//PROGRESS BAR SECTION
-		var progressSection = document.getElementById("progressBars");
-		var progressSummary = document.createElement("p");
+		var newCol = document.createElement("th");
+		var row = document.createElement("div");
+		var name = document.createElement("div");
+		var progressWrap = document.createElement("div");
+		var progress = document.createElement("div");
+		var progressBar = document.createElement("div");
+		$(row).addClass("row");
+		$(name).addClass("col-6");
+		$(name).text(data.player);
+		$(progressWrap).addClass("col-6");
+		$(progress).addClass("progress");
+		$(progressBar).addClass("progress-bar ");
+		$(progressBar).attr("id", "progress_"+data.player);
+		$(name).attr("id", "header_"+data.player);
 
-		progressSummary.setAttribute("class", "progressSummary");
-		var progressPlayer = document.createElement("span");
-		progressPlayer.innerHTML = data.player;;
+		$(progressBar).css('width', 0);
 
-		var bar = document.createElement("progress");
-		bar.setAttribute("value", 0);
-		bar.setAttribute("max", 100);
-		var barId = data.player + "_bar";
-		bar.setAttribute("id", barId);
-		var spanForBar = document.createElement("span");
-		spanForBar.setAttribute("class", "spanForProgress");
-		spanForBar.appendChild(bar);
+		progress.appendChild(progressBar);
+		progressWrap.appendChild(progress);
+		row.appendChild(name);
+		row.appendChild(progressWrap);
 
-		var percentageDisplay = document.createElement("span");
-		percentageDisplay.setAttribute("id", data.player + "_progress_display");
-		percentageDisplay.innerHTML = "0%";
-
-		progressSummary.appendChild(progressPlayer);
-		progressSummary.appendChild(spanForBar);
-		progressSummary.appendChild(percentageDisplay);
-
-		progressSection.appendChild(progressSummary);
-		var newLine = document.createElement("br");
-		progressSection.appendChild(newLine);
+		newCol.appendChild(row);
 
 		var headRow = document.getElementById("headingRow");
-		var newCol = document.createElement("th");
-		newCol.innerHTML = data.player + "<div class='progress'><div class='progress-bar' style='width:50%'/></div>";
-		newCol.setAttribute("class", "headingCol");
-		newCol.setAttribute("id", "head_" + data.player);
 		headRow.appendChild(newCol);
 
 		var taskNumber = 1;
