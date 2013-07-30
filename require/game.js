@@ -171,20 +171,27 @@ exports.doneLink = doneLink;
 
 var createGame = function(templateid, cb){
 	var gameid = generateID();
-	var t = tasks[templateid];
-	var newGame = {
-		gameid: gameid,
-		tasks: t,
-		players: [],
-		images: {},
-		scores: {},
-		coord: {},
-	}
-	//games[gameid] = newGame;
-	db.insert(newGame, function(err, g){
-		cb(err, g.gameid);
+	db.findOne({gameid: gameid}, function(err, game){
+		if(game){
+			cb(err, null);
+			return;
+		}
+		var t = tasks[templateid];
+		var newGame = {
+			gameid: gameid,
+			tasks: t,
+			players: [],
+			images: {},
+			scores: {},
+			coord: {},
+		}
+		//games[gameid] = newGame;
+		db.insert(newGame, function(err, g){
+			cb(err, g.gameid);
+		});
 	});
 }
+
 exports.createGame = createGame;
 
 var generateID = function(){

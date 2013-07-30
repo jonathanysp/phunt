@@ -118,6 +118,10 @@ app.get('/show', function(req, res){
 app.get('/new', function(req, res){
 	var templateid = req.query.tid;
 	game.createGame(templateid, function(err, gameid){
+		if(gameid === null){
+			res.send("Please try again");
+			return;
+		}
 		console.log(gameid);
 		res.redirect('/progress?gameid=' + gameid);
 	});
