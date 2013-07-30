@@ -284,50 +284,18 @@
 	"buffers":
 	[
 		{
-			"file": "views/login.jade",
+			"file": "require/game.js",
 			"settings":
 			{
-				"buffer_size": 398,
+				"buffer_size": 5182,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "views/tasks.jade",
+			"file": "app.js",
 			"settings":
 			{
-				"buffer_size": 575,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "views/upload.jade",
-			"settings":
-			{
-				"buffer_size": 1216,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "views/layout-m.jade",
-			"settings":
-			{
-				"buffer_size": 896,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "views/index.jade",
-			"settings":
-			{
-				"buffer_size": 623,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "<form>\n  <fieldset>\n    <legend>Legend</legend>\n    <div class=\"form-group\">\n      <label for=\"exampleInputEmail\">Email address</label>\n      <input type=\"text\" class=\"form-control\" id=\"exampleInputEmail\" placeholder=\"Enter email\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"exampleInputPassword\">Password</label>\n      <input type=\"password\" class=\"form-control\" id=\"exampleInputPassword\" placeholder=\"Password\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"exampleInputFile\">File input</label>\n      <input type=\"file\" id=\"exampleInputFile\">\n      <p class=\"help-block\">Example block-level help text here.</p>\n    </div>\n    <div class=\"checkbox\">\n      <label>\n        <input type=\"checkbox\"> Check me out\n      </label>\n    </div>\n    <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n  </fieldset>\n</form>",
-			"settings":
-			{
-				"buffer_size": 850,
+				"buffer_size": 6029,
 				"line_ending": "Unix"
 			}
 		}
@@ -496,22 +464,34 @@
 	},
 	"file_history":
 	[
+		"/home/jonathan/Documents/projects/phunt/views/progressPage.jade",
+		"/home/jonathan/Documents/projects/phunt/views/create.jade",
+		"/home/jonathan/Documents/projects/phunt/app.js",
+		"/home/jonathan/Documents/projects/phunt/public/js/socket.js",
+		"/home/jonathan/Documents/projects/phunt/views/login.jade",
+		"/home/jonathan/Documents/projects/phunt/public/js/create.js",
+		"/home/jonathan/Documents/projects/phunt/public/css/create.css",
+		"/home/jonathan/Documents/projects/phunt/public/css/progress.css",
+		"/home/jonathan/Documents/projects/phunt/views/index.jade",
+		"/home/jonathan/Documents/projects/phunt/public/css/index.css",
+		"/home/jonathan/Documents/projects/phunt/public/css/login.css",
+		"/home/jonathan/Documents/projects/phunt/public/css/tasks.css",
+		"/home/jonathan/Documents/projects/phunt/public/css/upload.css",
+		"/home/jonathan/Documents/projects/phunt/views/upload.jade",
+		"/home/jonathan/Documents/projects/phunt/views/tasks.jade",
+		"/home/jonathan/Documents/projects/phunt/public/uploads/.gitignore",
+		"/home/jonathan/Documents/projects/phunt/views/layout-m.jade",
 		"/home/jonathan/Documents/projects/phunt/views/layout.jade",
 		"/home/jonathan/Documents/projects/phunt/require/tasks.js",
 		"/home/jonathan/Documents/projects/phunt/paper.js",
-		"/home/jonathan/Documents/projects/phunt/app.js",
 		"/home/jonathan/Documents/projects/phunt/require/game.js",
-		"/home/jonathan/Documents/projects/phunt/public/js/socket.js",
 		"/home/jonathan/Documents/projects/phunt/routes/index.js",
 		"/home/jonathan/Documents/projects/phunt/views/layout-nav.jade",
-		"/home/jonathan/Documents/projects/phunt/views/index.jade",
 		"/home/jonathan/Documents/projects/phunt/public/upload.html",
-		"/home/jonathan/Documents/projects/phunt/views/upload.jade",
 		"/home/jonathan/Documents/projects/phunt/public/knox.html",
 		"/home/jonathan/Documents/projects/phunt/.env",
 		"/home/jonathan/Documents/projects/phunt/node_modules/knox/Readme.md",
 		"/home/jonathan/Documents/projects/phunt/package.json",
-		"/home/jonathan/Documents/projects/phunt/views/progressPage.jade",
 		"/home/jonathan/Documents/projects/phunt/views/qr.jade",
 		"/home/jonathan/Documents/projects/phunt/Procfile",
 		"/home/jonathan/Documents/projects/jonathanysp/views/about.jade",
@@ -611,19 +591,7 @@
 		"/home/jonathan/Documents/tofugear/journal-vote/app/views/admin/vote_subjects/_list.html.erb",
 		"/home/jonathan/Documents/tofugear/journal-vote/app/views/admin/admin_users/new.html.erb",
 		"/home/jonathan/Documents/tofugear/journal-vote/app/views/admin/admin_users/_form",
-		"/home/jonathan/Documents/tofugear/journal-vote/app/controllers/admin/dashboards_controller.rb",
-		"/home/jonathan/Documents/tofugear/journal-vote/app/views/admin/admin_users/_show.html.erb",
-		"/home/jonathan/Documents/tofugear/journal-vote/app/controllers/admin/admin_user_controller.rb",
-		"/home/jonathan/Documents/tofugear/journal-vote/app/views/admin/admin/index.html.erb",
-		"/home/jonathan/Documents/tofugear/journal-vote/app/views/admin/admin/_list.html.erb",
-		"/home/jonathan/Documents/tofugear/journal-vote/app/views/admin/dashboards/show.html.erb",
-		"/home/jonathan/Documents/tofugear/journal-vote/app/controllers/admin/admin_controller.rb",
-		"/home/jonathan/Documents/tofugear/journal-vote/config/environments/production.rb",
-		"/home/jonathan/Documents/tofugear/journal-vote/app/models/vote_record.rb",
-		"/home/jonathan/Documents/tofugear/journal-vote/app/workers/image_worker.rb",
-		"/home/jonathan/Documents/tofugear/journal-vote/db/seeds.rb",
-		"/home/jonathan/Documents/tofugear/journal-vote/app/views/admin/dashboards/index.html.erb",
-		"/home/jonathan/Documents/tofugear/journal-vote/app/views/backend_cruds/new.html.erb"
+		"/home/jonathan/Documents/tofugear/journal-vote/app/controllers/admin/dashboards_controller.rb"
 	],
 	"find":
 	{
@@ -642,6 +610,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"/newpla",
+			"head_",
+			"latitude",
+			"id",
+			"progress",
+			"/upload",
 			"getdirname",
 			"center",
 			"req.params.sid",
@@ -763,13 +737,7 @@
 			"imageindex",
 			"media",
 			"setslide",
-			"		'",
-			"enter",
-			"printf",
-			"socket",
-			"send_sock",
-			"offset",
-			"){\n"
+			"		'"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -792,23 +760,23 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "views/login.jade",
+					"file": "require/game.js",
 					"settings":
 					{
-						"buffer_size": 398,
+						"buffer_size": 5182,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								398,
-								398
+								388,
+								388
 							]
 						],
 						"settings":
@@ -946,7 +914,7 @@
 								"Ruby on Rails": "ruby"
 							},
 							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -957,18 +925,18 @@
 				},
 				{
 					"buffer": 1,
-					"file": "views/tasks.jade",
+					"file": "app.js",
 					"settings":
 					{
-						"buffer_size": 575,
+						"buffer_size": 6029,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								17,
-								17
+								1785,
+								1785
 							]
 						],
 						"settings":
@@ -1106,568 +1074,11 @@
 								"Ruby on Rails": "ruby"
 							},
 							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "views/upload.jade",
-					"settings":
-					{
-						"buffer_size": 1216,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								16,
-								16
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"bh_regions":
-							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 2,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": true,
-							"sublimelinter_gutter_marks_theme": "simple",
-							"sublimelinter_mark_style": "none",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"C++": "c",
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "views/layout-m.jade",
-					"settings":
-					{
-						"buffer_size": 896,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								359,
-								359
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"bh_regions":
-							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 2,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": true,
-							"sublimelinter_gutter_marks_theme": "simple",
-							"sublimelinter_mark_style": "none",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"C++": "c",
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "views/index.jade",
-					"settings":
-					{
-						"buffer_size": 623,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								623,
-								623
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"bh_regions":
-							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 2,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": true,
-							"sublimelinter_gutter_marks_theme": "simple",
-							"sublimelinter_mark_style": "none",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"C++": "c",
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 5,
-					"settings":
-					{
-						"buffer_size": 850,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								850,
-								850
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close"
-							],
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1403.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1692,18 +1103,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.5,
 			1.0
 		],
 		"rows":
@@ -1724,7 +1128,67 @@
 		"selected_items":
 		[
 			[
+				"progresspa",
+				"views/progressPage.jade"
+			],
+			[
+				"app",
+				"app.js"
+			],
+			[
+				"game",
+				"require/game.js"
+			],
+			[
+				"socket",
+				"public/js/socket.js"
+			],
+			[
+				"socket.j",
+				"public/js/socket.js"
+			],
+			[
 				"login",
+				"views/login.jade"
+			],
+			[
+				"ap",
+				"app.js"
+			],
+			[
+				"create.js",
+				"public/js/create.js"
+			],
+			[
+				"create.css",
+				"public/css/create.css"
+			],
+			[
+				"create.j",
+				"views/create.jade"
+			],
+			[
+				"index.ja",
+				"views/index.jade"
+			],
+			[
+				"socket.",
+				"public/js/socket.js"
+			],
+			[
+				"layout",
+				"views/layout-m.jade"
+			],
+			[
+				"tasks.ja",
+				"views/tasks.jade"
+			],
+			[
+				"index.cs",
+				"public/css/index.css"
+			],
+			[
+				"log",
 				"views/login.jade"
 			],
 			[
@@ -1740,20 +1204,8 @@
 				"require/tasks.js"
 			],
 			[
-				"game",
-				"require/game.js"
-			],
-			[
 				"upload",
 				"views/upload.jade"
-			],
-			[
-				"socket",
-				"public/js/socket.js"
-			],
-			[
-				"layout",
-				"views/layout.jade"
 			],
 			[
 				"lay",
@@ -1806,10 +1258,6 @@
 			[
 				"constants",
 				"lib/constants/index.js"
-			],
-			[
-				"index.ja",
-				"views/index.jade"
 			],
 			[
 				"pbser",
@@ -1878,10 +1326,6 @@
 			[
 				"passindex",
 				"lib/pbPass-api/index.js"
-			],
-			[
-				"app",
-				"app.js"
 			],
 			[
 				"templateinde",
@@ -2194,46 +1638,6 @@
 			[
 				"applic",
 				"app/views/layouts/application.html.erb"
-			],
-			[
-				"vote_reco",
-				"app/models/vote_record.rb"
-			],
-			[
-				"votecon",
-				"app/controllers/votes_controller.rb"
-			],
-			[
-				"strong",
-				"config/initializers/strong_parameters.rb"
-			],
-			[
-				"voterecord",
-				"app/models/vote_record.rb"
-			],
-			[
-				"oldin",
-				"app/views/home/oldindex.html.erb"
-			],
-			[
-				"home.css",
-				"app/assets/stylesheets/home.css.scss"
-			],
-			[
-				"ind",
-				"app/views/home/index.html.erb"
-			],
-			[
-				"_votes",
-				"app/views/admin/vote_subject_metas/_vote_subject_media_fields.html.erb"
-			],
-			[
-				"votesubjectmetafi",
-				"app/views/admin/vote_subject_metas/_vote_subject_media_fields.html.erb"
-			],
-			[
-				"vote_subject.co",
-				"app/assets/javascripts/admin/vote_subjects.js.coffee"
 			]
 		],
 		"width": 0.0
@@ -2245,7 +1649,7 @@
 		[
 			[
 				"",
-				"/home/jonathan/Documents/tofugear/journal-vote/journal-vote.sublime-project"
+				"/home/jonathan/Documents/tofugear/passbookServer/passbookServer.sublime-project"
 			]
 		],
 		"width": 380.0

@@ -83,12 +83,14 @@ app.get('/progress', function(req, res){
 		return;
 	}
 	qrcode.toDataURL("http://phunt.jonathanysp.com/m?gameid=" + gameid, function(err, dataurl){
-		res.render("progressPage", {title: "Game: " + gameid, g: game.getGame(gameid), gameid: gameid, dataurl: dataurl});
+		game.getGame(gameid, function(err, g){
+			if(g === null){
+				res.send(404);
+				return;
+			}
+			res.render("progressPage", {title: "Game: " + gameid, g: g, gameid: gameid, dataurl: dataurl});
+		})
 	});
-});
-
-app.get('/game', function(req, res){
-	res.render('game', {g: game.getGame(0)});
 });
 
 app.get('/m', function(req, res){
@@ -115,8 +117,10 @@ app.get('/show', function(req, res){
 
 app.get('/new', function(req, res){
 	var templateid = req.query.tid;
-	var gameid = game.createGame(templateid);
-	res.redirect('/progress?gameid=' + gameid);
+	game.createGame(templateid, function(err, gameid){
+		console.log(gameid);
+		res.redirect('/progress?gameid=' + gameid);
+	});
 });
 app.post('/new', function(req, res){
 	var template = req.body.task;
@@ -132,32 +136,50 @@ app.post('/login', function(req, res){
 	var gameid = req.body.gameid.toLowerCase();
 	var userid = req.body.userid;
 
-	if(game.isGameId(gameid)){
-		if(game.isPlayer(gameid, userid)){
-			res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
+	game.getGame(gameid, function(err, g){
+		console.log(g);
+		if(g){
+			if(game.isPlayer(g, userid)){
+				res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
+			} else {
+				game.addPlayer(g, userid, function(){
+					res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
+				});
+			}
 		} else {
-			game.addPlayer(gameid, userid);
-			res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
+			res.render('login', {error: "Invalid game id"});
 		}
-	} else {
-		res.render('login', {error: "Invalid game id"});
-	}
+	});
 });
 
 app.get('/tasks', function(req, res){
 	var gameid = req.query.gameid;
 	var userid = req.query.userid;
-	var tasks = game.getTasks(gameid);
-	var done = game.getDone(gameid, userid);
-	res.render('tasks', {title: userid, tasks: tasks, gameid: gameid, userid: userid, done: done});
+
+	game.getGame(gameid, function(err, g){
+		if(g === null){
+			res.send(404);
+			return;
+		}
+		console.log(g);
+		var tasks = g.tasks;
+		var done = g.images[userid];
+		res.render('tasks', {title: userid, tasks: tasks, gameid: g.gameid, userid: userid, done: done});
+	});
 });
 
 app.get('/upload', function(req, res){
 	var gameid = req.query.gameid;
 	var taskid = req.query.taskid;
 	var userid = req.query.userid;
-	var link = game.doneLink(gameid, userid, taskid);
-	res.render('upload', {title: "Task: "+taskid, gameid: gameid, taskid: taskid, userid:userid, link: link});
+	game.getGame(gameid, function(err, g){
+		if(g === null) return;
+		console.log(g);
+		console.log(g.images[userid]);
+		var link = g.images[userid][parseInt(taskid)];
+		//res.send("HI"); return;
+		res.render('upload', {title: "Task: "+taskid, gameid: gameid, taskid: taskid, userid:userid, link: link});
+	});
 });
 
 app.post('/upload', function(req, res){
@@ -168,19 +190,26 @@ app.post('/upload', function(req, res){
 	var tasknum = req.body.taskid;
 	var lat = req.body.lat;
 	var lon = req.body.lon;
-	var g = game.getGame(gameid);
 
-	res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
+	game.getGame(gameid, function(err, g){
+		if(g === null){
+			res.send(404);
+			return;
+		}
+		res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
 
-	uploader = new AvatarUploader();
-	uploader.process(gameid+'-'+userid+'-'+tasknum, req.files.image.path, function(err, images){
-		var score = game.imageSubmit(gameid, userid, tasknum, images.display, lat, lon, images.display);
-		io.sockets.in(gameid).emit('miniProgress', {
-			playerid: userid,
-			numTasks: game.getNumDone(gameid, userid)
+		uploader = new AvatarUploader();
+		uploader.process(gameid+'/'+userid+'-'+tasknum, req.files.image.path, function(err, images){
+			game.imageSubmit(gameid, userid, tasknum, images.display, lat, lon, images.display, function(err, score, num){
+				console.log(num);
+				io.sockets.in(gameid).emit('miniProgress', {
+					playerid: userid,
+					totalTasks: g.tasks.length,
+					numTasks: num
+				});
+			});
 		});
-		//res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
-	});
+	})
 });
 
 app.get("/qr", function(req, res){
@@ -196,20 +225,25 @@ io.sockets.on('connection', function(socket){
 	//socket.broadcast.emit('news', {my: "joined"});
 
 	socket.on('register', function(data){
-		if(game.isGameId(data.gameid)){
-			if(data.userid !== null){
-				console.log("New member registered on gameid: " + data.gameid);
+		game.isGameId(data.gameid, function(err, is){
+			if(is){
+				if(data.userid !== null){
+					console.log("New member registered on gameid: " + data.gameid);
+				} else {
+					console.log("New leaderboard joined");
+				}
+				socket.join(data.gameid);
 			} else {
-				console.log("New leaderboard joined");
+				socket.emit("error");
 			}
-			socket.join(data.gameid);
-		} else {
-			socket.emit("error");
-		}
+		});
 	});
 
 	socket.on('getInfo', function(data){
-		socket.emit('info', {g: game.getGame(data.gameid)});
+		game.getGame(data.gameid, function(err, g){
+			console.log(g);
+			socket.emit('info', {g: g});
+		});
 	});
 
 	socket.on('msg', function(data){

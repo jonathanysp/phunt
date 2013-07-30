@@ -19,7 +19,7 @@ block content
 			div.col-lg-12
 				a.taskA(href="/upload?taskid=" + i + "&userid=" + userid + "&gameid=" + gameid) 
 					- if(done[i] === undefined){
-						h3=tasks[i] + " "
+						h3= tasks[i] + " "
 					- } else {
 						h3.done(style="text-decoration:line-through; color:gray")=tasks[i] + " "
 					- }

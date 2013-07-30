@@ -1,6 +1,6 @@
 //connect
-//var socket = io.connect('192.168.1.110:3000');
-var socket = io.connect('https://phunt.herokuapp.com');
+var socket = io.connect('192.168.1.110:3000');
+//var socket = io.connect('https://phunt.herokuapp.com');
 
 var gameid;
 //var socket = io.connect('http://192.168.20.217:3000')
@@ -212,11 +212,11 @@ var addLeaderboardEvents = function(){
 			$("#"+tdLocation).append(latLon);
 			//$(latLon).hide().appendTo("#"+tdLocation).fadeIn("slow");
 
-			latLon.innerHTML = "Latitude: " + data.lat + "	Longitude: " + data.lon;
+			//latLon.innerHTML = "Latitude: " + data.lat + "	Longitude: " + data.lon;
 			var alink = document.createElement('a');
 			//alink.href = "https://maps.google.com/maps?q=" + data.lat + "," + data.lon;
 			alink.href = "#";
-			$(alink).text("Pciture Location");
+			$(alink).text("Picture Location");
 			$(alink).addClass("btn btn-primary");
 			$(alink).click(function(){
 				window.open("https://maps.google.com/maps?q=" + data.lat + "," + data.lon);
@@ -255,8 +255,8 @@ var addLeaderboardEvents = function(){
 		console.log("small progress update");
 		console.log(data);
 		//update progress bar
-		var newPercentage = (data.numTasks / totalTasks) * 100;
-		$("#progress_"+data.playerid).css("width", newPercentage + "%");
+		var newPercentage = (data.numTasks / data.totalTasks) * 100;
+		$("#progress_"+data.playerid).css("width",  newPercentage + "%");
 
 		/*
 		var barId = data.playerid + "_bar";
