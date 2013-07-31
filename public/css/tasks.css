@@ -1,3 +1,7 @@
-.row {
+.taskRow {
 	border-bottom: 1px solid black;
+}
+
+.alert {
+	margin-bottom: 0;
 }

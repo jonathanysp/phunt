@@ -27,11 +27,11 @@ block content
 					input(id="lon", name="lon", hidden);
 
 					div(id="share-bottom")
-						input.btn.btn-primary.butt(id="upload", type="button", class="photo-button", onclick="document.getElementById('upload-field').click();", value='Choose Photo')
+						input.btn.btn-primary.butt(id="upload", type="button", class="photo-button", onclick="document.getElementById('upload-field').click();", value='1) Choose Photo')
 						
 						div(id="upload-wrap")
 							input.hidden(type="file", id="upload-field", name="image", hidden)
-						input.btn.butt(type="submit", value="Upload", class = "submit-button")
+						input.btn.butt(type="submit", value="2) Submit", class = "submit-button", disabled='true')
 
 	script.
 		$("#upload-field").change(function(){
@@ -39,6 +39,8 @@ block content
 			//change upload button
 			//$("#upload").css('background-color', 'green');
 			$("#upload").addClass('btn-success');
+			$('.submit-button').removeAttr('disabled');
+			$('.submit-button').addClass('btn-primary');
 		})
 		var showPosition = function(position){
 			console.log(position);

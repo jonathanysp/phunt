@@ -1,6 +1,7 @@
 //connect
-// var socket = io.connect('192.168.1.110:3000');
-var socket = io.connect('https://phunt.herokuapp.com');
+var socket = io.connect('192.168.1.110:3000');
+// var socket = io.connect('192.168.104.91:3000');
+//var socket = io.connect('https://phunt.herokuapp.com');
 
 var gameid;
 //var socket = io.connect('http://192.168.20.217:3000')
@@ -16,10 +17,12 @@ var addMobileEvents = function(){
 		//send progress notification
 		console.log(data);
 		var string = data.player + " has completed " + data.progress + "%!";
-		var span = document.createElement(span);
+		var span = document.createElement('span');
+		var alert = document.createElement('div');
+		$(alert).addClass('alert');
 		$(span).text(string);
-		$("#notif").append(span);
-		$("#notif").append(document.createElement('br'));
+		$(alert).append(span);
+		$("#notif").append(alert);
 	});
 };
 

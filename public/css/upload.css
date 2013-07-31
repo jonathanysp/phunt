@@ -4,6 +4,8 @@
 
 .btn {
 	margin-bottom: 10px;
+	width: 100%;
+	display: inline;
 }
 
 hr {

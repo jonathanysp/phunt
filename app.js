@@ -41,19 +41,15 @@ papercut.configure(function(){
 	papercut.set('bucket', 'phunt');
 });
 
-photoUploader = papercut.Schema(function(schema){
-	this.version({
-		name: 'display',
-		size: '300x00',
-		process: 'resize'
-	});
-});
-
-AvatarUploader = papercut.Schema(function(schema) {
+AvatarUploader = papercut.Schema(function() {
 	this.version({
 		name: 'display',
 		size: '300x300'
 	});
+	this.version({
+		name: 'original',
+		process: 'copy'
+	})
 });
 
 uploader = new AvatarUploader();
@@ -200,12 +196,12 @@ app.post('/upload', function(req, res){
 			res.send(404);
 			return;
 		}
-		res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
 
 		uploader = new AvatarUploader();
 		uploader.process(gameid+'/'+userid+'-'+tasknum, req.files.image.path, function(err, images){
 			game.imageSubmit(gameid, userid, tasknum, images.display, lat, lon, images.display, function(err, score, num){
-				console.log(num);
+				console.log(images);
+				res.redirect('/tasks?gameid=' + gameid + "&userid=" + userid);
 				io.sockets.in(gameid).emit('miniProgress', {
 					playerid: userid,
 					totalTasks: g.tasks.length,
@@ -225,8 +221,6 @@ app.get("/qr", function(req, res){
 var done = 0;
 
 io.sockets.on('connection', function(socket){
-	//console.log("HIHIHIHI");
-	//socket.broadcast.emit('news', {my: "joined"});
 
 	socket.on('register', function(data){
 		game.isGameId(data.gameid, function(err, is){

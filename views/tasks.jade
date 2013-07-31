@@ -9,13 +9,13 @@ block head
 		addMobileEvents();
 
 block content
-	//div#notif(onclick="$('#notif').children().remove()") 
-
-	div.row
+	//div#notif(onclick="$('#notif').children().remove()")
+	div.row#notif(onclick="$('#notif').children().remove()")
+	div.row.taskRow
 		div.col-lg-12
 			h2 Your Phunt Tasks
 	- for(var i = 0; i < tasks.length; i++) {
-		div.row
+		div.row.taskRow
 			div.col-lg-12
 				a.taskA(href="/upload?taskid=" + i + "&userid=" + userid + "&gameid=" + gameid) 
 					- if(done[i] === undefined){
