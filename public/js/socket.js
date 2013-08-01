@@ -1,5 +1,5 @@
 //connect
-var socket = io.connect('192.168.1.110:3000');
+// var socket = io.connect('192.168.1.110:3000');
 // var socket = io.connect('192.168.104.91:3000');
 // var socket = io.connect('https://phunt.herokuapp.com');
 
