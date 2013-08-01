@@ -11,14 +11,14 @@ exports.index = function(req, res){
 			thumbnail: "/images/hunts/GoldenGateBridge.jpg"
 		},
 		{
+			name: "CSSI 2013",
+			link: "/show?tid=CSSI",
+			thumbnail: "/images/hunts/google.jpg"
+		},
+		{
 			name: "Disney",
 			link: "/show?tid=disney",
 			thumbnail: "/images/hunts/disney.jpg"
-		},
-		{
-			name: "Google",
-			link: "/show?tid=google",
-			thumbnail: "/images/hunts/google.jpg"
 		},
 		{
 			name: "Zoo",

@@ -198,6 +198,7 @@ app.post('/upload', function(req, res){
 		}
 
 		uploader = new AvatarUploader();
+		console.log("uploading");
 		uploader.process(gameid+'/'+userid+'-'+tasknum, req.files.image.path, function(err, images){
 			game.imageSubmit(gameid, userid, tasknum, images.display, lat, lon, images.display, function(err, score, num){
 				console.log(images);

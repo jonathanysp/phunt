@@ -58,3 +58,20 @@ tasks.disney = [
 ]
 
 exports.tasks = tasks;
+
+tasks.CSSI = [
+	"A Googler in a Google-branded article of clothing."
+	,"A non-Googler in a Google-branded article of clothing."
+	,"Your favorite line of code."
+	,"A group of 3 CSSIers from different cities who are going to different schools."
+	,"Catch your roommate sleeping."
+	,"Catch your roommate doing something embarassing."
+	,"Intructors doing a silly pose."
+	,"Posing with your favorite snack / drink from the microkitchen."
+	,"A postcard-worthy shot of the Charles River."
+	,"A G+ community post of an interesting / awesome / thought-provoking tech article."
+	,"A musical performance in the city."
+	,'Spell "Google". Be creative!'
+	,"A message to your family."
+	,"A photo of a photobomb - either by you or someone else."
+]
